@@ -1,7 +1,29 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tilemaps/World1_tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://Assets/Enemy1/batSprite.png" type="Texture" id=3]
+[ext_resource path="res://Enemies/EnemyType1.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Enemy1/PC Computer - Another Metroid 2 Remake - A4 Tower - Power Switch.png" type="Texture" id=5]
+[ext_resource path="res://Enemies/EnemyType2.gd" type="Script" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Idle"
+length = 0.8
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 2 ]
+}
 
 [node name="StageOne" type="Node2D"]
 
@@ -13,3 +35,36 @@ tile_set = ExtResource( 2 )
 cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 0, 0, 393225, 0, 0, 393226, 0, 0, 393245, 0, 0, 393246, 0, 0, 393247, 0, 0, 393248, 0, 0, 393249, 0, 0, 393250, 0, 0, 720911, 0, 0, 720912, 0, 0, 720913, 0, 0, 720914, 0, 0, 720915, 0, 0, 720916, 0, 0, 720917, 0, 0, 720918, 0, 0, 720919, 0, 0, 720920, 0, 0, 720921, 0, 0, 1310722, 0, 0, 1310723, 0, 0, 1310724, 0, 0, 1310725, 0, 0, 1310726, 0, 0, 1310727, 0, 0, 1310728, 0, 0, 1310729, 0, 0, 1310730, 0, 0, 1310731, 0, 0, 1310732, 0, 0, 1310733, 0, 0, 1310734, 0, 0, 1310735, 0, 0, 1310736, 0, 0, 1310737, 0, 0, 1310738, 0, 0, 1310739, 0, 0, 1310740, 0, 0, 1310741, 0, 0, 1310742, 0, 0, 1310743, 0, 0, 1310744, 0, 0, 1310745, 0, 0, 1310746, 0, 0, 1310747, 0, 0, 1310748, 0, 0, 1310749, 0, 0, 1310750, 0, 0, 1310751, 0, 0, 1310752, 0, 0, 1310753, 0, 0, 1310754, 0, 0, 1310755, 0, 0, 1310756, 0, 0, 1310757, 0, 0 )
+
+[node name="EnemyType1" type="KinematicBody2D" parent="."]
+position = Vector2( 389.773, 116.131 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="EnemyType1"]
+texture = ExtResource( 3 )
+vframes = 4
+hframes = 4
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="EnemyType1"]
+anims/Idle = SubResource( 1 )
+
+[node name="EnemyType2" type="KinematicBody2D" parent="."]
+position = Vector2( 547.811, 51.5141 )
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="EnemyType2"]
+position = Vector2( 0.132507, 0.0222778 )
+scale = Vector2( 0.370039, 0.370039 )
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 11, 9, 96, 240 )
+__meta__ = {
+"_edit_group_": true
+}
