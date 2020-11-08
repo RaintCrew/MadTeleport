@@ -7,9 +7,10 @@ onready var destination = null	# Punto a donde va la bala (donde estaba la mira 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	destination = get_local_mouse_position()
+	destination = get_local_mouse_position()	# La bala viaja hacia donde esta la mira
 
 func _physics_process(delta):
+	# Mover hacia destino
 	velocity = velocity.move_toward(destination, delta)
 	velocity = velocity.normalized() * speed
 	position = position + velocity
@@ -18,3 +19,12 @@ func _physics_process(delta):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+# Si la bala sale de la pantalla, se borra de existencia
+func _on_VisibilityNotifier2D_screen_exited():
+	queue_free()
+
+# Si la bala colisiona con un objeto solido (muro, enemy...), se borra
+# Esto se modificara despues para codear el damage a enemigos
+func _on_Bullet_body_entered(body):
+	queue_free()
