@@ -5,12 +5,14 @@ const GRAVITY = 10 			# aceleracion vertical que disminuye la velocidad vertical
 const FLOOR = Vector2(0,-1) # vector normal que el physics engine usa para frenar con pisos y paredes
 const MAX_FALL_SPEED = 200 	# lo mas rapido que puede caer el Player por gravedad
 
+const JUMP_FORCE = 165 		# qué tan alto puede saltar el jugador
+
+
 const PISTOL_AMMO = 6
 
 var velocity = Vector2() 			# Vector (x,y) donde x/y define cuanto se mueve horizontal/verticalmente en cada frame.
-var ammo = PISTOL_AMMO 					# Numero de balas ende arma. Se recarga con Teleport
+var ammo = PISTOL_AMMO 				# Numero de balas en el arma. Se recarga con Teleport
 var can_throw_teleport_ball = true	# Puede arrojar la teleport ball, o esta en el aire y no puede lanzarla
-
 onready var crosshair = get_node("Crosshair") 			# Referencia a la crosshair
 onready var gun = get_node("Gun") 						# Referencia al arma de la que disparas
 onready var floating_teleport_ball = get_node("Ball") 	# Referencia a teleport ball flotando al lado tuyo
@@ -36,8 +38,7 @@ func _physics_process(delta):
 		velocity.x = -RUN_SPEED
 	else:
 		velocity.x = 0
-		
-		
+	
 	# Limitar que el Player no caiga muy rapido
 	if velocity.y < MAX_FALL_SPEED: 
 		velocity.y += GRAVITY
@@ -56,6 +57,10 @@ func _physics_process(delta):
 	floating_teleport_ball.visible = can_throw_teleport_ball
 	
 	$Crosshair/Ammo_Label.text = str(ammo)
+
+func jump():
+	if is_on_floor():
+		velocity.y = -JUMP_FORCE
 
 # Funcion para disparar arma
 func fire():
@@ -105,6 +110,9 @@ func regain_teleport_ball():
 # Esta funcion se llama cada vez que cualquier input se detecta
 # "input" siendo una tecla presionada, mouse clickeada, etc.
 func _input(event):
+	if event.is_action_pressed("jump"):
+		jump()
+	
 	if event is InputEventMouseButton:
 		match event.button_index:		# Esto es como el switch-case statements en C++/Python
 			BUTTON_LEFT:				# Clic-izquierdo = disparar
