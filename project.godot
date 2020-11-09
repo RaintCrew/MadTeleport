@@ -37,6 +37,12 @@ jump={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="World"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Enemy"
+
 [rendering]
 
 quality/2d/use_pixel_snap=true

@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 const SPEED = 50
 #var animation = "Idle"
+var life = 3
 
 onready var target = get_parent().get_node("Player")
 
