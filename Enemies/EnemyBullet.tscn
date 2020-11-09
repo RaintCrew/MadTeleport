@@ -4,7 +4,7 @@
 [ext_resource path="res://Enemies/EnemyType2Bullet.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4.1077, 4.31653 )
+extents = Vector2( 2.88352, 2.79134 )
 
 [node name="EnemyBullet" type="Area2D"]
 position = Vector2( -0.396851, 0 )
