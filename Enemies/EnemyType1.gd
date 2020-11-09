@@ -16,3 +16,7 @@ func _physics_process(delta):
 
 func animation_loop():
 	get_node("AnimationPlayer").play(animation)
+
+#when detected that "something" entered this area, we're going to delete this enemy. 
+func _on_Hurtbox_area_entered(area):
+	queue_free()
