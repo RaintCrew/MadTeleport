@@ -10,6 +10,7 @@
 extents = Vector2( 7, 9 )
 
 [node name="Player" type="KinematicBody2D"]
+position = Vector2( 1.50339, -0.111362 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true,
@@ -27,15 +28,6 @@ position = Vector2( 32, 0 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 
-[node name="Ammo_Label" type="Label" parent="Crosshair"]
-margin_left = -4.0
-margin_top = -22.0
-margin_right = 36.0
-margin_bottom = -8.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Gun" type="Sprite" parent="."]
 scale = Vector2( 1.8913, 1.68519 )
 texture = ExtResource( 4 )
@@ -49,3 +41,13 @@ rotation = 1.57079
 position = Vector2( -10.528, -6.03323 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 5 )
+
+[node name="Ammo_Label" type="Label" parent="."]
+margin_left = -7.0
+margin_top = -23.0
+margin_right = 7.0
+margin_bottom = -9.0
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

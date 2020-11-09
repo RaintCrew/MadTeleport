@@ -56,7 +56,7 @@ func _physics_process(delta):
 	# si esta volando y por lo tanto, no puede ser arrojada
 	floating_teleport_ball.visible = can_throw_teleport_ball
 	
-	$Crosshair/Ammo_Label.text = str(ammo)
+	$Ammo_Label.text = str(ammo)
 
 func jump():
 	if is_on_floor():
