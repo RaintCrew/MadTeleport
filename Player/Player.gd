@@ -56,7 +56,14 @@ func _physics_process(delta):
 	# si esta volando y por lo tanto, no puede ser arrojada
 	floating_teleport_ball.visible = can_throw_teleport_ball
 	
-	$Ammo_Label.text = str(ammo)
+	$Ammo_Label.text = str(ammo) # Mostrar en texto la municion del arma
+	
+	if crosshair.global_position.x < global_position.x:
+		$PlayerSprite.flip_h = true
+		$Gun.flip_v = true
+	else:
+		$PlayerSprite.flip_h = false
+		$Gun.flip_v = false
 
 func jump():
 	if is_on_floor():
