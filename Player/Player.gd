@@ -12,7 +12,10 @@ const PISTOL_AMMO = 6
 
 var velocity = Vector2() 			# Vector (x,y) donde x/y define cuanto se mueve horizontal/verticalmente en cada frame.
 var ammo = PISTOL_AMMO 				# Numero de balas en el arma. Se recarga con Teleport
+
 var can_throw_teleport_ball = true	# Puede arrojar la teleport ball, o esta en el aire y no puede lanzarla
+var has_landed = true				# Se usa para ejecutar code en el primer instante que aterriza en suelo
+
 onready var crosshair = get_node("Crosshair") 			# Referencia a la crosshair
 onready var gun = get_node("Gun") 						# Referencia al arma de la que disparas
 onready var floating_teleport_ball = get_node("Ball") 	# Referencia a teleport ball flotando al lado tuyo
@@ -56,7 +59,35 @@ func _physics_process(delta):
 	# si esta volando y por lo tanto, no puede ser arrojada
 	floating_teleport_ball.visible = can_throw_teleport_ball
 	
-	$Crosshair/Ammo_Label.text = str(ammo)
+	$Ammo_Label.text = str(ammo) # Mostrar en texto la municion del arma
+	
+	# El jugador y el arma se voltean hacia donde este la crosshair
+	if crosshair.global_position.x < global_position.x:
+		$PlayerSprite.flip_h = true
+		gun.flip_v = true
+	else:
+		$PlayerSprite.flip_h = false
+		gun.flip_v = false
+	
+	# Cuando el Player aterriza en suelo, su sprite se deforma
+	# Este codigo es el que se encarga en cada frame de suavemente
+	# acomodar la sprite de vuelta a su forma normal
+	$PlayerSprite.scale.y += (1 - $PlayerSprite.scale.y) * 0.2
+	$PlayerSprite.scale.x += (1 - $PlayerSprite.scale.x) * 0.2
+	$PlayerSprite.position.y += (0 - $PlayerSprite.position.y) * 0.2
+	
+	
+	# Ejecutar efectos en el primer instante que el Player aterriza en suelo
+	if is_on_floor():
+		if has_landed == false:
+			$PlayerSprite.position.y += 2
+			$PlayerSprite.scale.y = 0.7
+			$PlayerSprite.scale.x = 1.3
+			
+			has_landed = true
+	else: 
+		has_landed = false
+		
 
 func jump():
 	if is_on_floor():
@@ -126,3 +157,4 @@ func _input(event):
 					else:
 						teleport()
 		
+
