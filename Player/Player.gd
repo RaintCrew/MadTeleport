@@ -90,6 +90,8 @@ func _physics_process(delta):
 	$PlayerSprite.scale.x += (1 - $PlayerSprite.scale.x) * 0.2
 	$PlayerSprite.position.y += (0 - $PlayerSprite.position.y) * 0.2
 	
+	$Gun.position.x += (0 - $Gun.position.x) * 0.2
+	$Gun.position.y += (0 - $Gun.position.y) * 0.2
 	
 	# Ejecutar efectos en el primer instante que el Player aterriza en suelo
 	if is_on_floor():
@@ -122,6 +124,11 @@ func fire():
 		get_parent().add_child(bullet)
 		
 		ammo -= 1
+		
+		# Gun recoil vfx
+		var recoil = $Gun.global_position.direction_to(crosshair.global_position)
+		recoil *= 6
+		$Gun.global_position -= recoil
 		
 		if will_camera_shake_on_gunfire:
 			get_parent().get_node("Camera").shake = true
