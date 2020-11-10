@@ -16,6 +16,8 @@ var ammo = PISTOL_AMMO 				# Numero de balas en el arma. Se recarga con Teleport
 var can_throw_teleport_ball = true	# Puede arrojar la teleport ball, o esta en el aire y no puede lanzarla
 var has_landed = true				# Se usa para ejecutar code en el primer instante que aterriza en suelo
 
+var will_camera_shake_on_gunfire = true
+
 onready var crosshair = get_node("Crosshair") 			# Referencia a la crosshair
 onready var gun = get_node("Gun") 						# Referencia al arma de la que disparas
 onready var floating_teleport_ball = get_node("Ball") 	# Referencia a teleport ball flotando al lado tuyo
@@ -109,6 +111,9 @@ func fire():
 		get_parent().add_child(bullet)
 		
 		ammo -= 1
+		
+		if will_camera_shake_on_gunfire:
+			get_parent().get_node("Camera").shake = true
 
 
 # Funcion para arrojar teleport ball

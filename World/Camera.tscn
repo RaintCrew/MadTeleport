@@ -5,3 +5,8 @@
 [node name="Camera" type="Camera2D"]
 current = true
 script = ExtResource( 1 )
+DAMP_EASING = 1.41421
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
