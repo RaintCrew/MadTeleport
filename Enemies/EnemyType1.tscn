@@ -27,7 +27,6 @@ radius = 4.56793
 height = 5.37776
 
 [node name="EnemyType1" type="KinematicBody2D"]
-position = Vector2( 391.999, 107.753 )
 collision_layer = 0
 collision_mask = 0
 script = ExtResource( 2 )

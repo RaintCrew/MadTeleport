@@ -6,7 +6,7 @@
 [ext_resource path="res://Enemies/EnemyType1.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Enemy1/PC Computer - Another Metroid 2 Remake - A4 Tower - Power Switch.png" type="Texture" id=5]
 [ext_resource path="res://Enemies/EnemyType2.gd" type="Script" id=6]
-[ext_resource path="res://Assets/EnemyDrone/EnemyDrone.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Enemies/EnemyDrone/EnemyDrone.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Idle"
