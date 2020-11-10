@@ -133,6 +133,11 @@ func fire():
 		if will_camera_shake_on_gunfire:
 			get_parent().get_node("Camera").shake = true
 
+		
+		if will_camera_shake_on_gunfire:
+			get_parent().get_node("Camera").shake = true
+
+
 
 # Funcion para arrojar teleport ball
 func throw_teleport_ball():
