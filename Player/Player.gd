@@ -11,6 +11,7 @@ const JUMP_FORCE = 165 		# qué tan alto puede saltar el jugador
 const PISTOL_AMMO = 6
 var stats = PlayerStats				# Access to the Singleton with the stats.
 var velocity = Vector2() 			# Vector (x,y) donde x/y define cuanto se mueve horizontal/verticalmente en cada frame.
+var target_running_velocity = 0
 var ammo = PISTOL_AMMO 				# Numero de balas en el arma. Se recarga con Teleport
 
 var can_throw_teleport_ball = true	# Puede arrojar la teleport ball, o esta en el aire y no puede lanzarla
@@ -43,11 +44,17 @@ func _physics_process(delta):
 	# Controles tecla "A" y "D" para moverse lateralmente
 	# Al no presionar ninguna tecla, el Player se detiene lateralmente
 	if Input.is_key_pressed(KEY_D):
-		velocity.x = RUN_SPEED
+		target_running_velocity = RUN_SPEED
+		print(velocity.x)
 	elif Input.is_key_pressed(KEY_A):
-		velocity.x = -RUN_SPEED
+		target_running_velocity = -RUN_SPEED
 	else:
-		velocity.x = 0
+		target_running_velocity = 0
+	
+	if target_running_velocity == 0:
+		velocity.x += (target_running_velocity - velocity.x) * 0.7
+	else:
+		velocity.x += (target_running_velocity - velocity.x) * 0.4
 	
 	# Limitar que el Player no caiga muy rapido
 	if velocity.y < MAX_FALL_SPEED: 
@@ -99,6 +106,7 @@ func _physics_process(delta):
 func jump():
 	if is_on_floor():
 		velocity.y = -JUMP_FORCE
+		
 
 # Funcion para disparar arma
 func fire():
