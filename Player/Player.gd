@@ -50,11 +50,12 @@ func _physics_process(delta):
 		target_running_velocity = -RUN_SPEED
 	else:
 		target_running_velocity = 0
-	
+
 	if target_running_velocity == 0:
 		velocity.x += (target_running_velocity - velocity.x) * 0.7
 	else:
 		velocity.x += (target_running_velocity - velocity.x) * 0.4
+
 	
 	# Limitar que el Player no caiga muy rapido
 	if velocity.y < MAX_FALL_SPEED: 
@@ -112,6 +113,7 @@ func jump():
 		$PlayerSprite.scale.y = 1.3
 		$PlayerSprite.position.y -= 2
 		
+
 
 # Funcion para disparar arma
 func fire():
