@@ -1,6 +1,11 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Assets/EnemyDrone/PlayerDetectionZone.gd" type="Script" id=1]
+[ext_resource path="res://Enemies/EnemyDrone/PlayerDetectionZone.gd" type="Script" id=1]
+
+
+
+
+
 
 [node name="PlayerDetectionZone" type="Area2D"]
 collision_layer = 0
