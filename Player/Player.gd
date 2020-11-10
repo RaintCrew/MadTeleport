@@ -106,6 +106,9 @@ func _physics_process(delta):
 func jump():
 	if is_on_floor():
 		velocity.y = -JUMP_FORCE
+		$PlayerSprite.scale.x = 0.7
+		$PlayerSprite.scale.y = 1.3
+		$PlayerSprite.position.y -= 2
 		
 
 # Funcion para disparar arma
