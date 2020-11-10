@@ -14,7 +14,8 @@ func _ready():
 	
 
 func _process(delta):
-	animation_loop()
+	pass
+	#animation_loop()
 
 
 func _physics_process(delta):
