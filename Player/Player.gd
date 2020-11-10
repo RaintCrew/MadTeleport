@@ -20,6 +20,7 @@ var has_landed = true				# Se usa para ejecutar code en el primer instante que a
 var will_camera_shake_on_gunfire = true
 
 onready var crosshair = get_node("Crosshair") 			# Referencia a la crosshair
+onready var camera = get_parent().get_node("Camera")	# Referencia a la camara
 onready var gun = get_node("Gun") 						# Referencia al arma de la que disparas
 onready var floating_teleport_ball = get_node("Ball") 	# Referencia a teleport ball flotando al lado tuyo
 onready var teleport_ball = null						# Referencia a teleport ball lanzada a la cual te teleportas
@@ -45,7 +46,7 @@ func _physics_process(delta):
 	# Al no presionar ninguna tecla, el Player se detiene lateralmente
 	if Input.is_key_pressed(KEY_D):
 		target_running_velocity = RUN_SPEED
-		print(velocity.x)
+
 	elif Input.is_key_pressed(KEY_A):
 		target_running_velocity = -RUN_SPEED
 	else:
@@ -133,11 +134,7 @@ func fire():
 		$Gun.global_position -= recoil
 		
 		if will_camera_shake_on_gunfire:
-			get_parent().get_node("Camera").shake = true
-
-		
-		if will_camera_shake_on_gunfire:
-			get_parent().get_node("Camera").shake = true
+			camera.shake = true
 
 
 
@@ -155,7 +152,7 @@ func throw_teleport_ball():
 func teleport():
 	# Relocar al jugador donde este la teleport_ball
 	self.global_position = teleport_ball.get_global_position()
-	
+	camera.flash()
 	velocity.y = 0					# El momentum de caida no se mantiene al teleportarse
 	regain_teleport_ball()	# Re-obtienes la teleport ball y puedes tirarla de nuevo
 	teleport_ball.queue_free()		# Borrar la teleport ball que estaba viajando
