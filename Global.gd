@@ -1,5 +1,8 @@
 extends Node
 
+var node_creation_parent = null
+var player = null
+
 #for now this function works to help spawn enemies
 func instance_node(node, location, parent):
 	var node_instance = node.instance()
