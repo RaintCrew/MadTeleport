@@ -9,12 +9,15 @@ const JUMP_FORCE = 165 		# qué tan alto puede saltar el jugador
 
 
 const PISTOL_AMMO = 6
-
+var stats = PlayerStats				# Access to the Singleton with the stats.
 var velocity = Vector2() 			# Vector (x,y) donde x/y define cuanto se mueve horizontal/verticalmente en cada frame.
+var target_running_velocity = 0
 var ammo = PISTOL_AMMO 				# Numero de balas en el arma. Se recarga con Teleport
 
 var can_throw_teleport_ball = true	# Puede arrojar la teleport ball, o esta en el aire y no puede lanzarla
 var has_landed = true				# Se usa para ejecutar code en el primer instante que aterriza en suelo
+
+var will_camera_shake_on_gunfire = true
 
 onready var crosshair = get_node("Crosshair") 			# Referencia a la crosshair
 onready var gun = get_node("Gun") 						# Referencia al arma de la que disparas
@@ -28,6 +31,10 @@ onready var teleport_ball_scene = preload("res://Player/TeleportBall.tscn") # Re
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Global.player = self
+	# no_health is the signal we're connecting to
+	# self is this object (like "this" in any othe major programming language xd)
+	# "queue_free" is the function that will be called.
+	stats.connect("no_health",self,"die")
 	pass
 
 
@@ -37,11 +44,17 @@ func _physics_process(delta):
 	# Controles tecla "A" y "D" para moverse lateralmente
 	# Al no presionar ninguna tecla, el Player se detiene lateralmente
 	if Input.is_key_pressed(KEY_D):
-		velocity.x = RUN_SPEED
+		target_running_velocity = RUN_SPEED
+		print(velocity.x)
 	elif Input.is_key_pressed(KEY_A):
-		velocity.x = -RUN_SPEED
+		target_running_velocity = -RUN_SPEED
 	else:
-		velocity.x = 0
+		target_running_velocity = 0
+	
+	if target_running_velocity == 0:
+		velocity.x += (target_running_velocity - velocity.x) * 0.7
+	else:
+		velocity.x += (target_running_velocity - velocity.x) * 0.4
 	
 	# Limitar que el Player no caiga muy rapido
 	if velocity.y < MAX_FALL_SPEED: 
@@ -77,6 +90,8 @@ func _physics_process(delta):
 	$PlayerSprite.scale.x += (1 - $PlayerSprite.scale.x) * 0.2
 	$PlayerSprite.position.y += (0 - $PlayerSprite.position.y) * 0.2
 	
+	$Gun.position.x += (0 - $Gun.position.x) * 0.2
+	$Gun.position.y += (0 - $Gun.position.y) * 0.2
 	
 	# Ejecutar efectos en el primer instante que el Player aterriza en suelo
 	if is_on_floor():
@@ -93,6 +108,10 @@ func _physics_process(delta):
 func jump():
 	if is_on_floor():
 		velocity.y = -JUMP_FORCE
+		$PlayerSprite.scale.x = 0.7
+		$PlayerSprite.scale.y = 1.3
+		$PlayerSprite.position.y -= 2
+		
 
 # Funcion para disparar arma
 func fire():
@@ -105,6 +124,14 @@ func fire():
 		get_parent().add_child(bullet)
 		
 		ammo -= 1
+		
+		# Gun recoil vfx
+		var recoil = $Gun.global_position.direction_to(crosshair.global_position)
+		recoil *= 6
+		$Gun.global_position -= recoil
+		
+		if will_camera_shake_on_gunfire:
+			get_parent().get_node("Camera").shake = true
 
 
 # Funcion para arrojar teleport ball
@@ -138,6 +165,12 @@ func reload():
 func regain_teleport_ball():
 	can_throw_teleport_ball = true
 
+
+func die():
+	if teleport_ball:
+		teleport_ball.queue_free()
+	queue_free()
+
 	
 # Esta funcion se llama cada vez que cualquier input se detecta
 # "input" siendo una tecla presionada, mouse clickeada, etc.
@@ -159,3 +192,6 @@ func _input(event):
 						teleport()
 		
 
+
+func _on_Hurtbox_area_entered(area):
+	stats.health -= area.damage

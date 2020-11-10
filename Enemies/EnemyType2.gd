@@ -23,8 +23,9 @@ func _ready():
 func repeat_me():
 	var bullet = bullet_scene.instance()	
 	bullet.position = global_position
-	bullet.destination = target.get_global_position()
-	get_parent().add_child(bullet)
+	if target:
+		bullet.destination = target.get_global_position()
+		get_parent().add_child(bullet)
 
 
 

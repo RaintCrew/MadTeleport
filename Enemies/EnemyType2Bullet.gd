@@ -6,11 +6,11 @@ onready var destination = null
 
 func _ready():
 	destination = get_parent().get_node("Player").get_global_position()
+	velocity = global_position.direction_to(destination)
+	velocity *= speed
 
 func _physics_process(delta):
-	velocity = destination - global_position
-	velocity = velocity.normalized() * speed
-	position = position + velocity
+	global_position = global_position + velocity
 
 
 func _on_EnemyBullet_body_entered(body):

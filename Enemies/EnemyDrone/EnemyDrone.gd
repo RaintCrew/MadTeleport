@@ -25,11 +25,12 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
-	var direction = global_position.direction_to(Global.player.global_position)
-	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
-	#global_position += velocity * MAX_SPEED * delta
-	sprite.flip_h = velocity.x < 0
-	velocity = move_and_slide(velocity)
+	if Global.player:
+		var direction = global_position.direction_to(Global.player.global_position)
+		velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+		#global_position += velocity * MAX_SPEED * delta
+		sprite.flip_h = velocity.x < 0
+		velocity = move_and_slide(velocity)
 
 #func _physics_process(delta: float) -> void:
 #	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
