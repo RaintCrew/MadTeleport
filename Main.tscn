@@ -82,5 +82,6 @@ visible = false
 position = Vector2( 340.899, 125.048 )
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 1.2
 autostart = true
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]

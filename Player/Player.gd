@@ -27,6 +27,7 @@ onready var teleport_ball_scene = preload("res://Player/TeleportBall.tscn") # Re
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Global.player = self
 	pass
 
 

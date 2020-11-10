@@ -24,26 +24,33 @@ func _ready() -> void:
 	#print(stats.health)
 	pass
 
-func _physics_process(delta: float) -> void:
-	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
-	knockback = move_and_slide(knockback)
-	
-	match state:
-		IDLE:
-			velocity = velocity.move_toward(Vector2.ZERO, 100)
-			seek_player()
-		WANDER:
-			pass
-		CHASE:
-			var player = playerDetectionZone.player
-			var direction = (player.global_position - global_position).normalized()
-			velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
-			sprite.flip_h = velocity.x < 0
+func _process(delta: float) -> void:
+	var direction = global_position.direction_to(Global.player.global_position)
+	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+	#global_position += velocity * MAX_SPEED * delta
+	sprite.flip_h = velocity.x < 0
 	velocity = move_and_slide(velocity)
 
-func seek_player():
-	if playerDetectionZone.can_see_player():
-		state = CHASE
+#func _physics_process(delta: float) -> void:
+#	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
+#	knockback = move_and_slide(knockback)
+#	
+#	match state:
+#		IDLE:
+#			velocity = velocity.move_toward(Vector2.ZERO, 100)
+#			seek_player()
+#		WANDER:
+#			pass
+#		CHASE:
+#			var player = playerDetectionZone.player
+#			var direction = (player.global_position - global_position).normalized()
+#			velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+#			sprite.flip_h = velocity.x < 0
+#	velocity = move_and_slide(velocity)
+
+#func seek_player():
+#	if playerDetectionZone.can_see_player():
+#		state = CHASE
 
 func _on_Hurtbox_area_entered(area: Area2D) -> void:
 	stats.health -=1
