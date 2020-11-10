@@ -34,7 +34,7 @@ func _ready():
 	# no_health is the signal we're connecting to
 	# self is this object (like "this" in any othe major programming language xd)
 	# "queue_free" is the function that will be called.
-	stats.connect("no_health",self,"queue_free")
+	stats.connect("no_health",self,"die")
 	pass
 
 
@@ -164,6 +164,12 @@ func reload():
 # cuando ocurra. Esos se pondrian aqui.
 func regain_teleport_ball():
 	can_throw_teleport_ball = true
+
+
+func die():
+	if teleport_ball:
+		teleport_ball.queue_free()
+	queue_free()
 
 	
 # Esta funcion se llama cada vez que cualquier input se detecta
