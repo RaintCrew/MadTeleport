@@ -9,7 +9,7 @@ const JUMP_FORCE = 165 		# qué tan alto puede saltar el jugador
 
 
 const PISTOL_AMMO = 6
-
+var stats = PlayerStats				# Access to the Singleton with the stats.
 var velocity = Vector2() 			# Vector (x,y) donde x/y define cuanto se mueve horizontal/verticalmente en cada frame.
 var ammo = PISTOL_AMMO 				# Numero de balas en el arma. Se recarga con Teleport
 
@@ -27,6 +27,11 @@ onready var teleport_ball_scene = preload("res://Player/TeleportBall.tscn") # Re
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	# no_health is the signal we're connecting to
+	# self is this object (like "this" in any othe major programming language xd)
+	# "queue_free" is the function that will be called.
+	stats.connect("no_health",self,"queue_free")
 	pass
 
 
@@ -158,3 +163,6 @@ func _input(event):
 						teleport()
 		
 
+
+func _on_Hurtbox_area_entered(area):
+	stats.health -= area.damage
