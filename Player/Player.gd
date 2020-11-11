@@ -28,7 +28,7 @@ onready var teleport_ball = null						# Referencia a teleport ball lanzada a la 
 onready var bullet_scene = preload("res://Player/Bullet.tscn") 				# Referencia a escena de bala
 onready var teleport_ball_scene = preload("res://Player/TeleportBall.tscn") # Referencia a escena de teleport ball
 onready var smoke_particle_scene = preload("res://Player/PlayerJumpSmokeParticle.tscn")
-
+onready var teleport_particle_scene = preload("res://Player/TeleportParticles.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Global.player = self
@@ -103,11 +103,8 @@ func _physics_process(delta):
 			$PlayerSprite.scale.x = 1.3
 			
 			has_landed = true
+			create_smoke_particles()
 			
-			var smoke_particles = smoke_particle_scene.instance()	
-			smoke_particles.global_position = Vector2(global_position.x, global_position.y+8)
-			smoke_particles.emitting = true
-			get_parent().add_child(smoke_particles)
 	else: 
 		has_landed = false
 		
@@ -118,7 +115,7 @@ func jump():
 		$PlayerSprite.scale.x = 0.7
 		$PlayerSprite.scale.y = 1.3
 		$PlayerSprite.position.y -= 2
-		
+		create_smoke_particles()
 
 
 # Funcion para disparar arma
@@ -155,11 +152,12 @@ func throw_teleport_ball():
 
 # Funcion de teleportarse hacia la teleport ball
 func teleport():
+	create_tp_particles()
 	# Relocar al jugador donde este la teleport_ball
 	self.global_position = teleport_ball.get_global_position()
 	OS.delay_msec(60)
 	camera.activate_shake(2.0, 0.4)
-	camera.flash()
+	create_tp_particles()
 	velocity.y = 0					# El momentum de caida no se mantiene al teleportarse
 	regain_teleport_ball()	# Re-obtienes la teleport ball y puedes tirarla de nuevo
 	teleport_ball.queue_free()		# Borrar la teleport ball que estaba viajando
@@ -206,3 +204,14 @@ func _input(event):
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
+
+func create_smoke_particles():
+	var smoke_particles = smoke_particle_scene.instance()	
+	smoke_particles.global_position = Vector2(global_position.x, global_position.y+8)
+	smoke_particles.emitting = true
+	get_parent().add_child(smoke_particles)
+
+func create_tp_particles():
+	var tp_particles = teleport_particle_scene.instance()	
+	tp_particles.global_position = Vector2(global_position.x, global_position.y)
+	get_parent().add_child(tp_particles)

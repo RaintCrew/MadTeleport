@@ -22,7 +22,6 @@ anim_speed = 4.0
 
 [node name="Particles2D" type="Particles2D"]
 position = Vector2( 0, 0.15749 )
-scale = Vector2( 2, 2 )
 emitting = false
 amount = 10
 lifetime = 0.5
