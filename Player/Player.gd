@@ -20,13 +20,14 @@ var has_landed = true				# Se usa para ejecutar code en el primer instante que a
 var will_camera_shake_on_gunfire = true
 
 onready var crosshair = get_node("Crosshair") 			# Referencia a la crosshair
+onready var camera = get_parent().get_node("Camera")	# Referencia a la camara
 onready var gun = get_node("Gun") 						# Referencia al arma de la que disparas
 onready var floating_teleport_ball = get_node("Ball") 	# Referencia a teleport ball flotando al lado tuyo
 onready var teleport_ball = null						# Referencia a teleport ball lanzada a la cual te teleportas
 
 onready var bullet_scene = preload("res://Player/Bullet.tscn") 				# Referencia a escena de bala
 onready var teleport_ball_scene = preload("res://Player/TeleportBall.tscn") # Referencia a escena de teleport ball
-
+onready var smoke_particle_scene = preload("res://Player/PlayerJumpSmokeParticle.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -45,16 +46,17 @@ func _physics_process(delta):
 	# Al no presionar ninguna tecla, el Player se detiene lateralmente
 	if Input.is_key_pressed(KEY_D):
 		target_running_velocity = RUN_SPEED
-		print(velocity.x)
+
 	elif Input.is_key_pressed(KEY_A):
 		target_running_velocity = -RUN_SPEED
 	else:
 		target_running_velocity = 0
-	
+
 	if target_running_velocity == 0:
 		velocity.x += (target_running_velocity - velocity.x) * 0.7
 	else:
 		velocity.x += (target_running_velocity - velocity.x) * 0.4
+
 	
 	# Limitar que el Player no caiga muy rapido
 	if velocity.y < MAX_FALL_SPEED: 
@@ -101,6 +103,11 @@ func _physics_process(delta):
 			$PlayerSprite.scale.x = 1.3
 			
 			has_landed = true
+			
+			var smoke_particles = smoke_particle_scene.instance()	
+			smoke_particles.global_position = Vector2(global_position.x, global_position.y+8)
+			smoke_particles.emitting = true
+			get_parent().add_child(smoke_particles)
 	else: 
 		has_landed = false
 		
@@ -112,6 +119,7 @@ func jump():
 		$PlayerSprite.scale.y = 1.3
 		$PlayerSprite.position.y -= 2
 		
+
 
 # Funcion para disparar arma
 func fire():
@@ -131,7 +139,8 @@ func fire():
 		$Gun.global_position -= recoil
 		
 		if will_camera_shake_on_gunfire:
-			get_parent().get_node("Camera").shake = true
+			camera.activate_shake(1.6,0.1)
+
 
 
 # Funcion para arrojar teleport ball
@@ -148,7 +157,9 @@ func throw_teleport_ball():
 func teleport():
 	# Relocar al jugador donde este la teleport_ball
 	self.global_position = teleport_ball.get_global_position()
-	
+	OS.delay_msec(60)
+	camera.activate_shake(2.0, 0.4)
+	camera.flash()
 	velocity.y = 0					# El momentum de caida no se mantiene al teleportarse
 	regain_teleport_ball()	# Re-obtienes la teleport ball y puedes tirarla de nuevo
 	teleport_ball.queue_free()		# Borrar la teleport ball que estaba viajando

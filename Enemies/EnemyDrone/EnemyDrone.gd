@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export var ACCELERATION = 300
+export var ACCELERATION = 200
 export var MAX_SPEED = 80
 export var FRICTION = 200
 
@@ -55,7 +55,8 @@ func _process(delta: float) -> void:
 
 func _on_Hurtbox_area_entered(area: Area2D) -> void:
 	stats.health -=1
-	velocity = velocity.move_toward(Vector2.ZERO, 300.0)
+	
 
 func _on_Stats_no_health() -> void:
 	queue_free()
+

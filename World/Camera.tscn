@@ -1,12 +1,19 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://ShakingCamera.gd" type="Script" id=1]
+[ext_resource path="res://Assets/smoke_small_particle.png" type="Texture" id=2]
 
 [node name="Camera" type="Camera2D"]
 current = true
 script = ExtResource( 1 )
 DAMP_EASING = 1.41421
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Shake_Timer" type="Timer" parent="."]
 wait_time = 0.1
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+
+[node name="Flash" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -1.87497, 0.124995 )
+scale = Vector2( 334.125, 192.125 )
+texture = ExtResource( 2 )
+[connection signal="timeout" from="Shake_Timer" to="." method="_on_Timer_timeout"]
