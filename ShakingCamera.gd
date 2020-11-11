@@ -66,3 +66,7 @@ func _on_Timer_timeout():
 func flash():
 	$Flash.modulate.a = 1
 
+func activate_shake(given_amplitude, given_duration):
+	amplitude = given_amplitude
+	duration = given_duration
+	self.shake = true

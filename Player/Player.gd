@@ -27,7 +27,7 @@ onready var teleport_ball = null						# Referencia a teleport ball lanzada a la 
 
 onready var bullet_scene = preload("res://Player/Bullet.tscn") 				# Referencia a escena de bala
 onready var teleport_ball_scene = preload("res://Player/TeleportBall.tscn") # Referencia a escena de teleport ball
-
+onready var smoke_particle_scene = preload("res://Player/PlayerJumpSmokeParticle.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -103,6 +103,11 @@ func _physics_process(delta):
 			$PlayerSprite.scale.x = 1.3
 			
 			has_landed = true
+			
+			var smoke_particles = smoke_particle_scene.instance()	
+			smoke_particles.global_position = Vector2(global_position.x, global_position.y+8)
+			smoke_particles.emitting = true
+			get_parent().add_child(smoke_particles)
 	else: 
 		has_landed = false
 		
@@ -134,7 +139,7 @@ func fire():
 		$Gun.global_position -= recoil
 		
 		if will_camera_shake_on_gunfire:
-			camera.shake = true
+			camera.activate_shake(1.6,0.1)
 
 
 
@@ -152,6 +157,8 @@ func throw_teleport_ball():
 func teleport():
 	# Relocar al jugador donde este la teleport_ball
 	self.global_position = teleport_ball.get_global_position()
+	OS.delay_msec(60)
+	camera.activate_shake(2.0, 0.4)
 	camera.flash()
 	velocity.y = 0					# El momentum de caida no se mantiene al teleportarse
 	regain_teleport_ball()	# Re-obtienes la teleport ball y puedes tirarla de nuevo
