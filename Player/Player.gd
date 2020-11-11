@@ -25,7 +25,7 @@ onready var gun = get_node("Gun") 						# Referencia al arma de la que disparas
 onready var floating_teleport_ball = get_node("Ball") 	# Referencia a teleport ball flotando al lado tuyo
 onready var teleport_ball = null						# Referencia a teleport ball lanzada a la cual te teleportas
 
-onready var bullet_scene = preload("res://Player/Bullet.tscn") 				# Referencia a escena de bala
+onready var bullet_scene = preload("res://Player/PlayerBullet.tscn") 				# Referencia a escena de bala
 onready var teleport_ball_scene = preload("res://Player/TeleportBall.tscn") # Referencia a escena de teleport ball
 onready var smoke_particle_scene = preload("res://Player/PlayerJumpSmokeParticle.tscn")
 onready var teleport_particle_scene = preload("res://Player/TeleportParticles.tscn")
@@ -219,6 +219,5 @@ func create_tp_particles():
 
 func _on_Trigger_body_entered(body):
 	if body == self:
-		print("hello")
-		get_tree().change_scene("res://World/Level2.tscn")
+		get_tree().change_scene("res://World/Level2/Level2.tscn")
 		get_tree().paused = false

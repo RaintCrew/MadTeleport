@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const EnemyDeathEfffect = preload("res://Enemies/EnemyDrone/DroneEnemyDeathEffect.tscn")
+const EnemyDeathEfffect = preload("res://Enemies/Enemy_drone/DroneEnemyDeathEffect.tscn")
 
 export var ACCELERATION = 200
 export var MAX_SPEED = 80

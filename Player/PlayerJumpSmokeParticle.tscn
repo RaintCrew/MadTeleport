@@ -1,6 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Assets/smoke_small_particle.png" type="Texture" id=1]
+[ext_resource path="res://Assets/VFX/smoke_small_particle.png" type="Texture" id=1]
+
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )

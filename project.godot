@@ -16,13 +16,13 @@ _global_script_class_icons={
 [application]
 
 config/name="BallTeleport"
-run/main_scene="res://World/Main.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://World/Level1/Level1.tscn"
+config/icon="res://Assets/Icon/icon.png"
 
 [autoload]
 
 PlayerStats="*res://Player/PlayerStats.tscn"
-Global="*res://Global.gd"
+Global="*res://Singletons/Global.gd"
 
 [display]
 

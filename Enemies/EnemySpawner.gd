@@ -1,6 +1,6 @@
 extends Position2D
 
-var enemy_drone = preload("res://Enemies/EnemyDrone/EnemyDrone.tscn")
+var enemy_drone = preload("res://Enemies/Enemy_drone/EnemyDrone.tscn")
 
 export var spwan_speed = 2
 

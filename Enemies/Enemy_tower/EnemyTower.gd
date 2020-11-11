@@ -4,7 +4,7 @@ const TIMER_LIMIT = 3000
 var timer = 0
 
 onready var target = get_parent().get_node("Player")
-onready var bullet_scene = preload("res://Enemies/EnemyTower/EnemyTowerBullet.tscn") 				# Referencia a escena de bala
+onready var bullet_scene = preload("res://Enemies/Enemy_tower/EnemyTowerBullet.tscn") 				# Referencia a escena de bala
 onready var stats = $Stats
 
 func _ready():

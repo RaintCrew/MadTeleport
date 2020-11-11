@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Assets/Door.png" type="Texture" id=1]
+[ext_resource path="res://Assets/World/door.png" type="Texture" id=1]
 
 [node name="Door" type="Node2D"]
 
@@ -10,3 +10,5 @@ texture = ExtResource( 1 )
 centered = false
 
 [node name="Trigger" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger"]

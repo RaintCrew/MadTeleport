@@ -1,9 +1,14 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Assets/EnemyTower/EnemyTowerSprite.png" type="Texture" id=1]
-[ext_resource path="res://Enemies/EnemyTower/EnemyTower.gd" type="Script" id=2]
-[ext_resource path="res://Stats.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Enemy_tower/enemy_tower.png" type="Texture" id=1]
+[ext_resource path="res://Enemies/Enemy_tower/EnemyTower.gd" type="Script" id=2]
+[ext_resource path="res://Singletons/Stats.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Hit_Hurtboxes/Hurtbox.tscn" type="PackedScene" id=4]
+
+
+
+
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 17.7069, 45.09 )
