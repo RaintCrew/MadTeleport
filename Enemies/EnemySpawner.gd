@@ -2,8 +2,10 @@ extends Position2D
 
 var enemy_drone = preload("res://Enemies/EnemyDrone/EnemyDrone.tscn")
 
+export var spwan_speed = 2
+
 func _ready() -> void:
-	##Global.node_creation_parent = self
+	get_node("EnemySpawnTimer").wait_time = spwan_speed
 	pass
 
 func _on_EnemySpawnTimer_timeout() -> void:
