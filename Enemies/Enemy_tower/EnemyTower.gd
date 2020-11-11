@@ -29,7 +29,7 @@ func repeat_me():
 		get_parent().add_child(bullet)
 
 func _on_Hurtbox_area_entered(area: Area2D) -> void:
-	stats.health -=1
+	stats.health -= area.damage
 	pass
 
 func _on_Stats_no_health() -> void:

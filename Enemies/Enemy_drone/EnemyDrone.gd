@@ -38,7 +38,7 @@ func _process(delta: float) -> void:
 
 
 func _on_Hurtbox_area_entered(area: Area2D) -> void:
-	stats.health -=1
+	stats.health -= area.damage
 	velocity = velocity.move_toward(Vector2.ZERO, 300.0)
 	$AnimatedSprite.modulate = Color(10,10,10,10) # Turns white
 	flash_timer = 6
