@@ -44,7 +44,7 @@ __meta__ = {
 scale = Vector2( 0.8, 0.8 )
 frames = SubResource( 1 )
 animation = "DroneAnimation"
-frame = 2
+frame = 1
 playing = true
 offset = Vector2( -2, 3 )
 
@@ -52,6 +52,9 @@ offset = Vector2( -2, 3 )
 position = Vector2( 0.343358, 0.655507 )
 shape = SubResource( 2 )
 disabled = true
+
+[node name="Stats" parent="." instance=ExtResource( 3 )]
+max_health = 3
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
 visible = false
@@ -61,9 +64,6 @@ collision_mask = 0
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 1.19209e-07, 0.156072 )
 shape = SubResource( 3 )
-
-[node name="Stats" parent="." instance=ExtResource( 3 )]
-max_health = 3
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 2 )]
 visible = false
@@ -78,8 +78,8 @@ collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 5 )
-[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 
 [editable path="Hurtbox"]
 

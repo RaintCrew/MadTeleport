@@ -5,6 +5,7 @@ var timer = 0
 
 onready var target = get_parent().get_node("Player")
 onready var bullet_scene = preload("res://Enemies/EnemyTower/EnemyTowerBullet.tscn") 				# Referencia a escena de bala
+onready var stats = $Stats
 
 func _ready():
 	# Create a timer node
@@ -27,3 +28,9 @@ func repeat_me():
 		bullet.destination = target.get_global_position()
 		get_parent().add_child(bullet)
 
+func _on_Hurtbox_area_entered(area: Area2D) -> void:
+	stats.health -=1
+	pass
+
+func _on_Stats_no_health() -> void:
+	queue_free()
