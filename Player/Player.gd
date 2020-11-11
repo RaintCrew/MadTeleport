@@ -206,3 +206,9 @@ func _input(event):
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
+
+
+func _on_Trigger_body_entered(body):
+	if body == self:
+		get_tree().change_scene("res://World/level2.tscn")
+		get_tree().paused = false
