@@ -1,21 +1,19 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Enemies/EnemyDrone/EnemyDrone.gd" type="Script" id=1]
 [ext_resource path="res://Enemies/EnemyDrone/PlayerDetectionZone.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Stats.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Hit_Hurtboxes/Hurtbox.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Enemies/EnemyDrone/droneSprite (1).png" type="Texture" id=5]
+[ext_resource path="res://Assets/EnemyDrone/DroneSprite2.png" type="Texture" id=5]
 [ext_resource path="res://Hit_Hurtboxes/Hitbox.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/EnemyDrone/Nave girando.3.png" type="Texture" id=7]
-[ext_resource path="res://Assets/EnemyDrone/Nave girando.5.png" type="Texture" id=8]
-[ext_resource path="res://Assets/EnemyDrone/Nave girando.4.png" type="Texture" id=9]
-[ext_resource path="res://Assets/EnemyDrone/Nave girando.2.png" type="Texture" id=10]
-[ext_resource path="res://Assets/EnemyDrone/Nave girando.1.png" type="Texture" id=11]
 [ext_resource path="res://Stats.gd" type="Script" id=12]
+[ext_resource path="res://Assets/EnemyDrone/DroneSprite3.png" type="Texture" id=7]
+[ext_resource path="res://Assets/EnemyDrone/DroneSprite5.png" type="Texture" id=8]
+[ext_resource path="res://Assets/EnemyDrone/DroneSprite4.png" type="Texture" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 11 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 8 ) ],
+"frames": [ ExtResource( 8 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 8 ) ],
 "loop": true,
 "name": "DroneAnimation",
 "speed": 15.0
@@ -51,14 +49,13 @@ frame = 4
 playing = true
 offset = Vector2( -2, 3 )
 
-[node name="Sprite" type="Sprite" parent="."]
-visible = false
-texture = ExtResource( 5 )
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.343358, 0.655507 )
 shape = SubResource( 2 )
 disabled = true
+
+[node name="Stats" parent="." instance=ExtResource( 3 )]
+max_health = 3
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
 visible = false
@@ -70,8 +67,7 @@ position = Vector2( 1.19209e-07, 0.156072 )
 shape = SubResource( 3 )
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
-script = ExtResource( 12 )
-max_health = 2
+max_health = 3
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 2 )]
 visible = false
@@ -81,13 +77,12 @@ modulate = Color( 1, 1, 1, 0.0980392 )
 shape = SubResource( 4 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 6 )]
-visible = false
 collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 5 )
-[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 
 [editable path="Hurtbox"]
 
