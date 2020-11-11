@@ -215,3 +215,9 @@ func create_tp_particles():
 	var tp_particles = teleport_particle_scene.instance()	
 	tp_particles.global_position = Vector2(global_position.x, global_position.y)
 	get_parent().add_child(tp_particles)
+
+
+func _on_Trigger_body_entered(body):
+	if body == self:
+		get_tree().change_scene("res://World/level2.tscn")
+		get_tree().paused = false
