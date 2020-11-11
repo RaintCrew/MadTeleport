@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Enemies/EnemyDrone/EnemyDrone.gd" type="Script" id=1]
 [ext_resource path="res://Enemies/EnemyDrone/PlayerDetectionZone.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Assets/EnemyDrone/Nave girando.4.png" type="Texture" id=9]
 [ext_resource path="res://Assets/EnemyDrone/Nave girando.2.png" type="Texture" id=10]
 [ext_resource path="res://Assets/EnemyDrone/Nave girando.1.png" type="Texture" id=11]
+[ext_resource path="res://Stats.gd" type="Script" id=12]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -46,7 +47,7 @@ __meta__ = {
 scale = Vector2( 0.8, 0.8 )
 frames = SubResource( 1 )
 animation = "DroneAnimation"
-frame = 2
+frame = 4
 playing = true
 offset = Vector2( -2, 3 )
 
@@ -69,7 +70,8 @@ position = Vector2( 1.19209e-07, 0.156072 )
 shape = SubResource( 3 )
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
-max_health = 3
+script = ExtResource( 12 )
+max_health = 2
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 2 )]
 visible = false
