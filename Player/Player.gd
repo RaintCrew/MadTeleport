@@ -219,5 +219,6 @@ func create_tp_particles():
 
 func _on_Trigger_body_entered(body):
 	if body == self:
-		get_tree().change_scene("res://World/level2.tscn")
+		print("hello")
+		get_tree().change_scene("res://World/Level2.tscn")
 		get_tree().paused = false

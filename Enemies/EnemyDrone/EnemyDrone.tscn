@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Enemies/EnemyDrone/EnemyDrone.gd" type="Script" id=1]
 [ext_resource path="res://Enemies/EnemyDrone/PlayerDetectionZone.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Hit_Hurtboxes/Hurtbox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/EnemyDrone/DroneSprite2.png" type="Texture" id=5]
 [ext_resource path="res://Hit_Hurtboxes/Hitbox.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Stats.gd" type="Script" id=12]
 [ext_resource path="res://Assets/EnemyDrone/DroneSprite3.png" type="Texture" id=7]
 [ext_resource path="res://Assets/EnemyDrone/DroneSprite5.png" type="Texture" id=8]
 [ext_resource path="res://Assets/EnemyDrone/DroneSprite4.png" type="Texture" id=9]
@@ -45,7 +44,6 @@ __meta__ = {
 scale = Vector2( 0.8, 0.8 )
 frames = SubResource( 1 )
 animation = "DroneAnimation"
-frame = 4
 playing = true
 offset = Vector2( -2, 3 )
 
@@ -55,7 +53,7 @@ shape = SubResource( 2 )
 disabled = true
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
-max_health = 3
+max_health = 2
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
 visible = false
