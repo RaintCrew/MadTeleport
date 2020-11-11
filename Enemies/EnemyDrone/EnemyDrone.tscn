@@ -46,6 +46,7 @@ __meta__ = {
 scale = Vector2( 0.8, 0.8 )
 frames = SubResource( 1 )
 animation = "DroneAnimation"
+frame = 2
 playing = true
 offset = Vector2( -2, 3 )
 
