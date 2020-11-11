@@ -55,6 +55,7 @@ func _process(delta: float) -> void:
 
 func _on_Hurtbox_area_entered(area: Area2D) -> void:
 	stats.health -=1
+	velocity = velocity.move_toward(Vector2.ZERO, 300.0)
 	
 
 func _on_Stats_no_health() -> void:

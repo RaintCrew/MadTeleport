@@ -4,7 +4,7 @@ const TIMER_LIMIT = 3000
 var timer = 0
 
 onready var target = get_parent().get_node("Player")
-onready var bullet_scene = preload("res://Enemies/EnemyBullet.tscn") 				# Referencia a escena de bala
+onready var bullet_scene = preload("res://Enemies/EnemyTower/EnemyTowerBullet.tscn") 				# Referencia a escena de bala
 
 func _ready():
 	# Create a timer node
@@ -27,11 +27,3 @@ func repeat_me():
 		bullet.destination = target.get_global_position()
 		get_parent().add_child(bullet)
 
-
-
-#func _process(delta):
-#	print(timer)
-#	timer += delta
-#	if(timer >= TIMER_LIMIT):
-#		timer -= TIMER_LIMIT;
-		
