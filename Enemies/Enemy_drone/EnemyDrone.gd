@@ -17,14 +17,14 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if Global.player: 			# If the player is alive execute below code
-		_chase_player(delta)
+		chase_player(delta)
 	
 	if flash_timer > 0:
 		flash_timer -= 1
 	if flash_timer == 1:
 		$AnimatedSprite.modulate = Color(1,1,1,1) # Returns to normal color
 
-func _chase_player(delta: float):
+func chase_player(delta: float):
 	var direction = global_position.direction_to(Global.player.global_position)		# Check player position
 	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)	# Sets the drone speed
 	sprite.flip_h = velocity.x < 0													# change the orientation  of the sprite depending on the direction of the player

@@ -28,7 +28,7 @@ func _ready():
 		$Sprite.modulate = Color(1,1,1,1) # Returns to normal color
 
 
-func _shoot_player():
+func shoot_player():
 	var bullet = bullet_scene.instance()		# Create a Bullet
 	bullet.position = global_position			# New Bullet have the position of the tower
 	if target:									# If the target is alive execute below
