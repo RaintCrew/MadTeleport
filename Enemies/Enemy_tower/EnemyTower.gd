@@ -3,34 +3,35 @@ extends KinematicBody2D
 const TIMER_LIMIT = 3000
 var timer = 0
 
-onready var target = get_parent().get_node("Player")
-onready var bullet_scene = preload("res://Enemies/Enemy_tower/EnemyTowerBullet.tscn") 				# Referencia a escena de bala
+onready var target = get_parent().get_node("Player") 									# Reference player
+onready var bullet_scene = preload("res://Enemies/Enemy_tower/EnemyTowerBullet.tscn") 	# Reference Bullet Scene
 onready var stats = $Stats
+export var attack_speed = 1 		# Tower Attack Speed
 
 func _ready():
 	# Create a timer node
 	var timer = Timer.new()
 	# Set timer interval
-	timer.set_wait_time(1.0)
+	timer.set_wait_time(attack_speed)
 	# Set it as repeat
 	timer.set_one_shot(false)
 	# Connect its timeout signal to the function you want to repeat
-	timer.connect("timeout", self, "repeat_me")
+	timer.connect("timeout", self, "_shoot_player")
 	# Add to the tree as child of the current node
 	add_child(timer)
 	timer.start()
 
 
-func repeat_me():
-	var bullet = bullet_scene.instance()	
-	bullet.position = global_position
-	if target:
-		bullet.destination = target.get_global_position()
+func _shoot_player():
+	var bullet = bullet_scene.instance()		# Create a Bullet
+	bullet.position = global_position			# New Bullet have the position of the tower
+	if target:									# If the target is alive execute below
+		bullet.destination = target.get_global_position()		# Bullet direction is the last position of the player
 		get_parent().add_child(bullet)
 
 func _on_Hurtbox_area_entered(area: Area2D) -> void:
-	stats.health -= area.damage
-	area.get_parent().queue_free()
+	stats.health -= area.damage					# Tower lose a life
+	area.get_parent().queue_free()				# Anything that hits the tower is removed
 	pass
 
 func _on_Stats_no_health() -> void:
