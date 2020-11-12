@@ -10,7 +10,6 @@
 [ext_resource path="res://Singletons/Stats.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Enemies/Enemy_drone/EnemyDrone.gd" type="Script" id=9]
 
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 4 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ) ],
@@ -45,7 +44,7 @@ __meta__ = {
 scale = Vector2( 0.8, 0.8 )
 frames = SubResource( 1 )
 animation = "DroneAnimation"
-frame = 2
+frame = 3
 playing = true
 offset = Vector2( -2, 3 )
 

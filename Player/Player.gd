@@ -11,7 +11,7 @@ const JUMP_FORCE = 165 		# qué tan alto puede saltar el jugador
 const PISTOL_AMMO = 6
 var stats = PlayerStats				# Access to the Singleton with the stats.
 var velocity = Vector2() 			# Vector (x,y) donde x/y define cuanto se mueve horizontal/verticalmente en cada frame.
-var target_running_velocity = 0
+var target_running_velocity = 0		# Velocidad a la que está intentando llegar. Se usa para lograr la aceleracion y desaceleracion
 var ammo = PISTOL_AMMO 				# Numero de balas en el arma. Se recarga con Teleport
 
 var can_throw_teleport_ball = true	# Puede arrojar la teleport ball, o esta en el aire y no puede lanzarla
@@ -25,10 +25,10 @@ onready var gun = get_node("Gun") 						# Referencia al arma de la que disparas
 onready var floating_teleport_ball = get_node("Ball") 	# Referencia a teleport ball flotando al lado tuyo
 onready var teleport_ball = null						# Referencia a teleport ball lanzada a la cual te teleportas
 
-onready var bullet_scene = preload("res://Player/PlayerBullet.tscn") 				# Referencia a escena de bala
-onready var teleport_ball_scene = preload("res://Player/TeleportBall.tscn") # Referencia a escena de teleport ball
-onready var smoke_particle_scene = preload("res://Player/PlayerJumpSmokeParticle.tscn")
-onready var teleport_particle_scene = preload("res://Player/TeleportParticles.tscn")
+onready var bullet_scene = preload("res://Player/PlayerBullet.tscn") 					# Referencia a escena de bala
+onready var teleport_ball_scene = preload("res://Player/TeleportBall.tscn") 			# Referencia a escena de teleport ball
+onready var smoke_particle_scene = preload("res://Player/PlayerJumpSmokeParticle.tscn")	# Referencia a escena de particulas de humo
+onready var teleport_particle_scene = preload("res://Player/TeleportParticles.tscn")	# Referencia a escena de particulas de teleport
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Global.player = self
@@ -44,6 +44,9 @@ func _physics_process(delta):
 	
 	# Controles tecla "A" y "D" para moverse lateralmente
 	# Al no presionar ninguna tecla, el Player se detiene lateralmente
+	# Acerca target_running_velocity: 
+	# 	por ejemplo al presionar "D", el personaje fija que "quiero llegar a RUN_SPEED".
+	# 	Después, la velocity suavemente cambia hasta llegar a cual sea el valor de target_running_velocity
 	if Input.is_key_pressed(KEY_D):
 		target_running_velocity = RUN_SPEED
 
@@ -51,10 +54,14 @@ func _physics_process(delta):
 		target_running_velocity = -RUN_SPEED
 	else:
 		target_running_velocity = 0
-
-	if target_running_velocity == 0:
+	
+	# Las siguientes formulas de velocity.x buscan suavizar su valor hasta que se vuelva target_running_velocity
+	# [Formula original:  x += (target - x) * 0.1]
+	# [Al llamar a esta funcion en cada frame, lo que haces es 
+	#   acercar a "x" 10% del camino que le falta para llegar a target]
+	if target_running_velocity == 0: # Si esta intentando frenar hasta cero
 		velocity.x += (target_running_velocity - velocity.x) * 0.7
-	else:
+	else:							# Si esta intentando acelerar
 		velocity.x += (target_running_velocity - velocity.x) * 0.4
 
 	
@@ -91,7 +98,7 @@ func _physics_process(delta):
 	$PlayerSprite.scale.y += (1 - $PlayerSprite.scale.y) * 0.2
 	$PlayerSprite.scale.x += (1 - $PlayerSprite.scale.x) * 0.2
 	$PlayerSprite.position.y += (0 - $PlayerSprite.position.y) * 0.2
-	
+	# Suaviza el retorno del arma a su posicion normal despues del recoil
 	$Gun.position.x += (0 - $Gun.position.x) * 0.2
 	$Gun.position.y += (0 - $Gun.position.y) * 0.2
 	
@@ -136,7 +143,7 @@ func fire():
 		$Gun.global_position -= recoil
 		
 		if will_camera_shake_on_gunfire:
-			camera.activate_shake(1.6,0.1)
+			camera.activate_shake(1.6,0.1) # (shake_intensity, shake_duration)
 
 
 
@@ -155,7 +162,7 @@ func teleport():
 	create_tp_particles()
 	# Relocar al jugador donde este la teleport_ball
 	self.global_position = teleport_ball.get_global_position()
-	OS.delay_msec(60)
+	OS.delay_msec(60) # Frame freeze
 	camera.activate_shake(2.0, 0.4)
 	create_tp_particles()
 	velocity.y = 0					# El momentum de caida no se mantiene al teleportarse
@@ -176,7 +183,7 @@ func regain_teleport_ball():
 
 
 func die():
-	if teleport_ball:
+	if teleport_ball: # Si la tp ball esta volando, debe ser eliminada antes de quitar al player
 		teleport_ball.queue_free()
 	queue_free()
 
