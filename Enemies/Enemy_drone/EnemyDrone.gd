@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
 		sprite.flip_h = velocity.x < 0
 		velocity = move_and_slide(velocity)
 		
-		decrease_hurt_vfx_timer()
+	decrease_hurt_vfx_timer()
 	
 
 
