@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/VFX/smoke_small_particle.png" type="Texture" id=2]
 [ext_resource path="res://Assets/UI/font_rainyhearts.ttf" type="DynamicFontData" id=3]
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=1]
 resource_name = "BlackScreenFadeIn"
 length = 0.4
 tracks/0/type = "bezier"
@@ -60,7 +60,7 @@ tracks/4/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "BlackScreenFadeOut"
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("BlackScreen:color:r")
@@ -115,8 +115,7 @@ tracks/4/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "GameOverFadeIn"
+[sub_resource type="Animation" id=3]
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("GameOver:modulate:r")
 tracks/0/interp = 1
@@ -190,7 +189,7 @@ tracks/6/keys = {
 "times": PoolRealArray( 0, 1 )
 }
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 3 )
 
 [node name="Camera" type="Camera2D"]
@@ -208,9 +207,9 @@ scale = Vector2( 334.125, 192.125 )
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/BlackScreenFadeIn = SubResource( 4 )
-anims/BlackScreenFadeOut = SubResource( 3 )
-anims/GameOverFadeIn = SubResource( 2 )
+anims/BlackScreenFadeIn = SubResource( 1 )
+anims/BlackScreenFadeOut = SubResource( 2 )
+anims/GameOverFadeIn = SubResource( 3 )
 
 [node name="GameOver" type="Node2D" parent="."]
 visible = false
@@ -233,7 +232,7 @@ margin_top = -32.0
 margin_right = 48.0
 margin_bottom = 16.0
 rect_scale = Vector2( 1.5, 1.5 )
-custom_fonts/normal_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 4 )
 text = "         IS IT POSSIBLE?
 
   - PRESS R TO RESTART -"
@@ -243,6 +242,7 @@ __meta__ = {
 }
 
 [node name="BlackScreen" type="ColorRect" parent="."]
+visible = false
 margin_left = -368.0
 margin_top = -208.0
 margin_right = 368.0
