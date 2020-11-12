@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://World/ShakingCamera.gd" type="Script" id=1]
+[ext_resource path="res://World/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Assets/VFX/smoke_small_particle.png" type="Texture" id=2]
 
 [node name="Camera" type="Camera2D"]
