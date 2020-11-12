@@ -12,7 +12,7 @@ var enemies_spawned = 0
 
 func _ready() -> void:
 	get_node("EnemySpawnTimer").wait_time = spawn_delay 			# Set spawn speed to the timer
-	print(enemy_type[0])
+	
 	pass
 
 func _on_EnemySpawnTimer_timeout() -> void:
