@@ -31,6 +31,7 @@ func _on_Hurtbox_area_entered(area: Area2D) -> void:
 	stats.health -= area.damage										# Lose a health depending of hit damage
 	velocity = velocity.move_toward(Vector2.ZERO, 300.0)			# Hitting the drone causes it to slow down
 	sprite.modulate = Color(10,10,10,10) 	# Drone sprite turns white
+	$Audio_Hit.play()
 	hurt_vfx_timer = DURATION_OF_HURT_VFX	# How long the vfx for being hit lasts
 	area.get_parent().queue_free()									# Delete everything that damages the drone
 

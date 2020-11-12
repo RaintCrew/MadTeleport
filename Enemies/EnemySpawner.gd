@@ -4,8 +4,8 @@ var enemy_drone = preload("res://Enemies/Enemy_drone/EnemyDrone.tscn") # Referen
 var enemy_tower = preload("res://Enemies/Enemy_tower/EnemyTower.tscn") # Reference EnemyTower
 export(String, "Drone", "Tower") var enemy_type
 
-export var spawn_delay = 2 				# Spawn speed
-export var enemies_limit = 5;
+export var spawn_delay : = 2.0 				# Spawn speed
+export var enemies_limit : = 5;
 export var spawning = true
 
 var enemies_spawned = 0
