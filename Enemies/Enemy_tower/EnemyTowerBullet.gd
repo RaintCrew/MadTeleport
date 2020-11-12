@@ -3,6 +3,7 @@ extends Area2D
 var speed = 5						# Speed of the bullet
 var velocity = Vector2(0,0)        	# Speed x/y
 onready var destination = null
+export var damage = 1
 
 func _ready():
 	destination = get_parent().get_node("Player").get_global_position() 	# get the player last position
