@@ -1,8 +1,7 @@
 [gd_scene load_steps=24 format=2]
 
-[ext_resource path="res://Enemies/Enemy_drone/Effect.gd" type="Script" id=1]
+[ext_resource path="res://Enemies/EnemyDeathEffect.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Enemy_drone/enemy_drone_death.png" type="Texture" id=2]
-
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
