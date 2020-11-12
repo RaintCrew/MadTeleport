@@ -187,6 +187,8 @@ func regain_teleport_ball():
 func die():
 	if teleport_ball: # Si la tp ball esta volando, debe ser eliminada antes de quitar al player
 		teleport_ball.queue_free()
+	OS.delay_msec(100)
+	camera.display_gameover()
 	queue_free()
 
 	
