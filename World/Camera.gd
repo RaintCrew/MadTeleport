@@ -21,6 +21,9 @@ var enabled : = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$BlackScreen.visible = true	# If the black screen is set as visible in the editor
+								# we can't edit the levels because it blocks sight.
+	$AnimationPlayer.play("BlackScreenFadeOut")
 	randomize()
 	#set_process(false)
 	self.duration = duration
@@ -70,3 +73,8 @@ func activate_shake(given_amplitude, given_duration):
 	amplitude = given_amplitude
 	duration = given_duration
 	self.shake = true
+
+func display_gameover():
+	$AnimationPlayer.play("GameOverFadeIn")
+	
+	
