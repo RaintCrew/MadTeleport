@@ -30,6 +30,7 @@ func repeat_me():
 
 func _on_Hurtbox_area_entered(area: Area2D) -> void:
 	stats.health -= area.damage
+	area.get_parent().queue_free()
 	pass
 
 func _on_Stats_no_health() -> void:

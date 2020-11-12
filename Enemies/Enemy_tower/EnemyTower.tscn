@@ -5,11 +5,6 @@
 [ext_resource path="res://Singletons/Stats.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Hit_Hurtboxes/Hurtbox.tscn" type="PackedScene" id=4]
 
-
-
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 17.7069, 45.09 )
 
