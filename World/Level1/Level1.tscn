@@ -34,11 +34,9 @@ position = Vector2( 538.565, 38.3994 )
 
 [node name="EnemySpawner3" parent="." instance=ExtResource( 4 )]
 position = Vector2( 607.163, 33.7664 )
-spwan_speed = 5
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 4 )]
 position = Vector2( 45.6984, 202.271 )
-spwan_speed = 1
 
 [node name="Door" parent="." instance=ExtResource( 3 )]
 position = Vector2( 336.739, 118.42 )

@@ -4,6 +4,7 @@
 
 [node name="EnemySpawner" type="Position2D"]
 script = ExtResource( 1 )
+spawning = false
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 wait_time = 2.0
