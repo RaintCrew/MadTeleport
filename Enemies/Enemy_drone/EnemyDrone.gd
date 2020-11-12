@@ -19,7 +19,6 @@ var state = IDLE
 
 onready var sprite = $AnimatedSprite
 onready var stats = $Stats
-onready var playerDetectionZone = $PlayerDetectionZone
 
 func _ready() -> void:
 	pass
