@@ -112,7 +112,7 @@ func _physics_process(delta):
 			
 			has_landed = true
 			create_smoke_particles()
-			
+			$Audio_Hit.play()
 	else: 
 		has_landed = false
 		
@@ -124,6 +124,7 @@ func jump():
 		$PlayerSprite.scale.y = 1.3
 		$PlayerSprite.position.y -= 2
 		create_smoke_particles()
+		$Audio_Jump.play()
 
 
 # Funcion para disparar arma
@@ -142,7 +143,7 @@ func fire():
 		var recoil = $Gun.global_position.direction_to(crosshair.global_position)
 		recoil *= 6
 		$Gun.global_position -= recoil
-		
+		$Audio_Shoot.play()
 		if will_camera_shake_on_gunfire:
 			camera.activate_shake(1.6,0.1) # (shake_intensity, shake_duration)
 
@@ -166,6 +167,7 @@ func teleport():
 	OS.delay_msec(60) # Frame freeze
 	camera.activate_shake(2.0, 0.4)
 	create_tp_particles()
+	$Audio_Teleport.play()
 	velocity.y = 0					# El momentum de caida no se mantiene al teleportarse
 	regain_teleport_ball()	# Re-obtienes la teleport ball y puedes tirarla de nuevo
 	teleport_ball.queue_free()		# Borrar la teleport ball que estaba viajando
@@ -186,6 +188,8 @@ func regain_teleport_ball():
 func die():
 	if teleport_ball: # Si la tp ball esta volando, debe ser eliminada antes de quitar al player
 		teleport_ball.queue_free()
+	OS.delay_msec(100)
+	camera.display_gameover()
 	queue_free()
 
 	
