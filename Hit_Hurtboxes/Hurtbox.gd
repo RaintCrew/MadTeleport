@@ -1,6 +1,6 @@
 extends Area2D
 
-var invincible = false setget set_invincible
+export var invincible = false setget set_invincible
 
 onready var timer = $Timer
 
@@ -16,7 +16,7 @@ func set_invincible(value):
 
 func start_invincibility(duration):
 	self.invincible = true
-	timer.start()
+	timer.start(duration)
 
 func _ready() -> void:
 	pass # Replace with function body.
