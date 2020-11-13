@@ -27,6 +27,11 @@ position = Vector2( 512.652, 70.0036 )
 spawn_delay = 1.4
 enemies_limit = 10
 
+[node name="EnemySpawner2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 48, 304 )
+spawn_delay = 1.4
+enemies_limit = 10
+
 [node name="Camera" parent="." instance=ExtResource( 1 )]
 position = Vector2( 320, 176 )
 
