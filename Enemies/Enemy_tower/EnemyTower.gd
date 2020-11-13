@@ -3,6 +3,7 @@ extends KinematicBody2D
 const TIMER_LIMIT = 3000
 var timer = 0
 
+export var attack = true
 onready var target = get_parent().get_node("Player") 									# Reference player
 onready var bullet_scene = preload("res://Enemies/Enemy_tower/EnemyTowerBullet.tscn") 	# Reference Bullet Scene
 onready var stats = $Stats
@@ -17,7 +18,7 @@ func _ready():
 	# Set it as repeat
 	timer.set_one_shot(false)
 	# Connect its timeout signal to the function you want to repeat
-	timer.connect("timeout", self, "_shoot_player")
+	timer.connect("timeout", self, "shoot_player")
 	# Add to the tree as child of the current node
 	add_child(timer)
 	timer.start()
@@ -29,11 +30,12 @@ func _ready():
 
 
 func shoot_player():
-	var bullet = bullet_scene.instance()		# Create a Bullet
-	bullet.position = global_position			# New Bullet have the position of the tower
-	if target:									# If the target is alive execute below
-		bullet.destination = target.get_global_position()		# Bullet direction is the last position of the player
-		get_parent().add_child(bullet)
+	if attack == true:
+		var bullet = bullet_scene.instance()		# Create a Bullet
+		bullet.position = global_position			# New Bullet have the position of the tower
+		if target:									# If the target is alive execute below
+			bullet.destination = target.get_global_position()		# Bullet direction is the last position of the player
+			get_parent().add_child(bullet)
 
 func _on_Hurtbox_area_entered(area: Area2D) -> void:
 	stats.health -= area.damage					# Tower lose a life

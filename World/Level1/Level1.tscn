@@ -32,18 +32,18 @@ position = Vector2( 319, 175 )
 [node name="EnemyTower" parent="." instance=ExtResource( 7 )]
 position = Vector2( 538.565, 38.3994 )
 
-[node name="EnemySpawner3" parent="." instance=ExtResource( 4 )]
-position = Vector2( 607.163, 33.7664 )
-
-[node name="EnemySpawner" parent="." instance=ExtResource( 4 )]
-position = Vector2( 45.6984, 202.271 )
-
 [node name="Door" parent="." instance=ExtResource( 3 )]
 position = Vector2( 336.739, 118.42 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door/Trigger" index="0"]
 position = Vector2( 26.1434, 36.2227 )
 shape = SubResource( 1 )
+
+[node name="EnemySpawner" parent="." instance=ExtResource( 4 )]
+position = Vector2( 38.3204, 199.907 )
+
+[node name="EnemySpawner2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 603.195, 41.7421 )
 [connection signal="body_entered" from="Door/Trigger" to="Player" method="_on_Trigger_body_entered"]
 
 [editable path="Door"]

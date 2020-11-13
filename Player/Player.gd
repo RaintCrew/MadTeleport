@@ -24,6 +24,7 @@ onready var camera = get_parent().get_node("Camera")	# Referencia a la camara
 onready var gun = get_node("Gun") 						# Referencia al arma de la que disparas
 onready var floating_teleport_ball = get_node("Ball") 	# Referencia a teleport ball flotando al lado tuyo
 onready var teleport_ball = null						# Referencia a teleport ball lanzada a la cual te teleportas
+onready var hurtbox = $Hurtbox
 
 onready var bullet_scene = preload("res://Player/PlayerBullet.tscn") 					# Referencia a escena de bala
 onready var teleport_ball_scene = preload("res://Player/TeleportBall.tscn") 			# Referencia a escena de teleport ball
@@ -215,6 +216,7 @@ func _input(event):
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
+	hurtbox.start_invincibility(0.5)
 
 func create_smoke_particles():
 	var smoke_particles = smoke_particle_scene.instance()	

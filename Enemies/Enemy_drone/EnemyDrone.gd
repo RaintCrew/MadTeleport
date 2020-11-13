@@ -11,6 +11,8 @@ var hurt_vfx_timer = -1 # Timer so that the vfx for being hurt is visible for a 
 
 onready var sprite = $AnimatedSprite		# Load the sprite.
 onready var stats = $Stats					# Load the stats script for the life
+onready var hurtbox = $Hurtbox
+onready var softCollision = $SoftCollision
 
 func _ready() -> void:
 	pass
@@ -25,10 +27,13 @@ func chase_player(delta: float):
 	var direction = global_position.direction_to(Global.player.global_position)		# Check player position
 	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)	# Sets the drone speed
 	sprite.flip_h = velocity.x < 0													# change the orientation  of the sprite depending on the direction of the player
+	if softCollision.is_colliding():
+		velocity += softCollision.get_push_vector() * delta * 400
 	velocity = move_and_slide(velocity)												# move the drone
 
 func _on_Hurtbox_area_entered(area: Area2D) -> void:
 	stats.health -= area.damage										# Lose a health depending of hit damage
+	
 	velocity = velocity.move_toward(Vector2.ZERO, 300.0)			# Hitting the drone causes it to slow down
 	sprite.modulate = Color(10,10,10,10) 	# Drone sprite turns white
 	$Audio_Hit.play()
