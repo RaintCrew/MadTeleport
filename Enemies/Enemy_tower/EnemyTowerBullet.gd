@@ -19,3 +19,4 @@ func _on_EnemyBullet_body_entered(body):
 
 func _on_EnemyBullet_area_entered(area: Area2D) -> void:
 	queue_free()
+

@@ -60,6 +60,7 @@ esc={
 2d_physics/layer_4="Enemy"
 2d_physics/layer_5="EnemyHurtBox"
 2d_physics/layer_10="SoftCollisions"
+2d_physics/layer_11="Walls"
 
 [rendering]
 
