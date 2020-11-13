@@ -16,7 +16,7 @@ var ammo = PISTOL_AMMO 				# Numero de balas en el arma. Se recarga con Teleport
 
 var can_throw_teleport_ball = true	# Puede arrojar la teleport ball, o esta en el aire y no puede lanzarla
 var has_landed = true				# Se usa para ejecutar code en el primer instante que aterriza en suelo
-
+var has_tpball_traveled_enough = false
 var will_camera_shake_on_gunfire = true
 
 onready var crosshair = get_node("Crosshair") 			# Referencia a la crosshair
@@ -35,7 +35,7 @@ func _ready():
 	Global.player = self
 	# no_health is the signal we're connecting to
 	# self is this object (like "this" in any othe major programming language xd)
-	# "queue_free" is the function that will be called.
+	# "die" is the function that will be called.
 	stats.connect("no_health",self,"die")
 	pass
 
@@ -158,20 +158,22 @@ func throw_teleport_ball():
 	teleport_ball = teleport_ball_scene.instance()
 	teleport_ball.position = gun.get_node("Gun_Tip").get_global_position()
 	get_parent().add_child(teleport_ball)
+	
 
 # Funcion de teleportarse hacia la teleport ball
 func teleport():
-	create_tp_particles()
-	# Relocar al jugador donde este la teleport_ball
-	self.global_position = teleport_ball.get_global_position()
-	OS.delay_msec(60) # Frame freeze
-	camera.activate_shake(2.0, 0.4)
-	create_tp_particles()
-	$Audio_Teleport.play()
-	velocity.y = 0					# El momentum de caida no se mantiene al teleportarse
-	regain_teleport_ball()	# Re-obtienes la teleport ball y puedes tirarla de nuevo
-	teleport_ball.queue_free()		# Borrar la teleport ball que estaba viajando
-	reload()	# Teleportarse es lo que recarga tus armas
+	if has_tpball_traveled_enough:
+		create_tp_particles()
+		# Relocar al jugador donde este la teleport_ball
+		self.global_position = teleport_ball.get_global_position()
+		OS.delay_msec(60) # Frame freeze
+		camera.activate_shake(2.0, 0.4)
+		create_tp_particles()
+		$Audio_Teleport.play()
+		velocity.y = 0					# El momentum de caida no se mantiene al teleportarse
+		regain_teleport_ball()	# Re-obtienes la teleport ball y puedes tirarla de nuevo
+		teleport_ball.queue_free()		# Borrar la teleport ball que estaba viajando
+		reload()	# Teleportarse es lo que recarga tus armas
 
 # Funcion para recargar tu arma. Suele ejecutarse al teleportarse
 # Si vamos a agregar mas armas, esta funcion se modifica para cada tipo de arma
@@ -183,7 +185,7 @@ func reload():
 # cuando ocurra. Esos se pondrian aqui.
 func regain_teleport_ball():
 	can_throw_teleport_ball = true
-
+	has_tpball_traveled_enough = false
 
 func die():
 	if teleport_ball: # Si la tp ball esta volando, debe ser eliminada antes de quitar al player
@@ -234,3 +236,7 @@ func _on_Trigger_body_entered(body):
 	if body == self:
 		get_tree().change_scene("res://World/Level2/Level2.tscn")
 		get_tree().paused = false
+
+func tpball_traveled_enough():
+	has_tpball_traveled_enough = true
+
