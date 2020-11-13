@@ -19,6 +19,9 @@ var has_landed = true				# Se usa para ejecutar code en el primer instante que a
 var has_tpball_traveled_enough = false
 var will_camera_shake_on_gunfire = true
 
+onready var player_idle = $PlayerSpriteIdle
+onready var player_run = $PlayerSpriteRun
+onready var animation_player = $AnimationPlayer
 onready var crosshair = get_node("Crosshair") 			# Referencia a la crosshair
 onready var camera = get_parent().get_node("Camera")	# Referencia a la camara
 onready var gun = get_node("Gun") 						# Referencia al arma de la que disparas
@@ -37,12 +40,11 @@ func _ready():
 	# self is this object (like "this" in any othe major programming language xd)
 	# "die" is the function that will be called.
 	stats.connect("no_health",self,"die")
-	pass
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	
 	# Controles tecla "A" y "D" para moverse lateralmente
 	# Al no presionar ninguna tecla, el Player se detiene lateralmente
 	# Acerca target_running_velocity: 
@@ -50,11 +52,23 @@ func _physics_process(delta):
 	# 	Después, la velocity suavemente cambia hasta llegar a cual sea el valor de target_running_velocity
 	if Input.is_key_pressed(KEY_D):
 		target_running_velocity = RUN_SPEED
-
+		animation_player.play("run_left")
+		player_run.flip_h = true;
+		player_run.set_visible(true)
+		player_idle.set_visible(false)
+		
 	elif Input.is_key_pressed(KEY_A):
 		target_running_velocity = -RUN_SPEED
+		animation_player.play("run_left")
+		player_run.flip_h = false;
+		player_run.set_visible(true)
+		player_idle.set_visible(false)
+		
 	else:
 		target_running_velocity = 0
+		animation_player.play("idle")
+		player_idle.set_visible(true)
+		player_run.set_visible(false)
 	
 	# Las siguientes formulas de velocity.x buscan suavizar su valor hasta que se vuelva target_running_velocity
 	# [Formula original:  x += (target - x) * 0.1]
@@ -87,18 +101,18 @@ func _physics_process(delta):
 	
 	# El jugador y el arma se voltean hacia donde este la crosshair
 	if crosshair.global_position.x < global_position.x:
-		$PlayerSprite.flip_h = true
+		$PlayerSpriteIdle.flip_h = true
 		gun.flip_v = true
 	else:
-		$PlayerSprite.flip_h = false
+		$PlayerSpriteIdle.flip_h = false
 		gun.flip_v = false
 	
 	# Cuando el Player aterriza en suelo, su sprite se deforma
 	# Este codigo es el que se encarga en cada frame de suavemente
 	# acomodar la sprite de vuelta a su forma normal
-	$PlayerSprite.scale.y += (1 - $PlayerSprite.scale.y) * 0.2
-	$PlayerSprite.scale.x += (1 - $PlayerSprite.scale.x) * 0.2
-	$PlayerSprite.position.y += (0 - $PlayerSprite.position.y) * 0.2
+	$PlayerSpriteIdle.scale.y += (1 - $PlayerSpriteIdle.scale.y) * 0.2
+	$PlayerSpriteIdle.scale.x += (1 - $PlayerSpriteIdle.scale.x) * 0.2
+	$PlayerSpriteIdle.position.y += (0 - $PlayerSpriteIdle.position.y) * 0.2
 	# Suaviza el retorno del arma a su posicion normal despues del recoil
 	$Gun.position.x += (0 - $Gun.position.x) * 0.2
 	$Gun.position.y += (0 - $Gun.position.y) * 0.2
@@ -106,9 +120,9 @@ func _physics_process(delta):
 	# Ejecutar efectos en el primer instante que el Player aterriza en suelo
 	if is_on_floor():
 		if has_landed == false:
-			$PlayerSprite.position.y += 2
-			$PlayerSprite.scale.y = 0.7
-			$PlayerSprite.scale.x = 1.3
+			$PlayerSpriteIdle.position.y += 2
+			$PlayerSpriteIdle.scale.y = 0.7
+			$PlayerSpriteIdle.scale.x = 1.3
 			
 			has_landed = true
 			create_smoke_particles()
@@ -120,9 +134,9 @@ func _physics_process(delta):
 func jump():
 	if is_on_floor():
 		velocity.y = -JUMP_FORCE
-		$PlayerSprite.scale.x = 0.7
-		$PlayerSprite.scale.y = 1.3
-		$PlayerSprite.position.y -= 2
+		$PlayerSpriteIdle.scale.x = 0.7
+		$PlayerSpriteIdle.scale.y = 1.3
+		$PlayerSpriteIdle.position.y -= 2
 		create_smoke_particles()
 		$Audio_Jump.play()
 
