@@ -19,6 +19,7 @@ script = ExtResource( 8 )
 position = Vector2( 144, 64 )
 
 [node name="TileMap" parent="." instance=ExtResource( 5 )]
+collision_layer = 1025
 
 [node name="HealthUI" parent="." instance=ExtResource( 2 )]
 margin_left = 16.0
