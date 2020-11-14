@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/SFX/sfx_hits.wav" type="AudioStream" id=1]
 [ext_resource path="res://Assets/Enemy_drone/enemy_drone_idle2.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Singletons/Stats.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Enemies/Enemy_drone/EnemyDrone.gd" type="Script" id=9]
 [ext_resource path="res://Hit_Hurtboxes/SoftCollision.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Hit_Hurtboxes/Knockback.gd" type="Script" id=11]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -45,7 +46,7 @@ __meta__ = {
 scale = Vector2( 0.8, 0.8 )
 frames = SubResource( 1 )
 animation = "DroneAnimation"
-frame = 4
+frame = 2
 playing = true
 offset = Vector2( -2, 3 )
 
@@ -67,12 +68,10 @@ collision_mask = 0
 position = Vector2( 1.19209e-07, 0.156072 )
 shape = SubResource( 3 )
 
-[node name="Stats" parent="." instance=ExtResource( 8 )]
-max_health = 3
-
 [node name="Hitbox" parent="." instance=ExtResource( 6 )]
 visible = false
-collision_mask = 4
+collision_mask = 36
+script = ExtResource( 11 )
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 4 )
@@ -87,6 +86,7 @@ stream = ExtResource( 1 )
 volume_db = -10.0
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 
 [editable path="Hurtbox"]
 

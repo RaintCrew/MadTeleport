@@ -4,7 +4,7 @@ export var RUN_SPEED = 100 		# velocidad lateral de Player al caminar
 export var GRAVITY = 10 			# aceleracion vertical que disminuye la velocidad vertical del Player
 export var FLOOR = Vector2(0,-1) # vector normal que el physics engine usa para frenar con pisos y paredes
 export var MAX_FALL_SPEED = 200 	# lo mas rapido que puede caer el Player por gravedad
-
+export var FRICTION = 100			# this force will oppose the knockback force
 export var JUMP_FORCE = 165 		# qué tan alto puede saltar el jugador
 
 const PISTOL_AMMO = 6
@@ -46,7 +46,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	knockback = knockback.move_toward(Vector2.ZERO, 200 * delta)
+	# this force will oppose that of the knockback
+	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
 	knockback = move_and_slide(knockback)
 	# Controles tecla "A" y "D" para moverse lateralmente
 	# Al no presionar ninguna tecla, el Player se detiene lateralmente

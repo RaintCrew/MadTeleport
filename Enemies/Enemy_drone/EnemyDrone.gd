@@ -9,6 +9,7 @@ export var DURATION_OF_HURT_VFX = 5
 var velocity = Vector2.ZERO
 var hurt_vfx_timer = -1 # Timer so that the vfx for being hurt is visible for a couple of frames
 
+onready var hitbox = $Hitbox
 onready var sprite = $AnimatedSprite		# Load the sprite.
 onready var stats = $Stats					# Load the stats script for the life
 onready var hurtbox = $Hurtbox
@@ -56,3 +57,7 @@ func decrease_hurt_vfx_timer():
 	if hurt_vfx_timer == 0:
 		sprite.modulate = Color(1,1,1,1)	# Returns to normal color
 		sprite.scale = Vector2(1,1)		# Returns to normal size
+
+	# this set the normalized knocback vector on the enemydrone's hitbox
+func _on_Hitbox_area_entered(area):
+	hitbox.knockback_vector = velocity.normalized()
