@@ -1,26 +1,26 @@
 extends KinematicBody2D
 
-const RUN_SPEED = 100 		# velocidad lateral de Player al caminar
-const GRAVITY = 10 			# aceleracion vertical que disminuye la velocidad vertical del Player
-const FLOOR = Vector2(0,-1) # vector normal que el physics engine usa para frenar con pisos y paredes
-const MAX_FALL_SPEED = 200 	# lo mas rapido que puede caer el Player por gravedad
+export var RUN_SPEED = 100 		# velocidad lateral de Player al caminar
+export var GRAVITY = 10 			# aceleracion vertical que disminuye la velocidad vertical del Player
+export var FLOOR = Vector2(0,-1) # vector normal que el physics engine usa para frenar con pisos y paredes
+export var MAX_FALL_SPEED = 200 	# lo mas rapido que puede caer el Player por gravedad
 
-const JUMP_FORCE = 165 		# qué tan alto puede saltar el jugador
-
+export var JUMP_FORCE = 165 		# qué tan alto puede saltar el jugador
 
 const PISTOL_AMMO = 6
 var stats = PlayerStats				# Access to the Singleton with the stats.
+var knockback = Vector2.ZERO		# knockback yay
 var velocity = Vector2() 			# Vector (x,y) donde x/y define cuanto se mueve horizontal/verticalmente en cada frame.
 var target_running_velocity = 0		# Velocidad a la que está intentando llegar. Se usa para lograr la aceleracion y desaceleracion
 var ammo = PISTOL_AMMO 				# Numero de balas en el arma. Se recarga con Teleport
+var is_player_hurt = false
 
 var can_throw_teleport_ball = true	# Puede arrojar la teleport ball, o esta en el aire y no puede lanzarla
 var has_landed = true				# Se usa para ejecutar code en el primer instante que aterriza en suelo
 var has_tpball_traveled_enough = false
 var will_camera_shake_on_gunfire = true
 
-onready var player_idle = $PlayerSpriteIdle
-onready var player_run = $PlayerSpriteRun
+onready var player_sprite = $PlayerSprite
 onready var animation_player = $AnimationPlayer
 onready var crosshair = get_node("Crosshair") 			# Referencia a la crosshair
 onready var camera = get_parent().get_node("Camera")	# Referencia a la camara
@@ -28,6 +28,7 @@ onready var gun = get_node("Gun") 						# Referencia al arma de la que disparas
 onready var floating_teleport_ball = get_node("Ball") 	# Referencia a teleport ball flotando al lado tuyo
 onready var teleport_ball = null						# Referencia a teleport ball lanzada a la cual te teleportas
 onready var hurtbox = $Hurtbox
+
 
 onready var bullet_scene = preload("res://Player/PlayerBullet.tscn") 					# Referencia a escena de bala
 onready var teleport_ball_scene = preload("res://Player/TeleportBall.tscn") 			# Referencia a escena de teleport ball
@@ -45,6 +46,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	knockback = knockback.move_toward(Vector2.ZERO, 200 * delta)
+	knockback = move_and_slide(knockback)
 	# Controles tecla "A" y "D" para moverse lateralmente
 	# Al no presionar ninguna tecla, el Player se detiene lateralmente
 	# Acerca target_running_velocity: 
@@ -52,23 +55,18 @@ func _physics_process(delta):
 	# 	Después, la velocity suavemente cambia hasta llegar a cual sea el valor de target_running_velocity
 	if Input.is_key_pressed(KEY_D):
 		target_running_velocity = RUN_SPEED
-		animation_player.play("run_left")
-		player_run.flip_h = true;
-		player_run.set_visible(true)
-		player_idle.set_visible(false)
+		animation_player.play("run")
 		
 	elif Input.is_key_pressed(KEY_A):
 		target_running_velocity = -RUN_SPEED
-		animation_player.play("run_left")
-		player_run.flip_h = false;
-		player_run.set_visible(true)
-		player_idle.set_visible(false)
+		animation_player.play("run")
 		
 	else:
 		target_running_velocity = 0
-		animation_player.play("idle")
-		player_idle.set_visible(true)
-		player_run.set_visible(false)
+		if !is_player_hurt and !is_on_floor():
+			animation_player.play("idle")
+		if !is_player_hurt and !is_on_floor() and (velocity.y >= 1):
+			animation_player.play("falling")
 	
 	# Las siguientes formulas de velocity.x buscan suavizar su valor hasta que se vuelva target_running_velocity
 	# [Formula original:  x += (target - x) * 0.1]
@@ -101,18 +99,18 @@ func _physics_process(delta):
 	
 	# El jugador y el arma se voltean hacia donde este la crosshair
 	if crosshair.global_position.x < global_position.x:
-		$PlayerSpriteIdle.flip_h = true
+		$PlayerSprite.flip_h = true
 		gun.flip_v = true
 	else:
-		$PlayerSpriteIdle.flip_h = false
+		$PlayerSprite.flip_h = false
 		gun.flip_v = false
 	
 	# Cuando el Player aterriza en suelo, su sprite se deforma
 	# Este codigo es el que se encarga en cada frame de suavemente
 	# acomodar la sprite de vuelta a su forma normal
-	$PlayerSpriteIdle.scale.y += (1 - $PlayerSpriteIdle.scale.y) * 0.2
-	$PlayerSpriteIdle.scale.x += (1 - $PlayerSpriteIdle.scale.x) * 0.2
-	$PlayerSpriteIdle.position.y += (0 - $PlayerSpriteIdle.position.y) * 0.2
+	$PlayerSprite.scale.y += (1 - $PlayerSprite.scale.y) * 0.2
+	$PlayerSprite.scale.x += (1 - $PlayerSprite.scale.x) * 0.2
+	$PlayerSprite.position.y += (0 - $PlayerSprite.position.y) * 0.2
 	# Suaviza el retorno del arma a su posicion normal despues del recoil
 	$Gun.position.x += (0 - $Gun.position.x) * 0.2
 	$Gun.position.y += (0 - $Gun.position.y) * 0.2
@@ -120,9 +118,9 @@ func _physics_process(delta):
 	# Ejecutar efectos en el primer instante que el Player aterriza en suelo
 	if is_on_floor():
 		if has_landed == false:
-			$PlayerSpriteIdle.position.y += 2
-			$PlayerSpriteIdle.scale.y = 0.7
-			$PlayerSpriteIdle.scale.x = 1.3
+			$PlayerSprite.position.y += 2
+			$PlayerSprite.scale.y = 0.7
+			$PlayerSprite.scale.x = 1.3
 			
 			has_landed = true
 			create_smoke_particles()
@@ -134,11 +132,12 @@ func _physics_process(delta):
 func jump():
 	if is_on_floor():
 		velocity.y = -JUMP_FORCE
-		$PlayerSpriteIdle.scale.x = 0.7
-		$PlayerSpriteIdle.scale.y = 1.3
-		$PlayerSpriteIdle.position.y -= 2
+		$PlayerSprite.scale.x = 0.7
+		$PlayerSprite.scale.y = 1.3
+		$PlayerSprite.position.y -= 2
 		create_smoke_particles()
 		$Audio_Jump.play()
+	
 
 
 # Funcion para disparar arma
@@ -228,11 +227,18 @@ func _input(event):
 					else:
 						teleport()
 		
-
+func _on_PlayerKnockback_area_entered(area):
+	knockback = area.knockback_vector * area.knockback_force
+	animation_player.play("hurt")
+	is_player_hurt = true
+	yield(get_tree().create_timer(0.4), "timeout")
+	is_player_hurt = false
+	
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
-	hurtbox.start_invincibility(0.5)
+	hurtbox.start_invincibility(1)
+	
 
 func create_smoke_particles():
 	var smoke_particles = smoke_particle_scene.instance()	
@@ -253,4 +259,7 @@ func _on_Trigger_body_entered(body):
 
 func tpball_traveled_enough():
 	has_tpball_traveled_enough = true
+
+
+
 

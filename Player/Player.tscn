@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://Assets/Player/player_idle_spritesheet.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Player/player_spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Player/tempplayer_aim.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Player/tempplayer_pistol.png" type="Texture" id=4]
@@ -10,20 +10,13 @@
 [ext_resource path="res://Assets/SFX/sfx_shoot.wav" type="AudioStream" id=8]
 [ext_resource path="res://Assets/SFX/sfx_teleport.wav" type="AudioStream" id=9]
 [ext_resource path="res://Assets/SFX/sfx_jump.wav" type="AudioStream" id=10]
-[ext_resource path="res://Assets/Player/player_run_spritesheet.png" type="Texture" id=11]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7, 9 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 6.9997, 8.83759 )
 
 [sub_resource type="Animation" id=3]
-resource_name = "idle"
+resource_name = "falling"
 length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("PlayerSpriteIdle:frame")
+tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -32,15 +25,49 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 4, 5 ]
+"values": [ 25, 26, 27, 28, 29, 30 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "hurt"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 18, 19, 20, 21, 22 ]
 }
 
 [sub_resource type="Animation" id=5]
-resource_name = "run_left"
+resource_name = "idle"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "run"
 length = 0.7
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("PlayerSpriteRun:frame")
+tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -49,13 +76,14 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6 ]
+"values": [ 9, 10, 11, 12, 13, 14, 15 ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "run_right"
-length = 0.8
-loop = true
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7, 9 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 6.9997, 8.83759 )
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 1.415, -0.0229755 )
@@ -66,17 +94,18 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="PlayerSpriteIdle" type="Sprite" parent="."]
-visible = false
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/falling = SubResource( 3 )
+anims/hurt = SubResource( 4 )
+anims/idle = SubResource( 5 )
+anims/run = SubResource( 6 )
+
+[node name="PlayerSprite" type="Sprite" parent="."]
 position = Vector2( -1, 0 )
 texture = ExtResource( 1 )
-hframes = 7
-
-[node name="PlayerSpriteRun" type="Sprite" parent="."]
-texture = ExtResource( 11 )
-flip_h = true
+vframes = 4
 hframes = 8
-frame = 1
+frame = 27
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 visible = false
@@ -134,11 +163,6 @@ volume_db = -10.0
 [node name="Audio_Jump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 volume_db = -10.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/idle = SubResource( 3 )
-anims/run_left = SubResource( 5 )
-anims/run_right = SubResource( 4 )
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 
 [editable path="Hurtbox"]

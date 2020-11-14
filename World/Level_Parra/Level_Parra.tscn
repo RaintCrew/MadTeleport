@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
+[ext_resource path="res://Player/heal.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/Level1/Level1.gd" type="Script" id=2]
 [ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://World/Camera.tscn" type="PackedScene" id=4]
@@ -710,3 +711,5 @@ position = Vector2( 45.6984, 202.271 )
 
 [node name="Camera" parent="." instance=ExtResource( 4 )]
 position = Vector2( 319, 175 )
+
+[node name="heal" parent="." instance=ExtResource( 1 )]
