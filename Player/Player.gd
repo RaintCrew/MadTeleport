@@ -238,7 +238,7 @@ func _on_PlayerKnockback_area_entered(area):
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
-	hurtbox.start_invincibility(1)
+	hurtbox.start_invincibility(3)
 	
 
 func create_smoke_particles():

@@ -28,6 +28,7 @@ func _on_Timer_timeout() -> void:
 func _on_Hurtbox_invincibility_started() -> void: 		# when the signal invincibility_started is launched, executed below
 	set_deferred("monitorable", false) 			# if simple we use "monitorable=false" this cause a error, for this Godot recomend use instead "set_deferred"
 												# but this is just set the monitorable value tu false to shot down the masks on the collaider
+	
 
 func _on_Hurtbox_invincibility_ended() -> void: 		# when the signal invincibility_ended is launched, executed below
 	monitorable = true 			# this is set the monitorable true when te invencibility ended to see the mask again.
