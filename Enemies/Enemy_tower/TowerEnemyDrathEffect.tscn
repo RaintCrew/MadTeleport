@@ -142,8 +142,7 @@ animations = [ {
 } ]
 
 [node name="TowerEnemyDrathEffect" type="AnimatedSprite"]
-position = Vector2( 3.00612, 6.30485 )
-scale = Vector2( 0.916692, 0.912308 )
+scale = Vector2( 0.8, 0.8 )
 frames = SubResource( 27 )
 animation = "DeathAnimation"
 script = ExtResource( 1 )

@@ -22,5 +22,5 @@ tile_data = PoolIntArray( 0, 18, 4, 1, 18, 196609, 2, 18, 196609, 3, 18, 196609,
 position = Vector2( 319.902, 180.683 )
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 4 )]
-position = Vector2( 74.598, 285.758 )
+position = Vector2( 74.598, 292.299 )
 enemy_type = 1
