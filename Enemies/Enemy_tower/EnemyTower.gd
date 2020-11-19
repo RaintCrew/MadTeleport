@@ -1,16 +1,18 @@
 extends KinematicBody2D
 
+const GRAVITY = 200.0
 const TIMER_LIMIT = 3000
-var timer = 0
+const EnemyDeathEffect = preload("res://Enemies/Enemy_tower/TowerEnemyDrathEffect.tscn")
 
 export var attack = true
+export var attack_speed = 1 		# Tower Attack Speed
+
 onready var target = Global.player 									# Reference player
 onready var bullet_scene = preload("res://Enemies/Enemy_tower/EnemyTowerBullet.tscn") 	# Reference Bullet Scene
 onready var stats = $Stats
-export var attack_speed = 1 		# Tower Attack Speed
-var flash_timer = 0 			# Timer so that the white flash is visible for a couple of frames
 
-const GRAVITY = 200.0
+var timer = 0
+var flash_timer = 0 			# Timer so that the white flash is visible for a couple of frames
 var velocity = Vector2()
 
 func _ready():
@@ -51,3 +53,6 @@ func _on_Hurtbox_area_entered(area: Area2D) -> void:
 
 func _on_Stats_no_health() -> void:
 	queue_free()
+	var enemyDeathEffect = EnemyDeathEffect.instance() 				# Set enemy death animation
+	get_parent().add_child(enemyDeathEffect)						# Play enemy death animation
+	enemyDeathEffect.global_position = global_position				# drone death animation it is positioned in the same place where the enemy died
