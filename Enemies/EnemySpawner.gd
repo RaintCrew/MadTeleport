@@ -15,22 +15,12 @@ var enemy_position = global_position 						# Enemy appears in this position
 var enemy_spawned = null
 
 func _ready() -> void:
-	$EnemySpawnTimer.wait_time = spawn_delay 			# Set spawn speed to the timer
-	# Create a timer node
-	var timer_offset = Timer.new()
-	# Set timer interval
-	timer_offset.set_wait_time(spawn_delay_offset)
-	# Set it as single count
-	timer_offset.set_one_shot(true)
-	# Connect its timeout signal to the function you want to repeat
-	timer_offset.connect("timeout", self, "wave_start")
-	# Add to the tree as child of the current node
-	add_child(timer_offset)
-	timer_offset.start()
+	yield(get_tree().create_timer(spawn_delay_offset), "timeout")
+	wave_start()
 	
 
 func wave_start() -> void:
-	$EnemySpawnTimer.start()
+	$EnemySpawnTimer.start(spawn_delay)
 
 func _on_EnemySpawnTimer_timeout() -> void:
 	if Global.player and enemies_spawned < enemies_limit and spawning: 		# If the player is alive execute below code
@@ -38,16 +28,8 @@ func _on_EnemySpawnTimer_timeout() -> void:
 			spawn_enemy()
 		else:
 			if enemy_spawned == null:
-				print()
 				spawn_enemy()
-		#if enemy_type == 0:
-			#enemies_spawned += 1
-			#spawn_enemy()
-			#Global.instance_node(enemy_drone, enemy_position, self)
-		#if enemy_type == 1 and enemy_spawned == null:
-			#Global.instance_node(enemy_tower, enemy_position, self)
-			#enemies_spawned += 1
-			#spawn_tower()
+
 
 func spawn_enemy() -> void:
 	if enemy_type == 0:
