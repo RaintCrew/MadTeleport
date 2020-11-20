@@ -26,22 +26,30 @@ margin_bottom = 30.0
 [node name="EnemySpawnerUL" parent="." instance=ExtResource( 4 )]
 position = Vector2( 40.4405, 91.3393 )
 spawn_delay = 1.0
-enemies_limit = 2
+spawn_delay_offset = 3
+enemies_limit = 3
+will_wait_for_spawned_enemy_to_die = true
 
 [node name="EnemySpawnerUR" parent="." instance=ExtResource( 4 )]
 position = Vector2( 599.181, 90.2073 )
 spawn_delay = 3.0
+spawn_delay_offset = 3
 enemies_limit = 2
+spawning = false
 
 [node name="EnemySpawnerDL" parent="." instance=ExtResource( 4 )]
 position = Vector2( 43.5903, 256.502 )
 spawn_delay = 5.0
+spawn_delay_offset = 3
 enemies_limit = 2
+spawning = false
 
 [node name="EnemySpawnerDR" parent="." instance=ExtResource( 4 )]
 position = Vector2( 595.78, 260.282 )
 spawn_delay = 5.0
+spawn_delay_offset = 3
 enemies_limit = 2
+spawning = false
 
 [node name="EnemySpawnerCenter" parent="." instance=ExtResource( 4 )]
 position = Vector2( 320, 160 )
@@ -51,5 +59,5 @@ spawning = false
 wait_time = 0.3
 
 [node name="Camera" parent="." instance=ExtResource( 1 )]
-position = Vector2( 320, 176 )
+position = Vector2( 318.941, 177.059 )
 [connection signal="timeout" from="Timer_to_Restart_Level1" to="." method="_on_Timer_to_Restart_Level1_timeout"]

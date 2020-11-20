@@ -8,14 +8,14 @@ export var spawn_delay : = 2.0 				# Spawn speed
 export var spawn_delay_offset : = 0
 export var enemies_limit : = 5;
 export var spawning = true
-export var enemy_spawned_still_alive = false
+export var will_wait_for_spawned_enemy_to_die = false
 
 var enemies_spawned = 0
 var enemy_position = global_position 						# Enemy appears in this position
 var enemy_spawned = null
 
 func _ready() -> void:
-	$EnemySpawnTimer.start(spawn_delay) 			# Set spawn speed to the timer
+	$EnemySpawnTimer.wait_time = spawn_delay 			# Set spawn speed to the timer
 	# Create a timer node
 	var timer_offset = Timer.new()
 	# Set timer interval
@@ -27,14 +27,14 @@ func _ready() -> void:
 	# Add to the tree as child of the current node
 	add_child(timer_offset)
 	timer_offset.start()
-	get_node("EnemySpawnTimer").wait_time = spawn_delay 			# Set spawn speed to the timer
+	
 
 func wave_start() -> void:
 	$EnemySpawnTimer.start()
 
 func _on_EnemySpawnTimer_timeout() -> void:
 	if Global.player and enemies_spawned < enemies_limit and spawning: 		# If the player is alive execute below code
-		if enemy_spawned_still_alive == false:
+		if will_wait_for_spawned_enemy_to_die == false:
 			spawn_enemy()
 		else:
 			if enemy_spawned == null:
