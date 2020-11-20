@@ -3,7 +3,7 @@ extends Area2D
 var speed = 7					# Speed de la bala
 var velocity = Vector2()		# Vector velocidad x/y
 onready var destination = null	# Punto a donde va la bala (donde estaba la mira al disparar)
-
+export var can_cross_walls = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,6 +25,6 @@ func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 
 # Si la bala colisiona con un objeto solido (muro, enemy...), se borra
-# Esto se modificara despues para codear el damage a enemigos
 func _on_Bullet_body_entered(body):
-	queue_free()
+	if not can_cross_walls:
+		queue_free()
