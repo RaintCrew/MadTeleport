@@ -5,7 +5,7 @@ var enemy_tower = preload("res://Enemies/Enemy_tower/EnemyTower.tscn") # Referen
 export(int, "Drone", "Tower") var enemy_type
 
 export var spawn_delay : = 2.0 				# Spawn speed
-export var spawn_delay_offset : = 3
+export var spawn_delay_offset : = 0
 export var enemies_limit : = 5;
 export var spawning = true
 export var enemy_spawned_still_alive = false
@@ -33,7 +33,12 @@ func wave_start() -> void:
 
 func _on_EnemySpawnTimer_timeout() -> void:
 	if Global.player and enemies_spawned < enemies_limit and spawning: 		# If the player is alive execute below code
-		spawn_enemy()
+		if enemy_spawned_still_alive == false:
+			spawn_enemy()
+		else:
+			if enemy_spawned == null:
+				print()
+				spawn_enemy()
 		#if enemy_type == 0:
 			#enemies_spawned += 1
 			#spawn_enemy()
