@@ -6,12 +6,13 @@ var is_restarting = false
 # Player has to kill all enemies of the current phase
 # for the next phase to start. This var keeps track of that
 var num_of_phase_enemies_killed = 0
-
-# The phase of the level
+var enemies_to_kill_in_phase = [7]
+# The phase of the level (starts at 0)
 # The different waves and setups of enemies
-var phase = 1
+var phase = 0
 
 func _ready():
+	set_phase()
 	pass
 
 
@@ -33,3 +34,6 @@ func _on_Timer_to_Restart_Level1_timeout():
 
 func add_to_enemies_killed():
 	num_of_phase_enemies_killed += 1
+
+func set_phase():
+	pass
