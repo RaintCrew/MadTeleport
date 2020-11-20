@@ -1,13 +1,97 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Tilemaps/Tilemap.tres" type="TileSet" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://World/Camera.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Enemies/EnemySpawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://World/Level_Miguel/Level_Miguel.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Background/bg-tutorial_level.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Player/player_run_spritesheet.png" type="Texture" id=7]
+[ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=8]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 64, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 80, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 96, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 7 )
+region = Rect2( 112, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "Player_Running",
+"speed": 15.0
+} ]
 
 [node name="Level_Miguel" type="Node2D"]
 script = ExtResource( 5 )
+
+[node name="backgound" type="Sprite" parent="."]
+position = Vector2( 320.195, 176.598 )
+scale = Vector2( 0.954476, 1.00743 )
+texture = ExtResource( 6 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="backgound"]
+position = Vector2( -192.47, -73.9559 )
+scale = Vector2( -1.5, 1.5 )
+frames = SubResource( 9 )
+animation = "Player_Running"
+frame = 5
+playing = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="backgound"]
+margin_left = -242.534
+margin_top = -129.353
+margin_right = -75.5801
+margin_bottom = -79.2676
+tab_size = 2
+text = "			 Move
+Press A and D
+"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthUI" parent="." instance=ExtResource( 8 )]
+margin_left = 16.8883
+margin_top = 16.7331
+margin_right = 86.8883
+margin_bottom = 30.7331
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 334.63, 255.112 )
@@ -23,4 +107,4 @@ position = Vector2( 319.902, 180.683 )
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 4 )]
 position = Vector2( 74.598, 292.299 )
-enemy_type = 1
+spawn_delay = 3.0
