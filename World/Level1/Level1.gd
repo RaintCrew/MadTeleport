@@ -2,8 +2,13 @@ extends Node2D
 
 onready var currentScene = get_tree().get_current_scene().get_filename()
 var is_restarting = false
+
+# Player has to kill all enemies of the current phase
+# for the next phase to start. This var keeps track of that
 var num_of_phase_enemies_killed = 0
 
+# The phase of the level
+# The different waves and setups of enemies
 var phase = 1
 
 func _ready():
@@ -27,5 +32,4 @@ func _on_Timer_to_Restart_Level1_timeout():
 	PlayerStats.health = PlayerStats.max_health
 
 func add_to_enemies_killed():
-	print("killed")
 	num_of_phase_enemies_killed += 1
