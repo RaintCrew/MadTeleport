@@ -141,9 +141,10 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 
 [node name="Gun" type="Sprite" parent="."]
+position = Vector2( 8.9407e-08, 0 )
 scale = Vector2( 1.8913, 1.68519 )
 texture = ExtResource( 4 )
-offset = Vector2( 8, 0 )
+offset = Vector2( 5, 0 )
 
 [node name="Gun_Tip" type="Position2D" parent="Gun"]
 position = Vector2( 10.1056, -0.0673294 )
