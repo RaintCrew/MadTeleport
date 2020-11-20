@@ -14,7 +14,7 @@ var drone = null
 var tower = null
 
 func _ready() -> void:
-	get_node("EnemySpawnTimer").wait_time = spawn_delay 			# Set spawn speed to the timer
+	$EnemySpawnTimer.start(spawn_delay) 			# Set spawn speed to the timer
 	pass
 
 func _on_EnemySpawnTimer_timeout() -> void:
