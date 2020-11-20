@@ -2,6 +2,14 @@ extends Node2D
 
 onready var currentScene = get_tree().get_current_scene().get_filename()
 var is_restarting = false
+var num_of_phase_enemies_killed = 0
+
+var phase = 1
+
+func _ready():
+	pass
+
+
 func _process(_delta):
 	if Input.is_action_just_pressed("reset"):
 		if not is_restarting:
@@ -17,3 +25,7 @@ func _on_Timer_to_Restart_Level1_timeout():
 	get_tree().change_scene(currentScene)
 	get_tree().paused = false
 	PlayerStats.health = PlayerStats.max_health
+
+func add_to_enemies_killed():
+	print("killed")
+	num_of_phase_enemies_killed += 1

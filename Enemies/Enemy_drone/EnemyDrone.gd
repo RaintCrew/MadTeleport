@@ -14,8 +14,13 @@ onready var sprite = $AnimatedSprite		# Load the sprite.
 onready var stats = $Stats					# Load the stats script for the life
 onready var hurtbox = $Hurtbox
 onready var softCollision = $SoftCollision
+onready var level = get_parent().get_parent()
+
+# We use a signal because it's the child who wants to tell something to the parent.
+signal enemy_killed
 
 func _ready() -> void:
+	connect("enemy_killed",level,"add_to_enemies_killed")	# The Level script hears this to check when to change the current level phase
 	pass
 
 func _process(delta: float) -> void:
@@ -43,6 +48,7 @@ func _on_Hurtbox_area_entered(area: Area2D) -> void:
 	area.get_parent().queue_free()									# Delete everything that damages the drone
 
 func _on_Stats_no_health() -> void:
+	emit_signal("enemy_killed")
 	queue_free() 													# Drone die
 	var enemyDeathEffect = EnemyDeathEfffect.instance() 			# Set drone death animation
 	get_parent().add_child(enemyDeathEffect)						# Play drone death animation
@@ -56,7 +62,6 @@ func decrease_hurt_vfx_timer():
 		hurt_vfx_timer -= 1
 	if hurt_vfx_timer == 0:
 		sprite.modulate = Color(1,1,1,1)	# Returns to normal color
-		sprite.scale = Vector2(1,1)		# Returns to normal size
 
 	# this set the normalized knocback vector on the enemydrone's hitbox
 func _on_Hitbox_area_entered(area):

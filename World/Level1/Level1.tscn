@@ -24,7 +24,7 @@ margin_right = 86.0
 margin_bottom = 30.0
 
 [node name="Camera" parent="." instance=ExtResource( 1 )]
-position = Vector2( 319, 175 )
+position = Vector2( 320, 176 )
 
 [node name="EnemySpawnerUL" parent="." instance=ExtResource( 4 )]
 position = Vector2( 48, 48 )
