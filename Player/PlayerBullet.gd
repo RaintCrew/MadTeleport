@@ -9,8 +9,8 @@ export var can_cross_walls = false
 func _ready():
 	destination = get_local_mouse_position()	# La bala viaja hacia donde esta la mira
 	$Sprite.modulate = Color(10,10,10,10)
-	$Sprite.scale = Vector2(0.7,0.7)
-	yield(get_tree().create_timer(0.02),"timeout")
+	$Sprite.scale = Vector2(0.8,0.8)
+	yield(get_tree().create_timer(0.04),"timeout")
 	$Sprite.modulate = Color(1,1,1,1)
 	$Sprite.scale = Vector2(0.5,0.5)
 
