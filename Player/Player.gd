@@ -100,28 +100,28 @@ func _physics_process(delta):
 	
 	# El jugador y el arma se voltean hacia donde este la crosshair
 	if crosshair.global_position.x < global_position.x:
-		$PlayerSprite.flip_h = true
+		player_sprite.flip_h = true
 		gun.flip_v = true
 	else:
-		$PlayerSprite.flip_h = false
+		player_sprite.flip_h = false
 		gun.flip_v = false
 	
 	# Cuando el Player aterriza en suelo, su sprite se deforma
 	# Este codigo es el que se encarga en cada frame de suavemente
 	# acomodar la sprite de vuelta a su forma normal
-	$PlayerSprite.scale.y += (1 - $PlayerSprite.scale.y) * 0.2
-	$PlayerSprite.scale.x += (1 - $PlayerSprite.scale.x) * 0.2
-	$PlayerSprite.position.y += (0 - $PlayerSprite.position.y) * 0.2
+	player_sprite.scale.y += (1 - player_sprite.scale.y) * 0.2
+	player_sprite.scale.x += (1 - player_sprite.scale.x) * 0.2
+	player_sprite.position.y += (0 - player_sprite.position.y) * 0.2
 	# Suaviza el retorno del arma a su posicion normal despues del recoil
-	$Gun.position.x += (0 - $Gun.position.x) * 0.2
-	$Gun.position.y += (0 - $Gun.position.y) * 0.2
+	gun.position.x += (0 - gun.position.x) * 0.2
+	gun.position.y += (0 - gun.position.y) * 0.2
 	
 	# Ejecutar efectos en el primer instante que el Player aterriza en suelo
 	if is_on_floor():
 		if has_landed == false:
-			$PlayerSprite.position.y += 2
-			$PlayerSprite.scale.y = 0.7
-			$PlayerSprite.scale.x = 1.3
+			player_sprite.position.y += 2
+			player_sprite.scale.y = 0.7
+			player_sprite.scale.x = 1.3
 			
 			has_landed = true
 			create_smoke_particles()
@@ -133,9 +133,9 @@ func _physics_process(delta):
 func jump():
 	if is_on_floor():
 		velocity.y = -JUMP_FORCE
-		$PlayerSprite.scale.x = 0.7
-		$PlayerSprite.scale.y = 1.3
-		$PlayerSprite.position.y -= 2
+		player_sprite.scale.x = 0.7
+		player_sprite.scale.y = 1.3
+		player_sprite.position.y -= 2
 		create_smoke_particles()
 		$Audio_Jump.play()
 	
@@ -154,9 +154,9 @@ func fire():
 		ammo -= 1
 		
 		# Gun recoil vfx
-		var recoil = $Gun.global_position.direction_to(crosshair.global_position)
+		var recoil = gun.global_position.direction_to(crosshair.global_position)
 		recoil *= 6
-		$Gun.global_position -= recoil
+		gun.global_position -= recoil
 		$Audio_Shoot.play()
 		if will_camera_shake_on_gunfire:
 			camera.activate_shake(1.6,0.1) # (shake_intensity, shake_duration)
