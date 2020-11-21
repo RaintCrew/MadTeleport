@@ -55,5 +55,4 @@ func reset(_enemy_type, _spawn_delay, _spawn_offset, _enemies_limit, _spawning, 
 	will_wait_for_spawned_enemy_to_die = _will_wait_for_death
 	$EnemySpawnTimer.stop()
 	start_offset_to_spawn()
-	print("Reset activated")
-	pass
+

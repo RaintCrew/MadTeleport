@@ -37,20 +37,39 @@ func _process(_delta):
 # Called everytime an enemy is killed
 func add_to_enemies_killed():
 	num_of_phase_enemies_killed += 1
-	print("Enemies killed: ",num_of_phase_enemies_killed)
-	if num_of_phase_enemies_killed == enemies_to_kill_in_phase[phase]:
+	# When the player has killed the required enemies to advance to the next phase
+	if num_of_phase_enemies_killed == enemies_to_kill_in_phase[phase]:	
 		set_phase(phase+1)
 		
+#############
+## PHASE 0 ##
+#############
+# A slow spawn of saw drones in all four corners in the room.
+# All of them will wait for its spawned drones to die, giving more
+# space for the player to take each of them at a time
+###################################
 
+#############
+## PHASE 1 ##
+#############
+# Introduction to the tower.
+# A tower will spawn in Center
+# The player here will get a sense of the bullet speed
+# and HP of the tower for the rest of the game
+#######################################
+
+
+
+# This is called when the Level transitions to another phase
 # reset(_enemy_type, _spawn_delay, _spawn_offset, _enemies_limit, _spawning, _will_wait_for_death)
 # "Drone" = 1; "Tower" = 2
 func set_phase(value):
 	phase = clamp(value,0,total_phases)
 	print("Phase: ", phase)
 	if phase == 1:
-		$EnemySpawnerUL.reset(1, 1, 0, 2, true, true)
-		$EnemySpawnerDR.reset(1, 1.5, 1, 2, true, true)
+		$EnemySpawnerCenter.reset(1, 1, 0, 2, true, true)
 		$EnemySpawnerDL.spawning = false
 		$EnemySpawnerUR.spawning = false
-		$EnemySpawnerCenter.spawning = false
+		$EnemySpawnerDR.spawning = false
+		$EnemySpawnerUL.spawning = false
 	
