@@ -15,6 +15,7 @@ __meta__ = {
 "_edit_group_": true
 }
 MIN_DISTANCE_TO_TELEPORT = 12000.0
+speed = 8
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

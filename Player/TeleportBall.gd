@@ -1,7 +1,7 @@
 extends Area2D
 
 export var MIN_DISTANCE_TO_TELEPORT = 500.0
-var speed = 6					# Speed de la bala
+export var speed = 6					# Speed de la bala
 var velocity = Vector2()		# Vector velocidad x/y
 var traveled_distance = 0.0
 var initial_position = Vector2()
