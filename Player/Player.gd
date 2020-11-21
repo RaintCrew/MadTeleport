@@ -30,7 +30,7 @@ onready var gun = get_node("Gun") 						# Referencia al arma de la que disparas
 onready var floating_teleport_ball = get_node("Ball") 	# Referencia a teleport ball flotando al lado tuyo
 onready var teleport_ball = null						# Referencia a teleport ball lanzada a la cual te teleportas
 onready var hurtbox = $Hurtbox
-onready var player_knockback_area2d = $PlayerKnockback
+onready var player_knockback_collisionShape = $PlayerKnockback/CollisionShape2D
 
 
 onready var bullet_scene = preload("res://Player/PlayerBullet.tscn") 					# Referencia a escena de bala
@@ -235,6 +235,7 @@ func _input(event):
 		
 func _on_PlayerKnockback_area_entered(area):
 	knockback = area.knockback_vector * area.knockback_force
+	player_knockback_collisionShape.set_deferred("disabled",true)
 
 
 func _on_Hurtbox_area_entered(area):
@@ -267,3 +268,4 @@ func _on_Hurtbox_invincibility_started():
 
 func _on_Hurtbox_invincibility_ended():
 	blink_animation_player.play("Stop")
+	player_knockback_collisionShape.disabled = false

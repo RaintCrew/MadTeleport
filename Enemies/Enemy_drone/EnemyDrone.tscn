@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/SFX/sfx_hits.wav" type="AudioStream" id=1]
 [ext_resource path="res://Assets/Enemy_drone/enemy_drone_idle2.png" type="Texture" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://Singletons/Stats.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Enemies/Enemy_drone/EnemyDrone.gd" type="Script" id=9]
 [ext_resource path="res://Hit_Hurtboxes/SoftCollision.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Hit_Hurtboxes/Knockback.gd" type="Script" id=11]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -71,7 +70,7 @@ shape = SubResource( 3 )
 [node name="Hitbox" parent="." instance=ExtResource( 6 )]
 visible = false
 collision_mask = 36
-script = ExtResource( 11 )
+knockback_force = 170
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 4 )
