@@ -5,6 +5,7 @@ var player = null
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	OS.window_fullscreen = true
 
 #for now this function works to help spawn enemies
 func instance_node(node, location, parent):
