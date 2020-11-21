@@ -108,10 +108,10 @@ extents = Vector2( 6.9997, 8.83759 )
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 1.415, -0.0229755 )
-collision_layer = 33
+collision_layer = 35
 script = ExtResource( 2 )
 __meta__ = {
-"_edit_lock_": true,
+"_edit_group_": true,
 "_editor_description_": ""
 }
 FRICTION = 150
