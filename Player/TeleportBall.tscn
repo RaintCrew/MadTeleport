@@ -8,6 +8,8 @@ radius = 5.63264
 
 [node name="TeleportBall" type="Area2D"]
 modulate = Color( 0.368627, 0.368627, 0.368627, 1 )
+collision_layer = 0
+collision_mask = 1024
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true

@@ -193,8 +193,12 @@ tracks/6/keys = {
 font_data = ExtResource( 3 )
 
 [node name="Camera" type="Camera2D"]
+z_index = 100
 current = true
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 DAMP_EASING = 1.41421
 
 [node name="Shake_Timer" type="Timer" parent="."]

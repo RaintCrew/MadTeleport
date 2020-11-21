@@ -67,7 +67,7 @@ offset = Vector2( 3.891, -0.201 )
 shape = SubResource( 8 )
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
-max_health = 3
+max_health = 12
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
 collision_layer = 80
