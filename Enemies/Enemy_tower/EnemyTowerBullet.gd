@@ -1,6 +1,6 @@
 extends Area2D
 
-var speed = 5						# Speed of the bullet
+var speed = 3						# Speed of the bullet
 var velocity = Vector2()        	# Speed x/y
 onready var destination = null
 export var damage = 1

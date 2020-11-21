@@ -5,7 +5,7 @@ var enemy_tower = preload("res://Enemies/Enemy_tower/EnemyTower.tscn") # Referen
 export(int, "Drone", "Tower") var enemy_type
 
 export var spawn_delay : = 2.0 				# Spawn speed
-export var spawn_delay_offset : = 0
+export var spawn_delay_offset : = 0.0
 export var enemies_limit : = 5;
 export var spawning = true
 export var will_wait_for_spawned_enemy_to_die = false
@@ -15,10 +15,14 @@ var enemy_position = global_position 						# Enemy appears in this position
 var enemy_spawned = null
 
 func _ready() -> void:
+	start_offset_to_spawn()
+
+# The spawn_delay with its appropiate offset will start both when
+# the node enters scene and when its reset by Level script	
+func start_offset_to_spawn():
 	yield(get_tree().create_timer(spawn_delay_offset), "timeout")
 	wave_start()
-	
-
+		
 func wave_start() -> void:
 	$EnemySpawnTimer.start(spawn_delay)
 
@@ -39,3 +43,16 @@ func spawn_enemy() -> void:
 	enemy_spawned.position = enemy_position
 	add_child(enemy_spawned)
 	enemies_spawned += 1
+
+# Used by the Level script to reconfigure the spawner
+func reset(_enemy_type, _spawn_delay, _spawn_offset, _enemies_limit, _spawning, _will_wait_for_death):
+	enemies_spawned = 0
+	enemy_type = _enemy_type
+	spawn_delay = _spawn_delay
+	spawn_delay_offset = _spawn_offset
+	enemies_limit = _enemies_limit
+	spawning = _spawning
+	will_wait_for_spawned_enemy_to_die = _will_wait_for_death
+	$EnemySpawnTimer.stop()
+	start_offset_to_spawn()
+
