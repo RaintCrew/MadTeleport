@@ -18,5 +18,6 @@ func _ready():
 
 func _on_TowerEnemyDrathEffect_frame_changed():
 	if frame == 10:
+		OS.delay_msec(50)
 		$Audio_Explosion.play()
 		camera.activate_shake(4.0,0.3)

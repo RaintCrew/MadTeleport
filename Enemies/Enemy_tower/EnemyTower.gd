@@ -5,7 +5,7 @@ const TIMER_LIMIT = 3000
 const EnemyDeathEffect = preload("res://Enemies/Enemy_tower/TowerEnemyDrathEffect.tscn")
 
 export var attack = true
-export var attack_speed = 1 		# Tower Attack Speed
+export var attack_speed = 1.0 		# Tower Attack Speed
 
 onready var target = Global.player 									# Reference player
 onready var bullet_scene = preload("res://Enemies/Enemy_tower/EnemyTowerBullet.tscn") 	# Reference Bullet Scene
