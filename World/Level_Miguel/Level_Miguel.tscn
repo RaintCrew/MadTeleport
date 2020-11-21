@@ -5,7 +5,7 @@
 [ext_resource path="res://World/Camera.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Enemies/EnemySpawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://World/Level_Miguel/Level_Miguel.gd" type="Script" id=5]
-[ext_resource path="res://Assets/Background/bg-tutorial_level.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Background/bg1-tutorial_level.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Player/player_run_spritesheet.png" type="Texture" id=7]
 [ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=8]
 
@@ -70,7 +70,6 @@ position = Vector2( -192.47, -73.9559 )
 scale = Vector2( -1.5, 1.5 )
 frames = SubResource( 9 )
 animation = "Player_Running"
-frame = 5
 playing = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="backgound"]
@@ -106,5 +105,7 @@ tile_data = PoolIntArray( 0, 18, 4, 1, 18, 196609, 2, 18, 196609, 3, 18, 196609,
 position = Vector2( 319.902, 180.683 )
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 4 )]
-position = Vector2( 74.598, 292.299 )
+position = Vector2( 87.8272, 268.99 )
+enemy_type = 1
 spawn_delay = 3.0
+will_wait_for_spawned_enemy_to_die = true

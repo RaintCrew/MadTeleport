@@ -145,4 +145,5 @@ animations = [ {
 scale = Vector2( 0.8, 0.8 )
 frames = SubResource( 27 )
 animation = "DeathAnimation"
+offset = Vector2( 3, 2 )
 script = ExtResource( 1 )

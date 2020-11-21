@@ -37,6 +37,7 @@ func _physics_process(delta):
 	velocity.y += delta * GRAVITY
 	var motion = velocity * delta
 	move_and_collide(motion)
+	$Position2D.position = self.position + Vector2(0.065,-30)
 
 func shoot_player():
 	if attack == true:
