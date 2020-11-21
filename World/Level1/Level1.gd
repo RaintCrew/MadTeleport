@@ -83,12 +83,18 @@ func set_phase(value):
 		c_enemy_spawner.reset(1, 1, 0, 2, true, true)
 	elif phase == 2:
 		disable_all_spawners()
-		dr_enemy_spawner.reset(0, 2, 6, 6, true, true)
-		dl_enemy_spawner.reset(0, 3, 4, 6, true, true)
-		ur_enemy_spawner.reset(0, 1, 0, 1, true, true)
-		ul_enemy_spawner.reset(0, 2, 0, 1, true, true)
 		c_enemy_spawner.reset(1, 4, 0, 2, true, true)
-			
+		ur_enemy_spawner.reset(0, 1, 0, 1, true, true)
+		dr_enemy_spawner.reset(0, 3, 6, 6, true, true)
+		dl_enemy_spawner.reset(0, 3, 4, 6, true, true)
+		ul_enemy_spawner.reset(0, 2, 0, 1, true, true)
+		
+	elif phase == 3:
+		disable_all_spawners()
+		ur_enemy_spawner.reset(1, 3, 0, 2, true, true)
+		dr_enemy_spawner.reset(0, 3, 1, 4, true, true)
+		dl_enemy_spawner.reset(0, 3, 2, 4, true, true)
+		ul_enemy_spawner.reset(1, 3, 0, 2, true, true)
 	
 func disable_all_spawners():
 	for spawner in get_tree().get_nodes_in_group("all_enemy_spawners"):
