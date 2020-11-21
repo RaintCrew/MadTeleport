@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player/heal.tscn" type="PackedScene" id=1]
-[ext_resource path="res://World/Level1/Level1.gd" type="Script" id=2]
+[ext_resource path="res://World/Level_Parra/Level_Parra.gd" type="Script" id=2]
 [ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://World/Camera.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=6]
