@@ -4,8 +4,9 @@ export var RUN_SPEED = 100 		# velocidad lateral de Player al caminar
 export var GRAVITY = 10 			# aceleracion vertical que disminuye la velocidad vertical del Player
 export var FLOOR = Vector2(0,-1) # vector normal que el physics engine usa para frenar con pisos y paredes
 export var MAX_FALL_SPEED = 200 	# lo mas rapido que puede caer el Player por gravedad
-export var FRICTION = 100			# this force will oppose the knockback force
+export var FRICTION = 150			# this force will oppose the knockback force
 export var JUMP_FORCE = 165 		# qué tan alto puede saltar el jugador
+export var INVINCIBILITY_TIME = 2	# invincibility duration 
 
 const PISTOL_AMMO = 6
 var stats = PlayerStats				# Access to the Singleton with the stats.
@@ -22,12 +23,14 @@ var will_camera_shake_on_gunfire = true
 
 onready var player_sprite = $PlayerSprite
 onready var animation_player = $AnimationPlayer
+onready var blink_animation_player = $BlinkAnimationPlayer
 onready var crosshair = get_node("Crosshair") 			# Referencia a la crosshair
 onready var camera = get_parent().get_node("Camera")	# Referencia a la camara
 onready var gun = get_node("Gun") 						# Referencia al arma de la que disparas
 onready var floating_teleport_ball = get_node("Ball") 	# Referencia a teleport ball flotando al lado tuyo
 onready var teleport_ball = null						# Referencia a teleport ball lanzada a la cual te teleportas
 onready var hurtbox = $Hurtbox
+onready var player_knockback_area2d = $PlayerKnockback
 
 
 onready var bullet_scene = preload("res://Player/PlayerBullet.tscn") 					# Referencia a escena de bala
@@ -46,6 +49,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	
+
 	# this force will oppose that of the knockback
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
 	knockback = move_and_slide(knockback)
@@ -56,11 +61,11 @@ func _physics_process(delta):
 	# 	Después, la velocity suavemente cambia hasta llegar a cual sea el valor de target_running_velocity
 	if Input.is_key_pressed(KEY_D):
 		target_running_velocity = RUN_SPEED
-		animation_player.play("run")
+		animation_player.play("run_backwards")
 		
 	elif Input.is_key_pressed(KEY_A):
 		target_running_velocity = -RUN_SPEED
-		animation_player.play("run")
+		animation_player.play("run_backwards")
 		
 	else:
 		target_running_velocity = 0
@@ -230,16 +235,11 @@ func _input(event):
 		
 func _on_PlayerKnockback_area_entered(area):
 	knockback = area.knockback_vector * area.knockback_force
-	animation_player.play("hurt")
-	is_player_hurt = true
-	yield(get_tree().create_timer(0.4), "timeout")
-	is_player_hurt = false
-	
+
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
-	hurtbox.start_invincibility(3)
-	
+	hurtbox.start_invincibility(INVINCIBILITY_TIME)
 
 func create_smoke_particles():
 	var smoke_particles = smoke_particle_scene.instance()	
@@ -261,6 +261,9 @@ func _on_Trigger_body_entered(body):
 func tpball_traveled_enough():
 	has_tpball_traveled_enough = true
 
+func _on_Hurtbox_invincibility_started():
+	blink_animation_player.play("Start")
 
 
-
+func _on_Hurtbox_invincibility_ended():
+	blink_animation_player.play("Stop")
