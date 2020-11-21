@@ -46,7 +46,7 @@ func add_to_enemies_killed():
 #############
 # A slow spawn of saw drones in all four corners in the room.
 # All of them will wait for its spawned drones to die, giving more
-# space for the player to take each of them at a time
+# space for the player to take each of them one at a time
 ###################################
 
 #############
