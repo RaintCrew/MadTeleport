@@ -40,12 +40,13 @@ script = ExtResource( 9 )
 __meta__ = {
 "_edit_group_": true
 }
+MAX_SPEED = 60
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.8, 0.8 )
 frames = SubResource( 1 )
 animation = "DroneAnimation"
-frame = 3
+frame = 1
 playing = true
 offset = Vector2( -2, 3 )
 

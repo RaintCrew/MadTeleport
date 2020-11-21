@@ -165,7 +165,7 @@ position = Vector2( 1.415, -0.0229755 )
 collision_layer = 2
 script = ExtResource( 2 )
 __meta__ = {
-"_edit_lock_": true,
+"_edit_group_": true,
 "_editor_description_": ""
 }
 
@@ -202,7 +202,7 @@ texture = ExtResource( 4 )
 offset = Vector2( 10, 1 )
 
 [node name="Gun_Tip" type="Position2D" parent="Gun"]
-position = Vector2( 15, -1 )
+position = Vector2( 15, 0 )
 rotation = 1.57079
 
 [node name="Ball" type="Sprite" parent="."]
