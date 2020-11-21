@@ -10,9 +10,9 @@ export var attack_speed = 1 		# Tower Attack Speed
 onready var target = Global.player 									# Reference player
 onready var bullet_scene = preload("res://Enemies/Enemy_tower/EnemyTowerBullet.tscn") 	# Reference Bullet Scene
 onready var stats = $Stats
+onready var sprite = $AnimatedSprite
 
 var timer = 0
-var flash_timer = 0 			# Timer so that the white flash is visible for a couple of frames
 var velocity = Vector2()
 
 func _ready():
@@ -28,10 +28,6 @@ func _ready():
 	add_child(timer)
 	timer.start()
 	
-	if flash_timer > 0:
-		flash_timer -= 1
-	if flash_timer == 1:
-		$Sprite.modulate = Color(1,1,1,1) # Returns to normal color
 
 func _physics_process(delta):
 	velocity.y += delta * GRAVITY
@@ -49,7 +45,13 @@ func shoot_player():
 func _on_Hurtbox_area_entered(area: Area2D) -> void:
 	stats.health -= area.damage					# Tower lose a life
 	area.get_parent().queue_free()				# Anything that hits the tower is removed
-	pass
+	
+	$Audio_Hit.play()
+	sprite.modulate = Color(10,10,10,10)
+	OS.delay_msec(20)
+	yield(get_tree().create_timer(0.1), "timeout")
+	sprite.modulate = Color(1,1,1,1)
+	
 
 func _on_Stats_no_health() -> void:
 	queue_free()
