@@ -8,6 +8,11 @@ export var can_cross_walls = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	destination = get_local_mouse_position()	# La bala viaja hacia donde esta la mira
+	$Sprite.modulate = Color(10,10,10,10)
+	$Sprite.scale = Vector2(0.7,0.7)
+	yield(get_tree().create_timer(0.02),"timeout")
+	$Sprite.modulate = Color(1,1,1,1)
+	$Sprite.scale = Vector2(0.5,0.5)
 
 func _physics_process(delta):
 	# Mover hacia destino
