@@ -196,6 +196,9 @@ font_data = ExtResource( 3 )
 z_index = 100
 current = true
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 DAMP_EASING = 1.41421
 
 [node name="Shake_Timer" type="Timer" parent="."]
