@@ -4,8 +4,9 @@ export var RUN_SPEED = 100 		# velocidad lateral de Player al caminar
 export var GRAVITY = 10 			# aceleracion vertical que disminuye la velocidad vertical del Player
 export var FLOOR = Vector2(0,-1) # vector normal que el physics engine usa para frenar con pisos y paredes
 export var MAX_FALL_SPEED = 200 	# lo mas rapido que puede caer el Player por gravedad
-export var FRICTION = 100			# this force will oppose the knockback force
+export var FRICTION = 150			# this force will oppose the knockback force
 export var JUMP_FORCE = 165 		# qué tan alto puede saltar el jugador
+export var INVINCIBILITY_TIME = 2	# invincibility duration 
 
 const PISTOL_AMMO = 6
 var stats = PlayerStats				# Access to the Singleton with the stats.
@@ -22,12 +23,14 @@ var will_camera_shake_on_gunfire = true
 
 onready var player_sprite = $PlayerSprite
 onready var animation_player = $AnimationPlayer
+onready var blink_animation_player = $BlinkAnimationPlayer
 onready var crosshair = get_node("Crosshair") 			# Referencia a la crosshair
 onready var camera = get_parent().get_node("Camera")	# Referencia a la camara
 onready var gun = get_node("Gun") 						# Referencia al arma de la que disparas
 onready var floating_teleport_ball = get_node("Ball") 	# Referencia a teleport ball flotando al lado tuyo
 onready var teleport_ball = null						# Referencia a teleport ball lanzada a la cual te teleportas
 onready var hurtbox = $Hurtbox
+onready var player_knockback_collisionShape = $PlayerKnockback/CollisionShape2D
 
 
 onready var bullet_scene = preload("res://Player/PlayerBullet.tscn") 					# Referencia a escena de bala
@@ -46,6 +49,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	
+
 	# this force will oppose that of the knockback
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
 	knockback = move_and_slide(knockback)
@@ -56,11 +61,11 @@ func _physics_process(delta):
 	# 	Después, la velocity suavemente cambia hasta llegar a cual sea el valor de target_running_velocity
 	if Input.is_key_pressed(KEY_D):
 		target_running_velocity = RUN_SPEED
-		animation_player.play("run")
+		animation_player.play("run_backwards")
 		
 	elif Input.is_key_pressed(KEY_A):
 		target_running_velocity = -RUN_SPEED
-		animation_player.play("run")
+		animation_player.play("run_backwards")
 		
 	else:
 		target_running_velocity = 0
@@ -100,28 +105,28 @@ func _physics_process(delta):
 	
 	# El jugador y el arma se voltean hacia donde este la crosshair
 	if crosshair.global_position.x < global_position.x:
-		$PlayerSprite.flip_h = true
+		player_sprite.flip_h = true
 		gun.flip_v = true
 	else:
-		$PlayerSprite.flip_h = false
+		player_sprite.flip_h = false
 		gun.flip_v = false
 	
 	# Cuando el Player aterriza en suelo, su sprite se deforma
 	# Este codigo es el que se encarga en cada frame de suavemente
 	# acomodar la sprite de vuelta a su forma normal
-	$PlayerSprite.scale.y += (1 - $PlayerSprite.scale.y) * 0.2
-	$PlayerSprite.scale.x += (1 - $PlayerSprite.scale.x) * 0.2
-	$PlayerSprite.position.y += (0 - $PlayerSprite.position.y) * 0.2
+	player_sprite.scale.y += (1 - player_sprite.scale.y) * 0.2
+	player_sprite.scale.x += (1 - player_sprite.scale.x) * 0.2
+	player_sprite.position.y += (0 - player_sprite.position.y) * 0.2
 	# Suaviza el retorno del arma a su posicion normal despues del recoil
-	$Gun.position.x += (0 - $Gun.position.x) * 0.2
-	$Gun.position.y += (0 - $Gun.position.y) * 0.2
+	gun.position.x += (0 - gun.position.x) * 0.2
+	gun.position.y += (0 - gun.position.y) * 0.2
 	
 	# Ejecutar efectos en el primer instante que el Player aterriza en suelo
 	if is_on_floor():
 		if has_landed == false:
-			$PlayerSprite.position.y += 2
-			$PlayerSprite.scale.y = 0.7
-			$PlayerSprite.scale.x = 1.3
+			player_sprite.position.y += 2
+			player_sprite.scale.y = 0.7
+			player_sprite.scale.x = 1.3
 			
 			has_landed = true
 			create_smoke_particles()
@@ -133,9 +138,9 @@ func _physics_process(delta):
 func jump():
 	if is_on_floor():
 		velocity.y = -JUMP_FORCE
-		$PlayerSprite.scale.x = 0.7
-		$PlayerSprite.scale.y = 1.3
-		$PlayerSprite.position.y -= 2
+		player_sprite.scale.x = 0.7
+		player_sprite.scale.y = 1.3
+		player_sprite.position.y -= 2
 		create_smoke_particles()
 		$Audio_Jump.play()
 	
@@ -154,9 +159,9 @@ func fire():
 		ammo -= 1
 		
 		# Gun recoil vfx
-		var recoil = $Gun.global_position.direction_to(crosshair.global_position)
+		var recoil = gun.global_position.direction_to(crosshair.global_position)
 		recoil *= 6
-		$Gun.global_position -= recoil
+		gun.global_position -= recoil
 		$Audio_Shoot.play()
 		if will_camera_shake_on_gunfire:
 			camera.activate_shake(1.6,0.1) # (shake_intensity, shake_duration)
@@ -230,16 +235,12 @@ func _input(event):
 		
 func _on_PlayerKnockback_area_entered(area):
 	knockback = area.knockback_vector * area.knockback_force
-	animation_player.play("hurt")
-	is_player_hurt = true
-	yield(get_tree().create_timer(0.4), "timeout")
-	is_player_hurt = false
-	
+	player_knockback_collisionShape.set_deferred("disabled",true)
+
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
-	hurtbox.start_invincibility(3)
-	
+	hurtbox.start_invincibility(INVINCIBILITY_TIME)
 
 func create_smoke_particles():
 	var smoke_particles = smoke_particle_scene.instance()	
@@ -261,6 +262,10 @@ func _on_Trigger_body_entered(body):
 func tpball_traveled_enough():
 	has_tpball_traveled_enough = true
 
+func _on_Hurtbox_invincibility_started():
+	blink_animation_player.play("Start")
 
 
-
+func _on_Hurtbox_invincibility_ended():
+	blink_animation_player.play("Stop")
+	player_knockback_collisionShape.disabled = false
