@@ -46,38 +46,34 @@ radius = 17.7034
 height = 52.6408
 
 [node name="EnemyTower" type="KinematicBody2D"]
-position = Vector2( 0, -21.8633 )
 scale = Vector2( 0.8, 0.8 )
 collision_layer = 2147483656
 script = ExtResource( 2 )
 attack_speed = 1.5
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, 3.75 )
 frames = SubResource( 7 )
 animation = "idle"
+frame = 3
 playing = true
+offset = Vector2( 3.891, -0.201 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -3.04343, -2.41474 )
 shape = SubResource( 8 )
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
-max_health = 12
+max_health = 3
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
 collision_layer = 80
 collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2( -2.34111, -1.91912 )
 shape = SubResource( 9 )
 
 [node name="Position2D" type="Position2D" parent="."]
-position = Vector2( -2.95294, -22.2967 )
-
-[node name="Audio_Hit" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 1 )
-volume_db = -10.0
+position = Vector2( 0.065, -30 )
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 
