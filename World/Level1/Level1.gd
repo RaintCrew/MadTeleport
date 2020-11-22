@@ -6,7 +6,7 @@ var is_restarting = false
 # Player has to kill all enemies of the current phase
 # for the next phase to start. This var keeps track of that
 var num_of_phase_enemies_killed = 0
-var enemies_to_kill_in_phase = [8,2,16,14,100,100]
+var enemies_to_kill_in_phase = [8,2,16,14,19,100]
 
 onready var ul_enemy_spawner = $EnemySpawnerUL
 onready var ur_enemy_spawner = $EnemySpawnerUR
@@ -118,11 +118,18 @@ func set_phase(value):
 		disable_all_spawners()
 		c_enemy_spawner.reset(0, 2, 3, 5, true, true)
 		ur_enemy_spawner.reset(1, 1, 2, 2, true, true)
-		dr_enemy_spawner.reset(0, 2, 3, 5, true, true)
+		dr_enemy_spawner.reset(0, 3, 2, 5, true, true)
 		dl_enemy_spawner.reset(0, 2, 3, 5, true, true)
-		ul_enemy_spawner.reset(1, 1, 2, 2, true, true)
+		ul_enemy_spawner.reset(1, 3, 2, 2, true, true)
+	
+	elif phase == 5:
+		disable_all_spawners()
+		clear_level()
 	
 func disable_all_spawners():
 	for spawner in get_tree().get_nodes_in_group("all_enemy_spawners"):
 		spawner.spawning = false
 	
+# Called when the player completes the level!
+func clear_level():
+	pass
