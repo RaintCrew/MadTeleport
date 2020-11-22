@@ -1,4 +1,4 @@
-[gd_scene load_steps=135 format=2]
+[gd_scene load_steps=137 format=2]
 
 [ext_resource path="res://Tilemaps/Tilemap.tres" type="TileSet" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Assets/Player/player_run_spritesheet.png" type="Texture" id=7]
 [ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/TutorialAnimations/teleport.png" type="Texture" id=9]
+[ext_resource path="res://Assets/World/door.png" type="Texture" id=10]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -641,6 +642,9 @@ animations = [ {
 "speed": 30.0
 } ]
 
+[sub_resource type="RectangleShape2D" id=126]
+extents = Vector2( 15.8666, 21.3827 )
+
 [node name="Level_Miguel" type="Node2D"]
 script = ExtResource( 5 )
 
@@ -654,7 +658,7 @@ position = Vector2( -192.47, -73.9559 )
 scale = Vector2( -1.5, 1.5 )
 frames = SubResource( 9 )
 animation = "Player_Running"
-frame = 7
+frame = 6
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="backgound"]
@@ -662,7 +666,7 @@ position = Vector2( -23.7142, 13.0821 )
 scale = Vector2( 0.372886, 0.386197 )
 frames = SubResource( 125 )
 animation = "Teleport"
-frame = 103
+frame = 29
 playing = true
 
 [node name="MoveText" type="RichTextLabel" parent="backgound"]
@@ -743,6 +747,19 @@ margin_top = 16.7331
 margin_right = 86.8883
 margin_bottom = 30.7331
 
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 588.914, 316.25 )
+scale = Vector2( 0.677449, 0.694863 )
+collision_layer = 27
+collision_mask = 0
+
+[node name="Sprite" type="Sprite" parent="Area2D"]
+texture = ExtResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, 6.89758 )
+shape = SubResource( 126 )
+
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 334.63, 255.112 )
 
@@ -759,4 +776,6 @@ position = Vector2( 319.902, 180.683 )
 position = Vector2( 87.8272, 268.99 )
 enemy_type = 1
 spawn_delay = 3.0
+spawning = false
 will_wait_for_spawned_enemy_to_die = true
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
