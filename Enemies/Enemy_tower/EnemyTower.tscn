@@ -55,7 +55,7 @@ attack_speed = 1.5
 position = Vector2( 0, 3.75 )
 frames = SubResource( 7 )
 animation = "idle"
-frame = 3
+frame = 1
 playing = true
 offset = Vector2( 3.891, -0.201 )
 
@@ -63,7 +63,7 @@ offset = Vector2( 3.891, -0.201 )
 shape = SubResource( 8 )
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
-max_health = 3
+max_health = 10
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
 collision_layer = 80
@@ -74,6 +74,10 @@ shape = SubResource( 9 )
 
 [node name="Position2D" type="Position2D" parent="."]
 position = Vector2( 0.065, -30 )
+
+[node name="Audio_Hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+volume_db = -10.0
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 
