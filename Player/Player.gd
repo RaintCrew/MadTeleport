@@ -239,13 +239,20 @@ func regain_teleport_ball():
 	has_tpball_traveled_enough = false
 
 func die():
+	crosshair.set_visible(false)
+	gun.set_visible(false)
+	floating_teleport_ball.set_visible(false)
+	# disable input (not jumping, firing or throwing balls here ò.ó)
+	set_process_input(false)
+	# this pauses all things in the scene except for the player so the pyhisics can
+	# continue working until the death animation is finishes
 	get_tree().paused = true
 	if teleport_ball: # Si la tp ball esta volando, debe ser eliminada antes de quitar al player
 		teleport_ball.queue_free()
 	OS.delay_msec(100)
 	camera.display_gameover()
-	yield(get_tree().create_timer(0.4), "timeout")
 	player_dead = true
+
 
 	
 # Esta funcion se llama cada vez que cualquier input se detecta
