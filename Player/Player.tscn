@@ -13,14 +13,14 @@
 [ext_resource path="res://UI/InvincibilityUI.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/Player/player_spritesheetv2.png" type="Texture" id=13]
 
-[sub_resource type="Shader" id=16]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 uniform bool active = false;
 
 void fragment() {
 	vec4 previous_color = texture(TEXTURE, UV);
-	vec4 white_color = vec4(1.0, 1.0, 1.0, previous_color.a);
+	vec4 white_color = vec4(1.0, 1.0, 1.0, 0);
 	vec4 new_color = previous_color;
 	if (active == true){
 		new_color = white_color;
@@ -29,11 +29,11 @@ void fragment() {
 }"
 custom_defines = ""
 
-[sub_resource type="ShaderMaterial" id=17]
-shader = SubResource( 16 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 shader_param/active = false
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=3]
 resource_name = "die"
 length = 0.7
 tracks/0/type = "value"
@@ -49,8 +49,7 @@ tracks/0/keys = {
 "values": [ 56, 57, 58, 59, 60, 61, 62 ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "falling"
+[sub_resource type="Animation" id=4]
 length = 0.7
 loop = true
 tracks/0/type = "value"
@@ -66,7 +65,7 @@ tracks/0/keys = {
 "values": [ 16, 17, 18, 19, 20, 21, 23 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=5]
 resource_name = "hahaha"
 length = 1.5
 tracks/0/type = "value"
@@ -82,8 +81,7 @@ tracks/0/keys = {
 "values": [ 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "hurt"
+[sub_resource type="Animation" id=6]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerSprite:frame")
@@ -98,8 +96,7 @@ tracks/0/keys = {
 "values": [ 9, 9, 10, 11, 12, 13 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "idle"
+[sub_resource type="Animation" id=7]
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -115,8 +112,7 @@ tracks/0/keys = {
 "values": [ 1, 2, 3, 4, 5 ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "jump"
+[sub_resource type="Animation" id=8]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerSprite:frame")
@@ -131,7 +127,7 @@ tracks/0/keys = {
 "values": [ 34, 35 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=9]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -147,7 +143,7 @@ tracks/0/keys = {
 "values": [ 24, 25, 26, 27, 28, 29, 30, 31 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=10]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -163,7 +159,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=11]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerSprite:material:shader_param/active")
@@ -178,14 +174,14 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 7, 9 )
 
-[sub_resource type="CapsuleShape2D" id=12]
+[sub_resource type="CapsuleShape2D" id=13]
 radius = 5.39457
 height = 2.70943
 
-[sub_resource type="RectangleShape2D" id=13]
+[sub_resource type="RectangleShape2D" id=14]
 
 [node name="Player" type="KinematicBody2D"]
 pause_mode = 2
@@ -198,7 +194,7 @@ __meta__ = {
 }
 
 [node name="PlayerSprite" type="Sprite" parent="."]
-material = SubResource( 17 )
+material = SubResource( 2 )
 position = Vector2( 1, 0 )
 texture = ExtResource( 13 )
 vframes = 8
@@ -206,21 +202,21 @@ hframes = 8
 frame = 56
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/die = SubResource( 14 )
-anims/falling = SubResource( 1 )
-anims/hahaha = SubResource( 15 )
-anims/hurt = SubResource( 2 )
-anims/idle = SubResource( 3 )
-anims/jump = SubResource( 4 )
-anims/run = SubResource( 5 )
+anims/die = SubResource( 3 )
+anims/falling = SubResource( 4 )
+anims/hahaha = SubResource( 5 )
+anims/hurt = SubResource( 6 )
+anims/idle = SubResource( 7 )
+anims/jump = SubResource( 8 )
+anims/run = SubResource( 9 )
 
 [node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Start = SubResource( 7 )
-anims/Stop = SubResource( 8 )
+anims/Start = SubResource( 10 )
+anims/Stop = SubResource( 11 )
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 visible = false
-shape = SubResource( 11 )
+shape = SubResource( 12 )
 
 [node name="Crosshair" type="Sprite" parent="."]
 position = Vector2( 32, 0 )
@@ -257,7 +253,7 @@ collision_mask = 2147483648
 
 [node name="CollisionShape2D" parent="PlayerKnockback" index="0"]
 position = Vector2( -1.03009, 1.21738 )
-shape = SubResource( 12 )
+shape = SubResource( 13 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 6 )]
 visible = false
@@ -266,7 +262,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 modulate = Color( 0.501961, 0.054902, 0.054902, 1 )
-shape = SubResource( 13 )
+shape = SubResource( 14 )
 
 [node name="Audio_Shoot" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
@@ -295,10 +291,10 @@ margin_bottom = -32.4113
 text = "Invincibility ON"
 [connection signal="area_entered" from="PlayerKnockback" to="." method="_on_PlayerKnockback_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
-[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_ended" from="Hurtbox" to="Invincibility" method="_on_Hurtbox_invincibility_ended"]
-[connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="Invincibility" method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
 
 [editable path="PlayerKnockback"]
 
