@@ -10,6 +10,7 @@ var velocity = Vector2.ZERO
 var hurt_vfx_timer = -1 # Timer so that the vfx for being hurt is visible for a couple of frames
 
 onready var hitbox = $Hitbox
+onready var hitbox_collision_shape = $Hitbox/CollisionShape2D
 onready var sprite = $AnimatedSprite		# Load the sprite.
 onready var stats = $Stats					# Load the stats script for the life
 onready var hurtbox = $Hurtbox
@@ -24,10 +25,11 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
-	if Global.player: 			# If the player is alive execute below code
+	if PlayerStats.health > 0: 			# If the player is alive execute below code
 		chase_player(delta)
+	else:
+		hitbox_collision_shape.disabled = true
 	decrease_hurt_vfx_timer()
-	
 
 func chase_player(delta: float):
 	var direction = global_position.direction_to(Global.player.global_position)		# Check player position

@@ -32,7 +32,7 @@ extents = Vector2( 21.0369, 12.9202 )
 radius = 8.76727
 
 [node name="EnemyDrone" type="KinematicBody2D"]
-pause_mode = 1
+pause_mode = 2
 position = Vector2( -0.187286, 0 )
 scale = Vector2( 0.6, 0.6 )
 collision_layer = 0
@@ -47,7 +47,7 @@ MAX_SPEED = 60
 scale = Vector2( 0.8, 0.8 )
 frames = SubResource( 1 )
 animation = "DroneAnimation"
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( -2, 3 )
 

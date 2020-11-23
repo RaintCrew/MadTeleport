@@ -56,21 +56,22 @@ func _physics_process(delta):
 	# if player is dead, anything keypressed-related is innaccesible
 	# !play_hurt is a condition so that it can play the hurt animation
 	if player_dead and !player_hurt:
-		# move_and_slide is here so that is_on_floor can be updated
-		velocity = move_and_slide(velocity, FLOOR)
+		target_running_velocity = 0
 		# the player has to be on the floor to reproduce the death animation
 		if is_on_floor():
 			blink_animation_player.play("Stop")
 			animation_player.play("die")
 			# yield and then pause cause we're in a process func so all this is called every frame
 			yield(get_tree().create_timer(0.7),"timeout")
+			get_tree().paused = true
 			self.pause_mode = Node.PAUSE_MODE_STOP
 	# if the player isn't dead, it can be controlled
 	# however if the player is hurt, the animation plays AND THEN it can be controlled
 	else:	
 		if player_hurt:
-			# this x axis momentum won't add to the knockback force
+			# the x axis momentum won't add to the knockback force
 			velocity.x = 0
+			target_running_velocity = 0
 			animation_player.play("hurt")
 			# this force will oppose that of the knockback
 			# preventing the player from being pushed infinitely
@@ -246,14 +247,14 @@ func regain_teleport_ball():
 
 func die():
 	player_dead = true
+	# disable input (not jumping, firing or throwing balls here ò.ó)
+	set_process_input(false)
+	velocity = Vector2.ZERO
+	target_running_velocity = 0
 	crosshair.set_visible(false)
 	gun.set_visible(false)
 	floating_teleport_ball.set_visible(false)
-	# disable input (not jumping, firing or throwing balls here ò.ó)
-	set_process_input(false)
-	# this pauses all things in the scene except for the player so the pyhisics can
-	# continue working until the death animation is finishes
-	get_tree().paused = true
+
 	if teleport_ball: # Si la tp ball esta volando, debe ser eliminada antes de quitar al player
 		teleport_ball.queue_free()
 	OS.delay_msec(100)
@@ -289,6 +290,7 @@ func _input(event):
 		
 # this knockback makes the player jump a little, like a "classic" knockback
 func classic_knockback(area):
+	velocity = Vector2.ZERO
 	var collision_point = global_position - area.global_position
 	area.knockback_vector.x = sign(collision_point.x) * area.knockback_force
 	area.knockback_vector.y = -125
@@ -299,7 +301,7 @@ func vector_knockback(area):
 	knockback = area.knockback_vector * area.knockback_force
 	
 func _on_PlayerKnockback_area_entered(area):
-	
+	target_running_velocity = 0
 	classic_knockback(area)
 	#vector_knockback(area)
 	player_knockback_collisionShape.set_deferred("disabled",true)
@@ -320,11 +322,10 @@ func _on_Hurtbox_area_entered(area):
 	# occur
 	yield(get_tree().create_timer(0.01),"timeout")
 	flip_on_enemy_collision(area)
-	animation_player.play("hurt")
 	player_hurt = true
 	stats.health -= area.damage
 	hurtbox.start_invincibility(INVINCIBILITY_TIME)
-	yield(get_tree().create_timer(0.8), "timeout")
+	yield(get_tree().create_timer(1), "timeout")
 	player_hurt = false
 
 func create_smoke_particles():

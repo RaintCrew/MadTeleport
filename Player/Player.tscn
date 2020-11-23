@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Player/tempplayer_aim.png" type="Texture" id=3]
@@ -10,7 +10,6 @@
 [ext_resource path="res://Assets/SFX/sfx_teleport.wav" type="AudioStream" id=9]
 [ext_resource path="res://Assets/SFX/sfx_jump.wav" type="AudioStream" id=10]
 [ext_resource path="res://Hit_Hurtboxes/Knockback.tscn" type="PackedScene" id=11]
-[ext_resource path="res://UI/InvincibilityUI.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/Player/player_spritesheetv2.png" type="Texture" id=13]
 
 [sub_resource type="Shader" id=1]
@@ -279,25 +278,11 @@ volume_db = -10.0
 [node name="Audio_Jump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 volume_db = -10.0
-
-[node name="Invincibility" parent="." instance=ExtResource( 12 )]
-
-[node name="Invincibility" parent="Invincibility" index="0"]
-visible = false
-margin_left = -44.8236
-margin_top = -46.4117
-margin_right = 55.1764
-margin_bottom = -32.4113
-text = "Invincibility ON"
 [connection signal="area_entered" from="PlayerKnockback" to="." method="_on_PlayerKnockback_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
-[connection signal="invincibility_ended" from="Hurtbox" to="Invincibility" method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
-[connection signal="invincibility_started" from="Hurtbox" to="Invincibility" method="_on_Hurtbox_invincibility_started"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
 
 [editable path="PlayerKnockback"]
 
 [editable path="Hurtbox"]
-
-[editable path="Invincibility"]

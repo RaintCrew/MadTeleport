@@ -10,6 +10,7 @@ var health = max_health setget set_health
 signal no_health
 signal health_changed(value)
 signal max_health_changed(value)
+signal player_is_dead()
 
 func set_max_health(value):
 	max_health = value
@@ -18,6 +19,9 @@ func set_max_health(value):
 	emit_signal("max_health_changed", max_health)	
 
 func set_health(value):
+	if value < 1:
+		emit_signal("player_is_dead")
+	
 	health = value
 	# when the health changes we emit a signal with the new value.
 	emit_signal("health_changed", health)
