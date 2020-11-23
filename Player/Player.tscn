@@ -31,7 +31,7 @@ custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
-shader_param/active = false
+shader_param/active = true
 
 [sub_resource type="Animation" id=3]
 resource_name = "die"
@@ -82,7 +82,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=6]
-length = 0.6
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
@@ -90,10 +90,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 9, 9, 10, 11, 12, 13 ]
+"values": [ 9, 10, 11, 12, 13 ]
 }
 
 [sub_resource type="Animation" id=7]

@@ -4,7 +4,7 @@ export var RUN_SPEED = 100 		# velocidad lateral de Player al caminar
 export var GRAVITY = 10 			# aceleracion vertical que disminuye la velocidad vertical del Player
 export var FLOOR = Vector2(0,-1) # vector normal que el physics engine usa para frenar con pisos y paredes
 export var MAX_FALL_SPEED = 200 	# lo mas rapido que puede caer el Player por gravedad
-export var FRICTION = 150			# this force will oppose the knockback force
+export var FRICTION = 200			# this force will oppose the knockback force
 export var JUMP_FORCE = 165 		# qué tan alto puede saltar el jugador
 export var INVINCIBILITY_TIME = 2	# invincibility duration 
 
@@ -51,14 +51,13 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):	
-	# this force will oppose that of the knockback
-	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
-	knockback = move_and_slide(knockback)
-	# if player is dead, anything input-related is innaccesible
-	if player_dead:
+
+	
+	# if player is dead, anything keypressed-related is innaccesible
+	# !play_hurt is a condition so that it can play the hurt animation
+	if player_dead and !player_hurt:
 		# move_and_slide is here so that is_on_floor can be updated
 		velocity = move_and_slide(velocity, FLOOR)
-		crosshair.set_visible(false)
 		# the player has to be on the floor to reproduce the death animation
 		if is_on_floor():
 			blink_animation_player.play("Stop")
@@ -70,8 +69,13 @@ func _physics_process(delta):
 	# however if the player is hurt, the animation plays AND THEN it can be controlled
 	else:	
 		if player_hurt:
+			# this x axis momentum won't add to the knockback force
+			velocity.x = 0
 			animation_player.play("hurt")
-			yield(get_tree().create_timer(0.7),"timeout")
+			# this force will oppose that of the knockback
+			# preventing the player from being pushed infinitely
+			knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
+			knockback = move_and_slide(knockback, FLOOR)
 		else:
 			# Controles tecla "A" y "D" para moverse lateralmente
 			# Al no presionar ninguna tecla, el Player se detiene lateralmente
@@ -99,10 +103,7 @@ func _physics_process(delta):
 				elif velocity.y > 0: 
 					animation_player.play("falling")
 			
-			# Ubicar la mira donde este el mouse
-			crosshair.global_position = get_global_mouse_position()
-			# Rotar la pistola para que apunte a donde este la mira
-			gun.look_at(get_global_mouse_position())
+
 			
 			# Hace desaparecer la teleport ball flotando al lado tuyo
 			# si esta volando y por lo tanto, no puede ser arrojada
@@ -123,6 +124,12 @@ func _physics_process(delta):
 	#### (this worked at the first time and I didn't think nor test it inside the prior
 	#### conditions. We can test that later, for the moment it works as thought and intended).
 	
+	# Ubicar la mira donde este el mouse
+	crosshair.global_position = get_global_mouse_position()
+	# Rotar la pistola para que apunte a donde este la mira
+	gun.look_at(get_global_mouse_position())
+	
+	
 	# Las siguientes formulas de velocity.x buscan suavizar su valor hasta que se vuelva target_running_velocity
 	# [Formula original:  x += (target - x) * 0.1]
 	# [Al llamar a esta funcion en cada frame, lo que haces es 
@@ -132,7 +139,6 @@ func _physics_process(delta):
 	else:							# Si esta intentando acelerar
 		velocity.x += (target_running_velocity - velocity.x) * 0.4
 
-	
 	# Limitar que el Player no caiga muy rapido
 	if velocity.y < MAX_FALL_SPEED: 
 		velocity.y += GRAVITY
@@ -140,8 +146,6 @@ func _physics_process(delta):
 	# Desplazar al Player de acuerdo al velocity,
 	# evaluando por colisiones en el proceso
 	velocity = move_and_slide(velocity, FLOOR)
-	
-
 	
 	# Cuando el Player aterriza en suelo, su sprite se deforma
 	# Este codigo es el que se encarga en cada frame de suavemente
@@ -280,8 +284,20 @@ func _input(event):
 					else:
 						teleport()
 		
-func _on_PlayerKnockback_area_entered(area):
+# this knockback makes the player jump a little, like a "classic" knockback
+func classic_knockback(area):
+	var collision_point = global_position - area.global_position
+	area.knockback_vector.x = sign(collision_point.x) * area.knockback_force
+	area.knockback_vector.y = -125
+	knockback = area.knockback_vector
+
+# this knockback aplies the force in the same direction the enemy is moving 
+func vector_knockback(area):
 	knockback = area.knockback_vector * area.knockback_force
+	
+func _on_PlayerKnockback_area_entered(area):
+	classic_knockback(area)
+	#vector_knockback(area)
 	player_knockback_collisionShape.set_deferred("disabled",true)
 
 
@@ -290,7 +306,7 @@ func _on_Hurtbox_area_entered(area):
 	player_hurt = true
 	stats.health -= area.damage
 	hurtbox.start_invincibility(INVINCIBILITY_TIME)
-	yield(get_tree().create_timer(0.5), "timeout")
+	yield(get_tree().create_timer(0.8), "timeout")
 	player_hurt = false
 
 func create_smoke_particles():

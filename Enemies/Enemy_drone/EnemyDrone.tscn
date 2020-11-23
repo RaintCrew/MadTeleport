@@ -47,7 +47,7 @@ MAX_SPEED = 60
 scale = Vector2( 0.8, 0.8 )
 frames = SubResource( 1 )
 animation = "DroneAnimation"
-frame = 4
+frame = 1
 playing = true
 offset = Vector2( -2, 3 )
 
@@ -72,7 +72,6 @@ shape = SubResource( 3 )
 [node name="Hitbox" parent="." instance=ExtResource( 6 )]
 visible = false
 collision_mask = 36
-knockback_force = 170
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 4 )
