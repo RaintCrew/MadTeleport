@@ -16,6 +16,7 @@ var target_running_velocity = 0		# Velocidad a la que está intentando llegar. S
 var ammo = PISTOL_AMMO 				# Numero de balas en el arma. Se recarga con Teleport
 var player_hurt = false
 var player_dead = false
+var is_facing_right = true
 
 var can_throw_teleport_ball = true	# Puede arrojar la teleport ball, o esta en el aire y no puede lanzarla
 var has_landed = true				# Se usa para ejecutar code en el primer instante que aterriza en suelo
@@ -52,7 +53,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):	
 
-	
 	# if player is dead, anything keypressed-related is innaccesible
 	# !play_hurt is a condition so that it can play the hurt animation
 	if player_dead and !player_hurt:
@@ -110,12 +110,14 @@ func _physics_process(delta):
 			floating_teleport_ball.visible = can_throw_teleport_ball
 			
 			$Ammo_Label.text = str(ammo) # Mostrar en texto la municion del arma
-			
+
 			# El jugador y el arma se voltean hacia donde este la crosshair
 			if crosshair.global_position.x < global_position.x:
+				is_facing_right = false
 				player_sprite.flip_h = true
 				gun.flip_v = true
 			else:
+				is_facing_right = true
 				player_sprite.flip_h = false
 				gun.flip_v = false
 	
@@ -243,6 +245,7 @@ func regain_teleport_ball():
 	has_tpball_traveled_enough = false
 
 func die():
+	player_dead = true
 	crosshair.set_visible(false)
 	gun.set_visible(false)
 	floating_teleport_ball.set_visible(false)
@@ -255,7 +258,7 @@ func die():
 		teleport_ball.queue_free()
 	OS.delay_msec(100)
 	camera.display_gameover()
-	player_dead = true
+
 
 
 	
@@ -296,12 +299,27 @@ func vector_knockback(area):
 	knockback = area.knockback_vector * area.knockback_force
 	
 func _on_PlayerKnockback_area_entered(area):
+	
 	classic_knockback(area)
 	#vector_knockback(area)
 	player_knockback_collisionShape.set_deferred("disabled",true)
 
+# flips the player  horizontally if facing the wrong direction when taking damage
+func flip_on_enemy_collision(area):				
+	if is_facing_right and (area.knockback_vector.x > 0):
+		player_sprite.flip_h = true
+		gun.flip_v = true
+		is_facing_right = false
+	elif !is_facing_right and (area.knockback_vector.x < 0):
+		player_sprite.flip_h = false
+		gun.flip_v = false
+		is_facing_right = true
 
 func _on_Hurtbox_area_entered(area):
+	# litle dirty fix so that the enemy can assign its knocback vector before this
+	# occur
+	yield(get_tree().create_timer(0.01),"timeout")
+	flip_on_enemy_collision(area)
 	animation_player.play("hurt")
 	player_hurt = true
 	stats.health -= area.damage
