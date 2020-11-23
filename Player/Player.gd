@@ -220,7 +220,8 @@ func teleport():
 		camera.activate_shake(2.0, 0.4)
 		create_tp_particles()
 		$Audio_Teleport.play()
-		velocity.y = 0					# El momentum de caida no se mantiene al teleportarse
+		velocity = Vector2.ZERO		# El momentum de caida no se mantiene al teleportarse
+		knockback = Vector2.ZERO	# Tampoco debería mantenerse el momento del knockback 
 		regain_teleport_ball()	# Re-obtienes la teleport ball y puedes tirarla de nuevo
 		teleport_ball.queue_free()		# Borrar la teleport ball que estaba viajando
 		reload()	# Teleportarse es lo que recarga tus armas
