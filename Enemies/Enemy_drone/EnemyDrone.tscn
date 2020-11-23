@@ -35,8 +35,8 @@ radius = 8.76727
 pause_mode = 2
 position = Vector2( -0.187286, 0 )
 scale = Vector2( 0.6, 0.6 )
-collision_layer = 0
-collision_mask = 2147483648
+collision_layer = 8
+collision_mask = 2147483649
 script = ExtResource( 9 )
 __meta__ = {
 "_edit_group_": true
@@ -47,15 +47,13 @@ MAX_SPEED = 60
 scale = Vector2( 0.8, 0.8 )
 frames = SubResource( 1 )
 animation = "DroneAnimation"
-frame = 2
+frame = 4
 playing = true
 offset = Vector2( -2, 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0.343358, 0.655507 )
 shape = SubResource( 2 )
-disabled = true
 
 [node name="Stats" parent="." instance=ExtResource( 8 )]
 max_health = 2
