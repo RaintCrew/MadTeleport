@@ -40,6 +40,7 @@ onready var smoke_particle_scene = preload("res://Player/PlayerJumpSmokeParticle
 onready var teleport_particle_scene = preload("res://Player/TeleportParticles.tscn")	# Referencia a escena de particulas de teleport
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	blink_animation_player.play("Stop")
 	Global.player = self
 	# no_health is the signal we're connecting to
 	# self is this object (like "this" in any othe major programming language xd)
