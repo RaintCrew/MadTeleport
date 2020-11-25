@@ -14,7 +14,8 @@ var knockback = Vector2.ZERO		# knockback yay
 var velocity = Vector2() 			# Vector (x,y) donde x/y define cuanto se mueve horizontal/verticalmente en cada frame.
 var target_running_velocity = 0		# Velocidad a la que está intentando llegar. Se usa para lograr la aceleracion y desaceleracion
 var ammo = PISTOL_AMMO 				# Numero de balas en el arma. Se recarga con Teleport
-var is_player_hurt = false
+var player_hurt = false
+var player_dead = false
 
 var can_throw_teleport_ball = true	# Puede arrojar la teleport ball, o esta en el aire y no puede lanzarla
 var has_landed = true				# Se usa para ejecutar code en el primer instante que aterriza en suelo
@@ -48,31 +49,78 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
-	
-
+func _physics_process(delta):	
 	# this force will oppose that of the knockback
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
 	knockback = move_and_slide(knockback)
-	# Controles tecla "A" y "D" para moverse lateralmente
-	# Al no presionar ninguna tecla, el Player se detiene lateralmente
-	# Acerca target_running_velocity: 
-	# 	por ejemplo al presionar "D", el personaje fija que "quiero llegar a RUN_SPEED".
-	# 	Después, la velocity suavemente cambia hasta llegar a cual sea el valor de target_running_velocity
-	if Input.is_key_pressed(KEY_D):
-		target_running_velocity = RUN_SPEED
-		animation_player.play("run_backwards")
-		
-	elif Input.is_key_pressed(KEY_A):
-		target_running_velocity = -RUN_SPEED
-		animation_player.play("run_backwards")
-		
-	else:
-		target_running_velocity = 0
-		if !is_player_hurt and !is_on_floor():
-			animation_player.play("idle")
-		if !is_player_hurt and !is_on_floor() and (velocity.y >= 1):
-			animation_player.play("falling")
+	# if player is dead, anything input-related is innaccesible
+	if player_dead:
+		# move_and_slide is here so that is_on_floor can be updated
+		velocity = move_and_slide(velocity, FLOOR)
+		crosshair.set_visible(false)
+		# the player has to be on the floor to reproduce the death animation
+		if is_on_floor():
+			blink_animation_player.play("Stop")
+			animation_player.play("die")
+			# yield and then pause cause we're in a process func so all this is called every frame
+			yield(get_tree().create_timer(0.7),"timeout")
+			self.pause_mode = Node.PAUSE_MODE_STOP
+	# if the player isn't dead, it can be controlled
+	# however if the player is hurt, the animation plays AND THEN it can be controlled
+	else:	
+		if player_hurt:
+			animation_player.play("hurt")
+			yield(get_tree().create_timer(0.7),"timeout")
+		else:
+			# Controles tecla "A" y "D" para moverse lateralmente
+			# Al no presionar ninguna tecla, el Player se detiene lateralmente
+			# Acerca target_running_velocity: 
+			# 	por ejemplo al presionar "D", el personaje fija que "quiero llegar a RUN_SPEED".
+			# 	Después, la velocity suavemente cambia hasta llegar a cual sea el valor de target_running_velocity
+			if Input.is_key_pressed(KEY_D):
+				target_running_velocity = RUN_SPEED
+				animation_player.play("run")
+			elif Input.is_key_pressed(KEY_A):
+				target_running_velocity = -RUN_SPEED
+				animation_player.play("run")
+			else:
+				target_running_velocity = 0
+				animation_player.play("idle")
+			
+			# the player can jump only if they're on the floor
+			if is_on_floor():
+				if Input.is_action_just_pressed("jump"):
+					jump()
+			# if they're not on the floor, they're either jumping or falling
+			else:
+				if velocity.y < 0:
+					animation_player.play("jump")
+				elif velocity.y > 0: 
+					animation_player.play("falling")
+			
+			# Ubicar la mira donde este el mouse
+			crosshair.global_position = get_global_mouse_position()
+			# Rotar la pistola para que apunte a donde este la mira
+			gun.look_at(get_global_mouse_position())
+			
+			# Hace desaparecer la teleport ball flotando al lado tuyo
+			# si esta volando y por lo tanto, no puede ser arrojada
+			floating_teleport_ball.visible = can_throw_teleport_ball
+			
+			$Ammo_Label.text = str(ammo) # Mostrar en texto la municion del arma
+			
+			# El jugador y el arma se voltean hacia donde este la crosshair
+			if crosshair.global_position.x < global_position.x:
+				player_sprite.flip_h = true
+				gun.flip_v = true
+			else:
+				player_sprite.flip_h = false
+				gun.flip_v = false
+	
+	#### all this is outside so that it won't be affected by the prior conditions and
+	#### all (pun intended) physics can work properly
+	#### (this worked at the first time and I didn't think nor test it inside the prior
+	#### conditions. We can test that later, for the moment it works as thought and intended).
 	
 	# Las siguientes formulas de velocity.x buscan suavizar su valor hasta que se vuelva target_running_velocity
 	# [Formula original:  x += (target - x) * 0.1]
@@ -92,24 +140,7 @@ func _physics_process(delta):
 	# evaluando por colisiones en el proceso
 	velocity = move_and_slide(velocity, FLOOR)
 	
-	# Ubicar la mira donde este el mouse
-	crosshair.global_position = get_global_mouse_position()
-	# Rotar la pistola para que apunte a donde este la mira
-	gun.look_at(get_global_mouse_position())
-	
-	# Hace desaparecer la teleport ball flotando al lado tuyo
-	# si esta volando y por lo tanto, no puede ser arrojada
-	floating_teleport_ball.visible = can_throw_teleport_ball
-	
-	$Ammo_Label.text = str(ammo) # Mostrar en texto la municion del arma
-	
-	# El jugador y el arma se voltean hacia donde este la crosshair
-	if crosshair.global_position.x < global_position.x:
-		player_sprite.flip_h = true
-		gun.flip_v = true
-	else:
-		player_sprite.flip_h = false
-		gun.flip_v = false
+
 	
 	# Cuando el Player aterriza en suelo, su sprite se deforma
 	# Este codigo es el que se encarga en cada frame de suavemente
@@ -136,13 +167,12 @@ func _physics_process(delta):
 		
 
 func jump():
-	if is_on_floor():
-		velocity.y = -JUMP_FORCE
-		player_sprite.scale.x = 0.7
-		player_sprite.scale.y = 1.3
-		player_sprite.position.y -= 2
-		create_smoke_particles()
-		$Audio_Jump.play()
+	velocity.y = -JUMP_FORCE
+	player_sprite.scale.x = 0.7
+	player_sprite.scale.y = 1.3
+	player_sprite.position.y -= 2
+	create_smoke_particles()
+	$Audio_Jump.play()
 	
 
 
@@ -207,18 +237,26 @@ func regain_teleport_ball():
 	has_tpball_traveled_enough = false
 
 func die():
+	get_tree().paused = true
 	if teleport_ball: # Si la tp ball esta volando, debe ser eliminada antes de quitar al player
 		teleport_ball.queue_free()
 	OS.delay_msec(100)
 	camera.display_gameover()
-	queue_free()
+	yield(get_tree().create_timer(0.4), "timeout")
+	player_dead = true
 
 	
 # Esta funcion se llama cada vez que cualquier input se detecta
 # "input" siendo una tecla presionada, mouse clickeada, etc.
 func _input(event):
-	if event.is_action_pressed("jump"):
-		jump()
+	if is_on_floor():
+		if event.is_action_pressed("jump"):
+			jump()
+	else:
+		if velocity.y < 0:
+			animation_player.play("jump")
+		else:
+			animation_player.play("falling")
 	
 	if event is InputEventMouseButton:
 		match event.button_index:		# Esto es como el switch-case statements en C++/Python
@@ -239,9 +277,13 @@ func _on_PlayerKnockback_area_entered(area):
 
 
 func _on_Hurtbox_area_entered(area):
+	animation_player.play("hurt")
+	player_hurt = true
 	stats.health -= area.damage
 	hurtbox.start_invincibility(INVINCIBILITY_TIME)
 	$Audio_Hit_By_Enemy.play()
+	yield(get_tree().create_timer(0.5), "timeout")
+	player_hurt = false
 
 func create_smoke_particles():
 	var smoke_particles = smoke_particle_scene.instance()	
