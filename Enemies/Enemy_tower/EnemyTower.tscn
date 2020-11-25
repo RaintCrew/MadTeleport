@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://Assets/SFX/sfx_hits.wav" type="AudioStream" id=1]
+[ext_resource path="res://Assets/SFX/sfx_enemy_hurt.wav" type="AudioStream" id=1]
 [ext_resource path="res://Enemies/Enemy_tower/EnemyTower.gd" type="Script" id=2]
 [ext_resource path="res://Singletons/Stats.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Hit_Hurtboxes/Hurtbox.tscn" type="PackedScene" id=4]
@@ -61,7 +61,7 @@ attack_speed = 1.5
 position = Vector2( 0, 3.75 )
 frames = SubResource( 7 )
 animation = "idle"
-frame = 3
+frame = 4
 playing = true
 offset = Vector2( 3.891, -0.201 )
 

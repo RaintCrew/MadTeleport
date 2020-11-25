@@ -643,6 +643,9 @@ animations = [ {
 "speed": 30.0
 } ]
 
+[sub_resource type="DynamicFont" id=126]
+font_data = ExtResource( 11 )
+
 [sub_resource type="DynamicFont" id=127]
 font_data = ExtResource( 11 )
 
@@ -656,13 +659,10 @@ font_data = ExtResource( 11 )
 font_data = ExtResource( 11 )
 
 [sub_resource type="DynamicFont" id=131]
-font_data = ExtResource( 11 )
-
-[sub_resource type="DynamicFont" id=132]
 size = 14
 font_data = ExtResource( 11 )
 
-[sub_resource type="RectangleShape2D" id=126]
+[sub_resource type="RectangleShape2D" id=132]
 extents = Vector2( 15.8666, 21.3827 )
 
 [node name="Level_Miguel" type="Node2D"]
@@ -678,6 +678,7 @@ position = Vector2( -192.47, -73.9559 )
 scale = Vector2( -1.5, 1.5 )
 frames = SubResource( 9 )
 animation = "Player_Running"
+frame = 2
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="backgound"]
@@ -685,7 +686,7 @@ position = Vector2( 146.692, 13.0821 )
 scale = Vector2( 0.372886, 0.386197 )
 frames = SubResource( 125 )
 animation = "Teleport"
-frame = 108
+frame = 39
 playing = true
 
 [node name="MoveText" type="Label" parent="backgound"]
@@ -693,7 +694,7 @@ margin_left = -255.115
 margin_top = -135.207
 margin_right = -130.115
 margin_bottom = -102.207
-custom_fonts/font = SubResource( 127 )
+custom_fonts/font = SubResource( 126 )
 text = "Use \"A\" and \"D\" to 
 move left and right"
 __meta__ = {
@@ -705,7 +706,7 @@ margin_left = -66.0447
 margin_top = -135.137
 margin_right = 65.9553
 margin_bottom = -120.137
-custom_fonts/font = SubResource( 128 )
+custom_fonts/font = SubResource( 127 )
 text = "Use \"Space\" to jump"
 align = 1
 __meta__ = {
@@ -717,7 +718,7 @@ margin_left = -60.924
 margin_top = -99.2439
 margin_right = 55.076
 margin_bottom = -66.2439
-custom_fonts/font = SubResource( 129 )
+custom_fonts/font = SubResource( 128 )
 text = "Use mouse cursor 
 to aim your shot"
 align = 1
@@ -730,7 +731,7 @@ margin_left = 123.0
 margin_top = -135.0
 margin_right = 266.0
 margin_bottom = -84.0
-custom_fonts/font = SubResource( 130 )
+custom_fonts/font = SubResource( 129 )
 text = "Left-click to fire 
 gun and damage 
 enemies"
@@ -743,7 +744,7 @@ margin_left = -262.514
 margin_top = -25.7654
 margin_right = 11.4864
 margin_bottom = -10.7654
-custom_fonts/font = SubResource( 131 )
+custom_fonts/font = SubResource( 130 )
 text = "Right-click to throw the Teleport Moon Ball"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -754,7 +755,7 @@ margin_left = -263.069
 margin_top = -6.95374
 margin_right = 10.9314
 margin_bottom = 26.0463
-custom_fonts/font = SubResource( 131 )
+custom_fonts/font = SubResource( 130 )
 text = "Then, right-click again to teleport it, when 
 the Moon Ball isn’t darkened"
 __meta__ = {
@@ -766,7 +767,7 @@ margin_left = -262.0
 margin_top = 34.0
 margin_right = 18.0
 margin_bottom = 53.0
-custom_fonts/font = SubResource( 131 )
+custom_fonts/font = SubResource( 130 )
 text = "Your ammo ONLY reloads by teleporting"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -777,7 +778,7 @@ margin_left = -119.0
 margin_top = 81.0
 margin_right = 153.0
 margin_bottom = 146.0
-custom_fonts/font = SubResource( 132 )
+custom_fonts/font = SubResource( 131 )
 text = "Your goal is to destroy every one of your 
 crazy inventions that are trying to kill 
 you, until they stop appearing. 
@@ -805,7 +806,7 @@ texture = ExtResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 0, 6.89758 )
-shape = SubResource( 126 )
+shape = SubResource( 132 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 334.63, 255.112 )
