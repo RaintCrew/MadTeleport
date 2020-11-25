@@ -658,7 +658,7 @@ position = Vector2( -192.47, -73.9559 )
 scale = Vector2( -1.5, 1.5 )
 frames = SubResource( 9 )
 animation = "Player_Running"
-frame = 6
+frame = 3
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="backgound"]
@@ -666,7 +666,7 @@ position = Vector2( -23.7142, 13.0821 )
 scale = Vector2( 0.372886, 0.386197 )
 frames = SubResource( 125 )
 animation = "Teleport"
-frame = 29
+frame = 5
 playing = true
 
 [node name="MoveText" type="RichTextLabel" parent="backgound"]

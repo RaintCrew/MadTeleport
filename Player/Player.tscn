@@ -145,7 +145,6 @@ void fragment() {
 	}
 	COLOR = new_color;
 }"
-custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=9]
 shader = SubResource( 8 )
@@ -154,11 +153,11 @@ shader_param/active = false
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 7, 9 )
 
-[sub_resource type="CapsuleShape2D" id=12]
+[sub_resource type="CapsuleShape2D" id=11]
 radius = 5.39457
 height = 2.70943
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=12]
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 1.415, -0.0229755 )
@@ -226,7 +225,7 @@ collision_mask = 2147483648
 
 [node name="CollisionShape2D" parent="PlayerKnockback" index="0"]
 position = Vector2( -1.03009, 1.21738 )
-shape = SubResource( 12 )
+shape = SubResource( 11 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 6 )]
 visible = false
@@ -235,7 +234,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 modulate = Color( 0.501961, 0.054902, 0.054902, 1 )
-shape = SubResource( 11 )
+shape = SubResource( 12 )
 
 [node name="Audio_Shoot" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
