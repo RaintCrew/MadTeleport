@@ -17,7 +17,7 @@ onready var c_enemy_spawner = $EnemySpawnerCenter
 # The phase of the level (starts at 0)
 # The different waves and setups of enemies
 # Its in export var so, in testing, I can skip to test a specific phase
-var phase = 3 setget set_phase
+var phase = 0 setget set_phase
 
 # How many phases are there in this level
 var total_phases = 5
@@ -111,16 +111,16 @@ func set_phase(value):
 	elif phase == 3:
 		disable_all_spawners()
 		ur_enemy_spawner.reset(1, 3, 0, 1, true, true)
-		dr_enemy_spawner.reset(0, 3, 0, 6, true, true)
-		dl_enemy_spawner.reset(0, 3, 0, 6, true, true)
+		dr_enemy_spawner.reset(0, 3, 2, 6, true, true)
+		dl_enemy_spawner.reset(0, 3, 2, 6, true, true)
 		ul_enemy_spawner.reset(1, 3, 0, 1, true, true)
 		
 	elif phase == 4:
 		disable_all_spawners()
-		c_enemy_spawner.reset(0, 4, 1, 5, true, true)
+		c_enemy_spawner.reset(0, 2, 3, 5, true, true)
 		ur_enemy_spawner.reset(1, 1, 2, 2, true, true)
-		dr_enemy_spawner.reset(0, 3, 2, 5, true, true)
-		dl_enemy_spawner.reset(0, 4, 2, 5, true, true)
+		dr_enemy_spawner.reset(0, 2, 3, 5, true, true)
+		dl_enemy_spawner.reset(0, 2, 3, 5, true, true)
 		ul_enemy_spawner.reset(1, 1, 2, 2, true, true)
 	
 func disable_all_spawners():

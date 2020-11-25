@@ -684,7 +684,6 @@
 47/z_index = 0
 
 [node name="Level_Parra" type="Node2D"]
-pause_mode = 2
 script = ExtResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
@@ -711,7 +710,6 @@ margin_bottom = 30.0
 position = Vector2( 45.6984, 202.271 )
 
 [node name="Camera" parent="." instance=ExtResource( 4 )]
-pause_mode = 2
 position = Vector2( 318.439, 175 )
 
 [node name="heal" parent="." instance=ExtResource( 1 )]
