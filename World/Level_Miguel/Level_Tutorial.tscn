@@ -1,4 +1,4 @@
-[gd_scene load_steps=137 format=2]
+[gd_scene load_steps=144 format=2]
 
 [ext_resource path="res://Tilemaps/Tilemap.tres" type="TileSet" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/TutorialAnimations/teleport.png" type="Texture" id=9]
 [ext_resource path="res://Assets/World/door.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Fonts/rainyhearts.ttf" type="DynamicFontData" id=11]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -642,6 +643,25 @@ animations = [ {
 "speed": 30.0
 } ]
 
+[sub_resource type="DynamicFont" id=127]
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=128]
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=129]
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=130]
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=131]
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=132]
+size = 14
+font_data = ExtResource( 11 )
+
 [sub_resource type="RectangleShape2D" id=126]
 extents = Vector2( 15.8666, 21.3827 )
 
@@ -658,87 +678,114 @@ position = Vector2( -192.47, -73.9559 )
 scale = Vector2( -1.5, 1.5 )
 frames = SubResource( 9 )
 animation = "Player_Running"
-frame = 3
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="backgound"]
-position = Vector2( -23.7142, 13.0821 )
+position = Vector2( 146.692, 13.0821 )
 scale = Vector2( 0.372886, 0.386197 )
 frames = SubResource( 125 )
 animation = "Teleport"
-frame = 5
+frame = 108
 playing = true
 
-[node name="MoveText" type="RichTextLabel" parent="backgound"]
-anchor_left = 0.120272
-anchor_top = 0.0971031
-anchor_right = 0.144094
-anchor_bottom = 0.174836
-margin_left = -319.974
-margin_top = -160.073
-margin_right = -236.22
-margin_bottom = -134.948
-rect_pivot_offset = Vector2( -233.465, -45.9426 )
-tab_size = 2
-text = "			 Move
-Press A and D"
-scroll_active = false
+[node name="MoveText" type="Label" parent="backgound"]
+margin_left = -255.115
+margin_top = -135.207
+margin_right = -130.115
+margin_bottom = -102.207
+custom_fonts/font = SubResource( 127 )
+text = "Use \"A\" and \"D\" to 
+move left and right"
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 
-[node name="JumpText" type="RichTextLabel" parent="backgound"]
-anchor_left = 0.437459
-anchor_top = 0.0908531
-anchor_right = 0.442531
-anchor_bottom = 0.168586
-margin_left = -319.974
-margin_top = -160.073
-margin_right = -236.22
-margin_bottom = -134.948
-rect_pivot_offset = Vector2( -233.465, -45.9426 )
-tab_size = 2
-text = "			Jump
-Press Space"
-scroll_active = false
+[node name="JumpText" type="Label" parent="backgound"]
+margin_left = -66.0447
+margin_top = -135.137
+margin_right = 65.9553
+margin_bottom = -120.137
+custom_fonts/font = SubResource( 128 )
+text = "Use \"Space\" to jump"
+align = 1
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 
-[node name="ShootText" type="RichTextLabel" parent="backgound"]
-anchor_left = 0.718709
-anchor_top = 0.0877281
-anchor_right = 0.784719
-anchor_bottom = 0.165461
-margin_left = -319.974
-margin_top = -160.073
-margin_right = -236.22
-margin_bottom = -134.948
-rect_pivot_offset = Vector2( -233.465, -45.9426 )
-tab_size = 2
-text = "			  Shoot
-Press Right Click"
-scroll_active = false
+[node name="ShootText" type="Label" parent="backgound"]
+margin_left = -60.924
+margin_top = -99.2439
+margin_right = 55.076
+margin_bottom = -66.2439
+custom_fonts/font = SubResource( 129 )
+text = "Use mouse cursor 
+to aim your shot"
+align = 1
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel4" type="RichTextLabel" parent="backgound"]
-anchor_left = 0.218207
-anchor_top = 0.425228
-anchor_right = 0.601404
-anchor_bottom = 0.502961
-margin_left = -319.974
-margin_top = -160.073
-margin_right = -236.22
-margin_bottom = -134.948
-rect_pivot_offset = Vector2( -233.465, -45.9426 )
-tab_size = 2
-text = "																Teleport 
-Press Left Click, wait a little and Left Click Again"
-scroll_active = false
+[node name="ShootText2" type="Label" parent="backgound"]
+margin_left = 123.0
+margin_top = -135.0
+margin_right = 266.0
+margin_bottom = -84.0
+custom_fonts/font = SubResource( 130 )
+text = "Left-click to fire 
+gun and damage 
+enemies"
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
+}
+
+[node name="TeleportText" type="Label" parent="backgound"]
+margin_left = -262.514
+margin_top = -25.7654
+margin_right = 11.4864
+margin_bottom = -10.7654
+custom_fonts/font = SubResource( 131 )
+text = "Right-click to throw the Teleport Moon Ball"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TeleportText2" type="Label" parent="backgound"]
+margin_left = -263.069
+margin_top = -6.95374
+margin_right = 10.9314
+margin_bottom = 26.0463
+custom_fonts/font = SubResource( 131 )
+text = "Then, right-click again to teleport it, when 
+the Moon Ball isn’t darkened"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TeleportText3" type="Label" parent="backgound"]
+margin_left = -262.0
+margin_top = 34.0
+margin_right = 18.0
+margin_bottom = 53.0
+custom_fonts/font = SubResource( 131 )
+text = "Your ammo ONLY reloads by teleporting"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Goal" type="Label" parent="backgound"]
+margin_left = -119.0
+margin_top = 81.0
+margin_right = 153.0
+margin_bottom = 146.0
+custom_fonts/font = SubResource( 132 )
+text = "Your goal is to destroy every one of your 
+crazy inventions that are trying to kill 
+you, until they stop appearing. 
+And finish alive"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
 }
 
 [node name="HealthUI" parent="." instance=ExtResource( 8 )]
