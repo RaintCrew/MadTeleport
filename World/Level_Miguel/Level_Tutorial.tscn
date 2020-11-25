@@ -659,7 +659,7 @@ font_data = ExtResource( 11 )
 font_data = ExtResource( 11 )
 
 [sub_resource type="DynamicFont" id=132]
-size = 14
+size = 12
 font_data = ExtResource( 11 )
 
 [sub_resource type="RectangleShape2D" id=126]
@@ -685,7 +685,7 @@ position = Vector2( 146.692, 13.0821 )
 scale = Vector2( 0.372886, 0.386197 )
 frames = SubResource( 125 )
 animation = "Teleport"
-frame = 108
+frame = 114
 playing = true
 
 [node name="MoveText" type="Label" parent="backgound"]
@@ -726,10 +726,10 @@ __meta__ = {
 }
 
 [node name="ShootText2" type="Label" parent="backgound"]
-margin_left = 123.0
-margin_top = -135.0
-margin_right = 266.0
-margin_bottom = -84.0
+margin_left = 120.225
+margin_top = -138.155
+margin_right = 263.225
+margin_bottom = -87.1549
 custom_fonts/font = SubResource( 130 )
 text = "Left-click to fire 
 gun and damage 
@@ -751,9 +751,9 @@ __meta__ = {
 
 [node name="TeleportText2" type="Label" parent="backgound"]
 margin_left = -263.069
-margin_top = -6.95374
+margin_top = -5.96112
 margin_right = 10.9314
-margin_bottom = 26.0463
+margin_bottom = 27.0389
 custom_fonts/font = SubResource( 131 )
 text = "Then, right-click again to teleport it, when 
 the Moon Ball isn’t darkened"
@@ -773,10 +773,10 @@ __meta__ = {
 }
 
 [node name="Goal" type="Label" parent="backgound"]
-margin_left = -119.0
-margin_top = 81.0
-margin_right = 153.0
-margin_bottom = 146.0
+margin_left = 14.1993
+margin_top = -31.0007
+margin_right = 286.199
+margin_bottom = 33.9993
 custom_fonts/font = SubResource( 132 )
 text = "Your goal is to destroy every one of your 
 crazy inventions that are trying to kill 
@@ -821,8 +821,5 @@ position = Vector2( 319.902, 180.683 )
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 4 )]
 position = Vector2( 87.8272, 268.99 )
-enemy_type = 1
 spawn_delay = 3.0
-spawning = false
-will_wait_for_spawned_enemy_to_die = true
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

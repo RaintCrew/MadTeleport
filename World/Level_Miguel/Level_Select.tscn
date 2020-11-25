@@ -101,11 +101,18 @@ text = "3"
 [node name="LevelButtonTutorial" parent="." instance=ExtResource( 1 )]
 position = Vector2( 317.832, 131 )
 
+[node name="Label" parent="LevelButtonTutorial/TextureButton" index="0"]
+margin_left = -0.270085
+margin_top = 6.50447
+margin_right = 50.7299
+margin_bottom = 43.5045
+text = "Tutorial"
+
 [node name="teleport_ball_mouse" type="AnimatedSprite" parent="."]
 position = Vector2( 118.133, 138.156 )
 frames = SubResource( 13 )
 animation = "teleport_ball_mouse"
-frame = 6
+frame = 4
 playing = true
 
 [editable path="LevelButton"]
@@ -113,3 +120,5 @@ playing = true
 [editable path="LevelButton2"]
 
 [editable path="LevelButton3"]
+
+[editable path="LevelButtonTutorial"]

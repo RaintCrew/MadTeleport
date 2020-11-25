@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="BallTeleport"
-run/main_scene="res://World/Level_Miguel/Level_Tutorial.tscn"
+run/main_scene="res://World/Level_Miguel/Level_Select.tscn"
 config/icon="res://Assets/Icon/icon.png"
 
 [autoload]
