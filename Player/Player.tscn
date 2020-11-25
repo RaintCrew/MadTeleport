@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Assets/Player/player_spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
@@ -7,12 +7,11 @@
 [ext_resource path="res://Assets/Player/tempplayer_ball.png" type="Texture" id=5]
 [ext_resource path="res://Hit_Hurtboxes/Hurtbox.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/SFX/sfx_hits.wav" type="AudioStream" id=7]
-[ext_resource path="res://Assets/SFX/sfx_single_pistol_shoot.wav" type="AudioStream" id=8]
-[ext_resource path="res://Assets/SFX/sfx_teleport_2.wav" type="AudioStream" id=9]
+[ext_resource path="res://Assets/SFX/sfx_shoot.wav" type="AudioStream" id=8]
+[ext_resource path="res://Assets/SFX/sfx_teleport.wav" type="AudioStream" id=9]
 [ext_resource path="res://Assets/SFX/sfx_jump.wav" type="AudioStream" id=10]
 [ext_resource path="res://Hit_Hurtboxes/Knockback.tscn" type="PackedScene" id=11]
 [ext_resource path="res://UI/InvincibilityUI.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Assets/SFX/sfx_player_hit_by_enemy.wav" type="AudioStream" id=13]
 
 [sub_resource type="Animation" id=1]
 resource_name = "falling"
@@ -154,7 +153,7 @@ shader_param/active = false
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 7, 9 )
 
-[sub_resource type="CapsuleShape2D" id=13]
+[sub_resource type="CapsuleShape2D" id=11]
 radius = 5.39457
 height = 2.70943
 
@@ -226,7 +225,7 @@ collision_mask = 2147483648
 
 [node name="CollisionShape2D" parent="PlayerKnockback" index="0"]
 position = Vector2( -1.03009, 1.21738 )
-shape = SubResource( 13 )
+shape = SubResource( 11 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 6 )]
 visible = false
@@ -253,9 +252,6 @@ volume_db = -10.0
 stream = ExtResource( 10 )
 volume_db = -10.0
 
-[node name="Audio_Hit_By_Enemy" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 13 )
-
 [node name="Invincibility" parent="." instance=ExtResource( 12 )]
 
 [node name="Invincibility" parent="Invincibility" index="0"]
@@ -267,10 +263,10 @@ margin_bottom = -32.4113
 text = "Invincibility ON"
 [connection signal="area_entered" from="PlayerKnockback" to="." method="_on_PlayerKnockback_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
-[connection signal="invincibility_ended" from="Hurtbox" to="Invincibility" method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
-[connection signal="invincibility_started" from="Hurtbox" to="Invincibility" method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_ended" from="Hurtbox" to="Invincibility" method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_started" from="Hurtbox" to="Invincibility" method="_on_Hurtbox_invincibility_started"]
 
 [editable path="PlayerKnockback"]
 

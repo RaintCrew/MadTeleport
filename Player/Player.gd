@@ -241,7 +241,6 @@ func _on_PlayerKnockback_area_entered(area):
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
 	hurtbox.start_invincibility(INVINCIBILITY_TIME)
-	$Audio_Hit_By_Enemy.play()
 
 func create_smoke_particles():
 	var smoke_particles = smoke_particle_scene.instance()	

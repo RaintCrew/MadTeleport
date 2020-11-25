@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://World/Camera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Music/bg_music_level_1.wav" type="AudioStream" id=3]
 [ext_resource path="res://Enemies/EnemySpawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://World/Props/TileMap.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=6]
@@ -67,6 +66,3 @@ spawning = false
 
 [node name="Camera" parent="." instance=ExtResource( 1 )]
 position = Vector2( 320, 176 )
-
-[node name="bg_music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
