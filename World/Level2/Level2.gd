@@ -19,10 +19,10 @@ onready var ul_enemy_spawner = $EnemySpawnerUL
 # The phase of the level (starts at 0)
 # The different waves and setups of enemies
 # Its in export var so, in testing, I can skip to test a specific phase
-var phase = 1 setget set_phase
+var phase = 0 setget set_phase
 
 # How many phases are there in this level
-var total_phases = 5
+var total_phases = 4
 
 func _ready():
 	set_phase(phase)
@@ -55,31 +55,30 @@ func add_to_enemies_killed():
 #############
 # In this level, the only way to hit someone in the opposite side
 # of the room is to teleport through the upper passageway
+# The tightness of the room also makes it harder to teleport
+# 2 towers, in opposite sides
 ###################################
 
 #############
 ## PHASE 1 ##
 #############
-# 
+# Phase 0, but with two saw drones in UL and UR
 #######################################
 
 #############
 ## PHASE 2 ##
 #############
-# We mix 
+# 5 fast-spawning saw drones. 
 ######################################
 
 #############
 ## PHASE 3 ##
 #############
-# It's 
+# 4 fast-spawning saw drones
+# 2 towers in DL and DR
+# QUITE HARD.
 ######################################
 
-#############
-## PHASE 4 ##
-#############
-# The e
-######################################
 
 # This is called when the Level transitions to another phase
 # reset(_enemy_type, _spawn_delay, _spawn_offset, _enemies_limit, _spawning, _will_wait_for_death)
@@ -110,16 +109,8 @@ func set_phase(value):
 		dl_enemy_spawner.reset(1, 4, 0, 2, true, true)
 		dll_enemy_spawner.reset(0, 1, 2, 4, true, true)
 		ul_enemy_spawner.reset(0, 1, 0, 4, true, true)
-		
-	elif phase == 4:
-		disable_all_spawners()
-		c_enemy_spawner.reset(0, 2, 3, 5, true, true)
-		ur_enemy_spawner.reset(1, 1, 2, 2, true, true)
-		dr_enemy_spawner.reset(0, 3, 2, 5, true, true)
-		dl_enemy_spawner.reset(0, 2, 3, 5, true, true)
-		ul_enemy_spawner.reset(1, 3, 2, 2, true, true)
 	
-	elif phase == 5:
+	elif phase == total_phases:
 		disable_all_spawners()
 		clear_level()
 	
