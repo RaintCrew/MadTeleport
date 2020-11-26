@@ -156,7 +156,6 @@ position = Vector2( 319.913, 179.802 )
 scale = Vector2( 0.997656, 0.971178 )
 frames = SubResource( 26 )
 animation = "bg"
-frame = 23
 playing = true
 
 [node name="ButtonNewGame" type="TextureButton" parent="."]
