@@ -1,6 +1,6 @@
 extends TextureRect
 
-onready var mouse = get_node("teleport_ball_mouse")
+onready var mouse = get_node("mouse")
 
 func _ready() -> void:
 	pass # Replace with function body.
