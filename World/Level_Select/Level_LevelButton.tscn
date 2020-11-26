@@ -2,7 +2,8 @@
 
 [ext_resource path="res://Assets/Level_select_assets/level_button_normal_50x50.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Fonts/rainyhearts.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://World/Level_Miguel/Levels_Button.gd" type="Script" id=3]
+[ext_resource path="res://World/Level_Select/Levels_Button.gd" type="Script" id=3]
+
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 2 )

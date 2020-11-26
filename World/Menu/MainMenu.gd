@@ -1,6 +1,6 @@
 extends Node2D
 
-var newGame_button_animation = preload("res://World/Level_Miguel/Main_Menu/Menu_NewGame_Animation.tscn")
+var newGame_button_animation = preload("res://World/Menu/Menu_NewGame_Animation.tscn")
 
 onready var mouse = get_node("mouse")
 
