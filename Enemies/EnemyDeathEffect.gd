@@ -18,4 +18,4 @@ func _on_animation_finished():
 func _on_DroneEnemyDeathEffect_frame_changed():
 	if frame == 9:
 		$Audio_Explosion.play()
-		camera.activate_shake(3.0,0.4)
+		#camera.activate_shake(3.0,0.4)
