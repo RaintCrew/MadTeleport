@@ -5,7 +5,7 @@ export var GRAVITY = 10 			# aceleracion vertical que disminuye la velocidad ver
 export var FLOOR = Vector2(0,-1) # vector normal que el physics engine usa para frenar con pisos y paredes
 export var MAX_FALL_SPEED = 200 	# lo mas rapido que puede caer el Player por gravedad
 export var FRICTION = 150			# this force will oppose the knockback force
-export var JUMP_FORCE = 165 		# qué tan alto puede saltar el jugador
+export var JUMP_FORCE = 220 		# qué tan alto puede saltar el jugador
 export var INVINCIBILITY_TIME = 2	# invincibility duration 
 
 const PISTOL_AMMO = 6
@@ -31,7 +31,7 @@ onready var floating_teleport_ball = get_node("Ball") 	# Referencia a teleport b
 onready var teleport_ball = null						# Referencia a teleport ball lanzada a la cual te teleportas
 onready var hurtbox = $Hurtbox
 onready var player_knockback_collisionShape = $PlayerKnockback/CollisionShape2D
-
+onready var enemy_tower_bullet = "res://Enemies/Enemy_tower/EnemyTowerBullet.tscn"
 
 onready var bullet_scene = preload("res://Player/PlayerBullet.tscn") 					# Referencia a escena de bala
 onready var teleport_ball_scene = preload("res://Player/TeleportBall.tscn") 			# Referencia a escena de teleport ball
@@ -239,8 +239,12 @@ func _on_PlayerKnockback_area_entered(area):
 
 
 func _on_Hurtbox_area_entered(area):
+	print(area.get_filename())
 	stats.health -= area.damage
 	hurtbox.start_invincibility(INVINCIBILITY_TIME)
+	OS.delay_msec(100)
+	if area.get_filename() == enemy_tower_bullet:
+		area.queue_free()
 
 func create_smoke_particles():
 	var smoke_particles = smoke_particle_scene.instance()	
