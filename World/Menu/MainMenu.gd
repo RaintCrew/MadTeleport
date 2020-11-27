@@ -16,8 +16,17 @@ func _on_ButtonNewGame_pressed() -> void:
 	var newGame_animation = newGame_button_animation.instance()
 	get_parent().add_child(newGame_animation)
 	newGame_animation.global_position = Vector2(319.913,179.802)
-	pass
+	var timer = Timer.new()
+	timer.set_wait_time(0.86)
+	timer.set_one_shot(true)
+	timer.connect("timeout", self, "change_scene")
+	add_child(timer)
+	timer.start()
+	
 
+func change_scene() -> void:
+	queue_free()
+	get_tree().change_scene("res://World/Level_Select/LevelSelect.tscn")  
 
 func _on_MusicAvailableButton_pressed() -> void:
 	$bg_music.stop()

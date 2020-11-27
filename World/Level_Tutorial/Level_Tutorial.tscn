@@ -5,13 +5,14 @@
 [ext_resource path="res://Assets/Background/bg1-tutorial_level.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Player/player_run_spritesheet.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Fonts/rainyhearts.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://World/Level_Tutorial/Level_Tutorial.gd" type="Script" id=6]
+[ext_resource path="res://World/Level_Tutorial/LevelTutorial.gd" type="Script" id=6]
 [ext_resource path="res://Enemies/EnemySpawner.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=8]
 [ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=9]
 [ext_resource path="res://World/Camera.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Tilemaps/Tilemap.tres" type="TileSet" id=11]
 [ext_resource path="res://Enemies/Enemy_drone_turret/EnemyDroneTurret.tscn" type="PackedScene" id=12]
+
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
