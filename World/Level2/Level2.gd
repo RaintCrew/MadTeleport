@@ -90,8 +90,8 @@ func set_phase(value):
 	if phase == 1:
 		disable_all_spawners()
 		ur_enemy_spawner.reset(0, 1, 0, 4, true, true)
-		dll_enemy_spawner.reset(1, 4, 0, 2, true, true)
-		drr_enemy_spawner.reset(1, 4, 0, 2, true, true)
+		dl_enemy_spawner.reset(1, 4, 0, 2, true, true)
+		dr_enemy_spawner.reset(1, 4, 0, 2, true, true)
 		ul_enemy_spawner.reset(0, 1, 0, 4, true, true)
 	elif phase == 2:
 		disable_all_spawners()
@@ -100,15 +100,14 @@ func set_phase(value):
 		dl_enemy_spawner.reset(0, 1, 1, 5, true, true)
 		dr_enemy_spawner.reset(0, 1, 1, 5, true, true)
 		ul_enemy_spawner.reset(0, 1, 2, 5, true, true)
-		
 	elif phase == 3:
 		disable_all_spawners()
-		ur_enemy_spawner.reset(0, 1, 0, 4, true, true)
-		dr_enemy_spawner.reset(1, 4, 0, 2, true, true)
-		drr_enemy_spawner.reset(0, 1, 2, 4, true, true)
-		dl_enemy_spawner.reset(1, 4, 0, 2, true, true)
-		dll_enemy_spawner.reset(0, 1, 2, 4, true, true)
-		ul_enemy_spawner.reset(0, 1, 0, 4, true, true)
+		ur_enemy_spawner.reset(0, 3, 0, 4, true, true)
+		drr_enemy_spawner.reset(1, 4, 0, 2, true, true)
+		dr_enemy_spawner.reset(0, 4, 2, 4, true, true)
+		dll_enemy_spawner.reset(1, 4, 0, 2, true, true)
+		dl_enemy_spawner.reset(0, 5, 2, 4, true, true)
+		ul_enemy_spawner.reset(0, 3, 0, 4, true, true)
 	
 	elif phase == total_phases:
 		disable_all_spawners()
