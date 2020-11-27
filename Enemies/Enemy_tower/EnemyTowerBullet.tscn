@@ -14,7 +14,8 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
-speed = 6
+speed = 4
+can_cross_Walls = true
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 0.905882, 0, 0, 1 )

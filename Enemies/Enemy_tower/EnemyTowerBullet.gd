@@ -12,7 +12,6 @@ func _ready():
 	destination = Global.player.get_global_position()
 	velocity = global_position.direction_to(destination) 					# go to the player last position
 	velocity *= speed
-	print(tilemap)
 
 func _physics_process(delta):
 	global_position = global_position + velocity 							# go to the speed value
