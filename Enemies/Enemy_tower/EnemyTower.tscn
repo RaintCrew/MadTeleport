@@ -55,7 +55,7 @@ attack_speed = 1.5
 position = Vector2( 0, 3.75 )
 frames = SubResource( 7 )
 animation = "idle"
-frame = 1
+frame = 3
 playing = true
 offset = Vector2( 3.891, -0.201 )
 
@@ -63,7 +63,7 @@ offset = Vector2( 3.891, -0.201 )
 shape = SubResource( 8 )
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
-max_health = 10
+max_health = 8
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
 collision_layer = 80
