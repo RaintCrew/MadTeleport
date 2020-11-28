@@ -6,13 +6,17 @@ var is_restarting = false
 # Player has to kill all enemies of the current phase
 # for the next phase to start. This var keeps track of that
 var num_of_phase_enemies_killed = 0
-var enemies_to_kill_in_phase = [8,2,16,14,19,100]
+var enemies_to_kill_in_phase = [11,17,25,20,19,100]
 
-onready var ul_enemy_spawner = $EnemySpawnerUL
+onready var c_enemy_spawner = $EnemySpawnerC
 onready var ur_enemy_spawner = $EnemySpawnerUR
-onready var dl_enemy_spawner = $EnemySpawnerDL
+onready var drr_enemy_spawner = $EnemySpawnerDRR
 onready var dr_enemy_spawner = $EnemySpawnerDR
-onready var c_enemy_spawner = $EnemySpawnerCenter
+onready var dl_enemy_spawner = $EnemySpawnerDL
+onready var dll_enemy_spawner = $EnemySpawnerDLL
+onready var ul_enemy_spawner = $EnemySpawnerUL
+onready var ull_enemy_spawner = $EnemySpawnerULL
+onready var urr_enemy_spawner = $EnemySpawnerURR
 
 # The phase of the level (starts at 0)
 # The different waves and setups of enemies
@@ -20,11 +24,10 @@ onready var c_enemy_spawner = $EnemySpawnerCenter
 var phase = 0 setget set_phase
 
 # How many phases are there in this level
-var total_phases = 5
+var total_phases = 4
 
 func _ready():
 	set_phase(phase)
-	$bg_music.play()
 	pass
 
 
@@ -52,41 +55,30 @@ func add_to_enemies_killed():
 #############
 ## PHASE 0 ##
 #############
-# A slow spawn of saw drones in two corners in the room.
-# Both of them will wait for its spawned drones to die, giving more
-# space for the player to take each of them one at a time
-# All enemies in this level will do that
+# In this level, the player is faced with spawners
+# that have the "will_wait_for_spawned_2die" desactived.
+# In this phase, ULL, URR, DL and DR will spawn saw drones
 ###################################
 
 #############
 ## PHASE 1 ##
 #############
-# Introduction to the tower.
-# A tower will spawn in Center
-# The player here will get a sense of the bullet speed
-# and HP of the tower for the rest of the game
+# We combine the problem the saw drones that don't wait
+# with two towers in DL, DR
 #######################################
 
 #############
 ## PHASE 2 ##
 #############
-# We mix few saw drones (two spawning at a time)
-# with one tower in the center
+# 3 towers in ULL, URR and C 
 ######################################
 
 #############
 ## PHASE 3 ##
 #############
-# It's phase 2, but with two towers.
-# The towers are in UL and UR
-######################################
-
-#############
-## PHASE 4 ##
-#############
-# The end. It's phase 3, but with three saw drones spawning.
-# The saw drones will spawn more frequently
-# The towers will reappear after being destroyed once
+# 3 towers
+# 2 saw drones
+# 
 ######################################
 
 
@@ -99,31 +91,29 @@ func set_phase(value):
 	print("Phase: ", phase)
 	if phase == 1:
 		disable_all_spawners()
-		c_enemy_spawner.reset(1, 1, 0, 2, true, true)
+		dr_enemy_spawner.reset(1, 3, 0, 1, true, true)
+		dl_enemy_spawner.reset(1, 3, 0, 1, true, true)
+		ull_enemy_spawner.reset(0, 3, 0, 5, true, false)
+		urr_enemy_spawner.reset(0, 3, 0, 5, true, false)
+		c_enemy_spawner.reset(0, 3, 0, 5, true, false)
+		pass
 	elif phase == 2:
 		disable_all_spawners()
-		c_enemy_spawner.reset(1, 4, 0, 2, true, true)
-		ur_enemy_spawner.reset(0, 1, 0, 1, true, true)
-		dr_enemy_spawner.reset(0, 3, 6, 6, true, true)
-		dl_enemy_spawner.reset(0, 3, 4, 6, true, true)
-		ul_enemy_spawner.reset(0, 2, 0, 1, true, true)
+		urr_enemy_spawner.reset(1, 3, 0, 2, true, true)
+		ull_enemy_spawner.reset(1, 3, 0, 2, true, true)
+		c_enemy_spawner.reset(1, 3, 2, 2, true, true)
+		pass
 		
 	elif phase == 3:
 		disable_all_spawners()
-		ur_enemy_spawner.reset(1, 3, 0, 1, true, true)
-		dr_enemy_spawner.reset(0, 3, 2, 6, true, true)
-		dl_enemy_spawner.reset(0, 3, 2, 6, true, true)
-		ul_enemy_spawner.reset(1, 3, 0, 1, true, true)
-		
-	elif phase == 4:
-		disable_all_spawners()
-		c_enemy_spawner.reset(0, 2, 3, 5, true, true)
-		ur_enemy_spawner.reset(1, 1, 2, 2, true, true)
-		dr_enemy_spawner.reset(0, 3, 2, 5, true, true)
-		dl_enemy_spawner.reset(0, 2, 3, 5, true, true)
-		ul_enemy_spawner.reset(1, 3, 2, 2, true, true)
+		urr_enemy_spawner.reset(1, 3, 0, 2, true, true)
+		ull_enemy_spawner.reset(1, 3, 0, 2, true, true)
+		c_enemy_spawner.reset(1, 3, 0, 2, true, true)
+		drr_enemy_spawner.reset(0, 3, 0, 5, true, false)
+		dll_enemy_spawner.reset(0, 3, 0, 5, true, false)
+		pass
 	
-	elif phase == 5:
+	elif phase == total_phases:
 		disable_all_spawners()
 		clear_level()
 	

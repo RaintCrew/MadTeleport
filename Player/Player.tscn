@@ -159,13 +159,13 @@ radius = 5.39457
 height = 2.70943
 
 [sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 4.45519, 6.28274 )
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 1.415, -0.0229755 )
 collision_layer = 2
 script = ExtResource( 2 )
 __meta__ = {
-"_edit_group_": true,
 "_editor_description_": ""
 }
 
@@ -186,6 +186,7 @@ position = Vector2( -1, 0 )
 texture = ExtResource( 1 )
 vframes = 4
 hframes = 8
+frame = 25
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 visible = false
@@ -235,6 +236,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 modulate = Color( 0.501961, 0.054902, 0.054902, 1 )
+position = Vector2( -1, 1 )
 shape = SubResource( 12 )
 
 [node name="Audio_Shoot" type="AudioStreamPlayer" parent="."]
