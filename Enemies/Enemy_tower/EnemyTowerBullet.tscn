@@ -3,13 +3,15 @@
 [ext_resource path="res://Enemies/Enemy_tower/EnemyTowerBullet.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Player/tempplayer_bullet.png" type="Texture" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 3.83701, 4.08006 )
+[sub_resource type="CircleShape2D" id=1]
+radius = 4.41222
 
-[node name="EnemyBullet" type="Area2D"]
+[node name="EnemyBullet" type="Area2D" groups=[
+"enemyBullet",
+]]
 position = Vector2( -0.396851, 0 )
 collision_layer = 0
-collision_mask = 6
+collision_mask = 38
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true

@@ -304,6 +304,8 @@ func _on_PlayerKnockback_area_entered(area):
 	target_running_velocity = 0
 	classic_knockback(area)
 	#vector_knockback(area)
+	if area.is_in_group("enemyBullet"):
+		area.queue_free()
 	player_knockback_collisionShape.set_deferred("disabled",true)
 
 # flips the player  horizontally if facing the wrong direction when taking damage
@@ -317,8 +319,8 @@ func flip_on_enemy_collision(area):
 		gun.flip_v = false
 		is_facing_right = true
 
-func _on_Hurtbox_area_entered(area):
-	# litle dirty fix so that the enemy can assign its knocback vector before this
+func _on_Hurtbox_area_entered(area : Area2D):
+	# litle dirty fix so that the enemy can assign its knockback vector before this
 	# occur
 	yield(get_tree().create_timer(0.01),"timeout")
 	flip_on_enemy_collision(area)

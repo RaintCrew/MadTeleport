@@ -26,14 +26,14 @@ onready var player = get_parent().get_parent().get_node("Player")
 signal enemy_killed
 
 func _ready() -> void:
-	#set_process(false)
-	print(nav_2d.name)
 	connect("enemy_killed",level,"add_to_enemies_killed")	# The Level script hears this to check when to change the current level phase
 	pass
 
 func _process(delta: float) -> void:
 	if PlayerStats.health > 0: 			# If the player is alive execute below code
+		# path from the drone to the player
 		var path_to_player = nav_2d.get_simple_path(global_position,player.global_position)
+		# line drawn based on the path to the player
 		line_2d.points = path_to_player
 		path = path_to_player
 		
@@ -44,22 +44,23 @@ func _process(delta: float) -> void:
 		hitbox_collision_shape.disabled = true
 	decrease_hurt_vfx_timer()
 
+# pathfinding baby
 func move_along_path(distance, delta):
 	
+	# starting point in the path
 	var start_point : = global_position
+	# move the player along the path until there aren't points
 	for _i in range(path.size()):
 		
 		var distance_to_next : = start_point.distance_to(path[0])
 		if distance <= distance_to_next and distance >= 0.0:
-			#global_position = start_point.linear_interpolate(path[0], distance / distance_to_next)
-			#this means that the player teleported themself
+			# this means that the player teleported themself
 			if distance_to_next == 0:
 				return
 			global_position = start_point.linear_interpolate(path[0], min(distance, distance_to_next) / distance_to_next)
 			break
 		elif path.size() == 1 and distance > distance_to_next:
 			global_position = path[0]
-			#set_process(false)
 			chase_player(delta)
 			break
 			
@@ -71,7 +72,6 @@ func set_path(value : PoolVector2Array):
 	path = value
 	if value.size() == 0:
 		return
-	set_process(true)
 
 func move_along_path3(distance_to_walk):
 	# Move the player along the path until he has run out of movement or the path ends.
