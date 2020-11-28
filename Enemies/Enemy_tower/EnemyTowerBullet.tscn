@@ -90,7 +90,9 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 12 )
-frame = 4
+frame = 9
 playing = true
+[connection signal="area_entered" from="." to="." method="_on_EnemyBullet_area_entered"]
+[connection signal="area_shape_entered" from="." to="." method="_on_EnemyBullet_area_shape_entered"]
 [connection signal="body_entered" from="." to="." method="_on_EnemyBullet_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

@@ -52,7 +52,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):	
-
 	# if player is dead, anything keypressed-related is innaccesible
 	# !play_hurt is a condition so that it can play the hurt animation
 	if player_dead and !player_hurt:
@@ -304,7 +303,7 @@ func _on_PlayerKnockback_area_entered(area):
 	player_knockback_collisionShape.set_deferred("disabled",true)
 
 # flips the player  horizontally if facing the wrong direction when taking damage
-func flip_on_enemy_collision(area):				
+func flip_on_enemy_collision(area):
 	if is_facing_right and (area.knockback_vector.x > 0):
 		player_sprite.flip_h = true
 		gun.flip_v = true

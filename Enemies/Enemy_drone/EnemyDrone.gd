@@ -18,7 +18,7 @@ onready var sprite = $AnimatedSprite		# Load the sprite.
 onready var stats = $Stats					# Load the stats script for the life
 onready var hurtbox = $Hurtbox
 onready var softCollision = $SoftCollision
-onready var line_2d = get_parent().get_parent().get_node("Line2D")
+#onready var line_2d = get_parent().get_parent().get_node("Line2D")
 onready var level = get_parent().get_parent()
 onready var player = get_parent().get_parent().get_node("Player")
 
@@ -36,7 +36,6 @@ func _process(delta: float) -> void:
 		# line drawn based on the path to the player
 		#line_2d.points = path_to_player
 		path = path_to_player
-		
 		var move_distance : = SPEED * delta
 		move_along_path(move_distance, delta)
 		#chase_player(delta)
@@ -46,7 +45,7 @@ func _process(delta: float) -> void:
 
 # pathfinding baby
 func move_along_path(distance, delta):
-	
+	var motion = Vector2.ZERO
 	# starting point in the path
 	var start_point : = global_position
 	# move the player along the path until there aren't points
@@ -58,9 +57,16 @@ func move_along_path(distance, delta):
 			if distance_to_next == 0:
 				return
 			global_position = start_point.linear_interpolate(path[0], min(distance, distance_to_next) / distance_to_next)
+
+			# determine drone's direction
+			motion = path[0] - global_position
+			# assign that "velocity" to the knockback vector
+			hitbox.knockback_vector = motion
+
 			break
 		elif path.size() == 1 and distance > distance_to_next:
 			global_position = path[0]
+			print("CHASE")
 			chase_player(delta)
 			break
 			
@@ -124,6 +130,7 @@ func chase_player(delta: float):
 	if softCollision.is_colliding():
 		velocity += softCollision.get_push_vector() * delta * 400
 	velocity = move_and_slide(velocity)												# move the drone
+	hitbox.knockback_vector = velocity
 
 func _on_Hurtbox_area_entered(area: Area2D) -> void:
 	stats.health -= area.damage										# Lose a health depending of hit damage
@@ -150,7 +157,3 @@ func decrease_hurt_vfx_timer():
 		hurt_vfx_timer -= 1
 	if hurt_vfx_timer == 0:
 		sprite.modulate = Color(1,1,1,1)	# Returns to normal color
-
-	# this set the normalized knocback vector on the enemydrone's hitbox
-func _on_Hitbox_area_entered(_area):
-	hitbox.knockback_vector = velocity.normalized()

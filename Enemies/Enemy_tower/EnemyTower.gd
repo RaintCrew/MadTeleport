@@ -41,12 +41,13 @@ func _physics_process(delta):
 	$Position2D.position = self.position + Vector2(0.065,-30)
 
 func shoot_player():
-	if attack == true:
-		var bullet = bullet_scene.instance()		# Create a Bullet
-		bullet.position = get_node("Position2D").position			# New Bullet have the position of the tower
-		if target:									# If the target is alive execute below
-			bullet.destination = target.position		# Bullet direction is the last position of the player
-			get_parent().add_child(bullet)
+	if PlayerStats.health > 0:
+		if attack == true:
+			var bullet = bullet_scene.instance()		# Create a Bullet
+			bullet.position = get_node("Position2D").position			# New Bullet have the position of the tower
+			if target:									# If the target is alive execute below
+				bullet.destination = target.position		# Bullet direction is the last position of the player
+				get_parent().add_child(bullet)
 
 func _on_Hurtbox_area_entered(area: Area2D) -> void:
 	stats.health -= area.damage					# Tower lose a life

@@ -693,6 +693,7 @@ script = ExtResource( 2 )
 position = Vector2( 144, 64 )
 
 [node name="Line2D" type="Line2D" parent="."]
+visible = false
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
 
@@ -741,7 +742,7 @@ margin_right = 40.3654
 margin_bottom = 68.1984
 
 [node name="EnemyTower" parent="." instance=ExtResource( 10 )]
-position = Vector2( 384, 136 )
+position = Vector2( 352, 125.5 )
 
 [editable path="HealthUI"]
 
