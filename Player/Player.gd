@@ -242,6 +242,7 @@ func _on_Hurtbox_area_entered(area):
 	print(area.get_filename())
 	stats.health -= area.damage
 	hurtbox.start_invincibility(INVINCIBILITY_TIME)
+	$Audio_Hit_By_Enemy.play()
 	OS.delay_msec(100)
 	if area.get_filename() == enemy_tower_bullet:
 		area.queue_free()

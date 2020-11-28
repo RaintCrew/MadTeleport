@@ -1,32 +1,38 @@
 [gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://Assets/SFX/sfx_hits.wav" type="AudioStream" id=1]
+[ext_resource path="res://Assets/SFX/sfx_enemy_hurt.wav" type="AudioStream" id=1]
 [ext_resource path="res://Enemies/Enemy_tower/EnemyTower.gd" type="Script" id=2]
 [ext_resource path="res://Singletons/Stats.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Hit_Hurtboxes/Hurtbox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Enemy_tower/enemy_tower_idle.png" type="Texture" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
+flags = 4
 atlas = ExtResource( 5 )
 region = Rect2( 256, 0, 256, 256 )
 
 [sub_resource type="AtlasTexture" id=2]
+flags = 4
 atlas = ExtResource( 5 )
 region = Rect2( 512, 0, 256, 256 )
 
 [sub_resource type="AtlasTexture" id=3]
+flags = 4
 atlas = ExtResource( 5 )
 region = Rect2( 768, 0, 256, 256 )
 
 [sub_resource type="AtlasTexture" id=4]
+flags = 4
 atlas = ExtResource( 5 )
 region = Rect2( 1024, 0, 256, 256 )
 
 [sub_resource type="AtlasTexture" id=5]
+flags = 4
 atlas = ExtResource( 5 )
 region = Rect2( 0, 256, 256, 256 )
 
 [sub_resource type="AtlasTexture" id=6]
+flags = 4
 atlas = ExtResource( 5 )
 region = Rect2( 256, 256, 256, 256 )
 
@@ -75,9 +81,8 @@ shape = SubResource( 9 )
 [node name="Position2D" type="Position2D" parent="."]
 position = Vector2( 0.065, -30 )
 
-[node name="Audio_Hit" type="AudioStreamPlayer" parent="."]
+[node name="Audio_Hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 1 )
-volume_db = -10.0
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 

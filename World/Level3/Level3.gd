@@ -21,7 +21,7 @@ onready var urr_enemy_spawner = $EnemySpawnerURR
 # The phase of the level (starts at 0)
 # The different waves and setups of enemies
 # Its in export var so, in testing, I can skip to test a specific phase
-var phase = 3 setget set_phase
+var phase = 0 setget set_phase
 
 # How many phases are there in this level
 var total_phases = 4
