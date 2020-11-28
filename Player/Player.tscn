@@ -269,10 +269,10 @@ margin_bottom = -32.4113
 text = "Invincibility ON"
 [connection signal="area_entered" from="PlayerKnockback" to="." method="_on_PlayerKnockback_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
-[connection signal="invincibility_ended" from="Hurtbox" to="Invincibility" method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
-[connection signal="invincibility_started" from="Hurtbox" to="Invincibility" method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_ended" from="Hurtbox" to="Invincibility" method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_started" from="Hurtbox" to="Invincibility" method="_on_Hurtbox_invincibility_started"]
 
 [editable path="PlayerKnockback"]
 

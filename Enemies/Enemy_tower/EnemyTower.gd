@@ -41,6 +41,7 @@ func _physics_process(delta):
 	$Position2D.position = self.position + Vector2(0.065,-30)
 
 func shoot_player():
+	$Audio_Shoot.play()
 	if attack == true:
 		var bullet = bullet_scene.instance()		# Create a Bullet
 		bullet.position = get_node("Position2D").position			# New Bullet have the position of the tower
