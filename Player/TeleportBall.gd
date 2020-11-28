@@ -15,7 +15,7 @@ func _ready():
 	destination = get_local_mouse_position()	# La tp ball viaja hacia donde esta la mira
 	initial_position = global_position
 	player = get_parent().get_node("Player")
-	
+	global_rotation = global_position.angle_to(destination)
 func _physics_process(delta):
 	# Mover hacia destino
 	velocity = velocity.move_toward(destination, delta)
