@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://World/Camera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=2]
@@ -6,9 +6,19 @@
 [ext_resource path="res://World/Props/TileMap.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World/Level3/Level3.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Background/bg_level0_blue.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Music/bg_music_level_1.ogg" type="AudioStream" id=8]
 
 [node name="Level3" type="Node2D"]
 script = ExtResource( 6 )
+
+[node name="bg" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
 position = Vector2( 336, 160 )
@@ -101,3 +111,7 @@ enemies_limit = 3
 
 [node name="Camera" parent="." instance=ExtResource( 1 )]
 position = Vector2( 320, 176 )
+
+[node name="bg_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+autoplay = true
