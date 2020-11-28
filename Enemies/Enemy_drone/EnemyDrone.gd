@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 		# path from the drone to the player
 		var path_to_player = nav_2d.get_simple_path(global_position,player.global_position)
 		# line drawn based on the path to the player
-		line_2d.points = path_to_player
+		#line_2d.points = path_to_player
 		path = path_to_player
 		
 		var move_distance : = SPEED * delta

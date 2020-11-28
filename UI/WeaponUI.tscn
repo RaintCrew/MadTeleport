@@ -4,10 +4,6 @@
 [ext_resource path="res://Assets/UI/weapon_frame.png" type="Texture" id=2]
 
 [node name="WeaponUI" type="CenterContainer"]
-margin_left = 24.0
-margin_top = 48.0
-margin_right = 44.0
-margin_bottom = 68.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -686,6 +686,7 @@
 47/z_index = 0
 
 [node name="Level_Parra" type="Node2D"]
+pause_mode = 2
 script = ExtResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
@@ -734,6 +735,10 @@ __meta__ = {
 }
 
 [node name="WeaponUI" parent="." instance=ExtResource( 5 )]
+margin_left = 20.3654
+margin_top = 48.1984
+margin_right = 40.3654
+margin_bottom = 68.1984
 
 [node name="EnemyTower" parent="." instance=ExtResource( 10 )]
 position = Vector2( 384, 136 )
