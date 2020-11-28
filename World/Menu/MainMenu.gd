@@ -6,7 +6,6 @@ var level_select = preload("res://World/Level_Select/LevelSelect.tscn")
 onready var mouse = get_node("mouse")
 
 func _ready() -> void:
-	$MusicDisableButton.hide()
 	pass
 
 func _physics_process(delta):
@@ -29,15 +28,3 @@ func change_scene() -> void:
 	queue_free()
 	get_tree().change_scene("res://World/Level_Select/LevelSelect.tscn")  
 
-func _on_MusicAvailableButton_pressed() -> void:
-	$bg_music.stop()
-	$MusicDisableButton.show()
-	$MusicAvailableButton.hide()
-	pass
-
-
-func _on_MusicDisableButton_pressed() -> void:
-	$bg_music.play()
-	$MusicDisableButton.hide()
-	$MusicAvailableButton.show()
-	pass

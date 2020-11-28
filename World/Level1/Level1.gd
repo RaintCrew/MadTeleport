@@ -24,7 +24,8 @@ var total_phases = 5
 
 func _ready():
 	set_phase(phase)
-	$bg_music.play()
+	if Global.music:
+		$bg_music.play()
 	pass
 
 
