@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Enemies/Enemy_tower/TowerEnemyDeathEffect.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Enemy_tower/enemy_tower_deat.png" type="Texture" id=2]
-[ext_resource path="res://Assets/SFX/sfx_explosion.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/SFX/sfx_enemy_machine_explotion.wav" type="AudioStream" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4

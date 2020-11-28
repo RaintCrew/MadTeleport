@@ -27,7 +27,6 @@ func _ready():
 	randomize()
 	#set_process(false)
 	self.duration = duration
-	connect_to_shakers()
 	
 
 
@@ -59,9 +58,6 @@ func set_shake(value):
 	if shake:
 		timer.start(duration)
 
-func connect_to_shakers():
-	for camera_shaker in get_tree().get_nodes_in_group("camera_shaker"):
-		camera_shaker.connect("camera shake requested", self, "_on_camera_shake_requested")
 	
 func _on_Timer_timeout():
 	self.shake = false

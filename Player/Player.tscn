@@ -6,7 +6,7 @@
 [ext_resource path="res://Assets/Player/tempplayer_ball.png" type="Texture" id=5]
 [ext_resource path="res://Hit_Hurtboxes/Hurtbox.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/SFX/sfx_hits.wav" type="AudioStream" id=7]
-[ext_resource path="res://Assets/SFX/sfx_shoot.wav" type="AudioStream" id=8]
+[ext_resource path="res://Assets/SFX/sfx_single_pistol_shoot.wav" type="AudioStream" id=8]
 [ext_resource path="res://Assets/SFX/sfx_teleport.wav" type="AudioStream" id=9]
 [ext_resource path="res://Assets/SFX/sfx_jump.wav" type="AudioStream" id=10]
 [ext_resource path="res://Hit_Hurtboxes/Knockback.tscn" type="PackedScene" id=11]
@@ -129,18 +129,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=9]
 length = 0.8
 loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("PlayerSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 24, 25, 26, 27, 28, 29, 30, 31 ]
-}
 
 [sub_resource type="Animation" id=10]
 length = 0.2
@@ -160,18 +148,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=11]
 length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("PlayerSprite:material:shader_param/active")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
 
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 7, 9 )
@@ -183,12 +159,10 @@ height = 2.70943
 [sub_resource type="RectangleShape2D" id=14]
 
 [node name="Player" type="KinematicBody2D"]
-pause_mode = 2
 position = Vector2( 1.415, -0.0229755 )
 collision_layer = 2
 script = ExtResource( 2 )
 __meta__ = {
-"_edit_group_": true,
 "_editor_description_": ""
 }
 
@@ -225,7 +199,7 @@ texture = ExtResource( 3 )
 
 [node name="Gun" type="Sprite" parent="."]
 texture = ExtResource( 4 )
-offset = Vector2( 9, 1 )
+offset = Vector2( 10, 1 )
 
 [node name="Gun_Tip" type="Position2D" parent="Gun"]
 position = Vector2( 15, 0 )
@@ -274,6 +248,9 @@ volume_db = -10.0
 [node name="Audio_Teleport" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 volume_db = -10.0
+
+[node name="Audio_Hit_By_Enemy" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
 
 [node name="Audio_Jump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )

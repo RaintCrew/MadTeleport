@@ -3,7 +3,7 @@ extends "res://Hit_Hurtboxes/Hitbox.gd"
 export var speed = 3						# Speed of the bullet
 var velocity = Vector2()        	# Speed x/y
 onready var destination = null
-onready var collisionShape2d = $CollisionShape2D
+export var damage = 1
 
 func _ready():
 	#destination = get_parent().get_node("Player").get_global_position() 	# get the player last position

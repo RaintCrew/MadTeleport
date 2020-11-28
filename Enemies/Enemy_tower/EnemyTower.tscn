@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
+[ext_resource path="res://Assets/SFX/sfx_enemy_hurt.wav" type="AudioStream" id=1]
 [ext_resource path="res://Enemies/Enemy_tower/EnemyTower.gd" type="Script" id=2]
 [ext_resource path="res://Singletons/Stats.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Hit_Hurtboxes/Hurtbox.tscn" type="PackedScene" id=4]
@@ -51,7 +52,6 @@ radius = 17.7034
 height = 52.6408
 
 [node name="EnemyTower" type="KinematicBody2D"]
-pause_mode = 1
 scale = Vector2( 0.8, 0.8 )
 collision_layer = 2147483656
 script = ExtResource( 2 )
@@ -69,7 +69,7 @@ offset = Vector2( 3.891, -0.201 )
 shape = SubResource( 8 )
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
-max_health = 3
+max_health = 8
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
 collision_layer = 80
@@ -80,6 +80,9 @@ shape = SubResource( 9 )
 
 [node name="Position2D" type="Position2D" parent="."]
 position = Vector2( 0.065, -30 )
+
+[node name="Audio_Hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 

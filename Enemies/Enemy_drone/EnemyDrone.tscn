@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://Assets/SFX/sfx_hits.wav" type="AudioStream" id=1]
+[ext_resource path="res://Assets/SFX/sfx_enemy_hurt.wav" type="AudioStream" id=1]
 [ext_resource path="res://Assets/Enemy_drone/enemy_drone_idle2.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Enemy_drone/enemy_drone_idle3.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Enemy_drone/enemy_drone_idle5.png" type="Texture" id=4]

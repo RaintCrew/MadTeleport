@@ -4,8 +4,8 @@ export var RUN_SPEED = 100 		# velocidad lateral de Player al caminar
 export var GRAVITY = 10 			# aceleracion vertical que disminuye la velocidad vertical del Player
 export var FLOOR = Vector2(0,-1) # vector normal que el physics engine usa para frenar con pisos y paredes
 export var MAX_FALL_SPEED = 200 	# lo mas rapido que puede caer el Player por gravedad
-export var FRICTION = 200			# this force will oppose the knockback force
-export var JUMP_FORCE = 165 		# qué tan alto puede saltar el jugador
+export var FRICTION = 150			# this force will oppose the knockback force
+export var JUMP_FORCE = 220 		# qué tan alto puede saltar el jugador
 export var INVINCIBILITY_TIME = 2	# invincibility duration 
 
 const PISTOL_AMMO = 6
@@ -33,7 +33,7 @@ onready var floating_teleport_ball = get_node("Ball") 	# Referencia a teleport b
 onready var teleport_ball = null						# Referencia a teleport ball lanzada a la cual te teleportas
 onready var hurtbox = $Hurtbox
 onready var player_knockback_collisionShape = $PlayerKnockback/CollisionShape2D
-
+onready var enemy_tower_bullet = "res://Enemies/Enemy_tower/EnemyTowerBullet.tscn"
 
 onready var bullet_scene = preload("res://Player/PlayerBullet.tscn") 					# Referencia a escena de bala
 onready var teleport_ball_scene = preload("res://Player/TeleportBall.tscn") 			# Referencia a escena de teleport ball
@@ -175,12 +175,13 @@ func _physics_process(delta):
 		
 
 func jump():
-	velocity.y = -JUMP_FORCE
-	player_sprite.scale.x = 0.7
-	player_sprite.scale.y = 1.3
-	player_sprite.position.y -= 2
-	create_smoke_particles()
-	$Audio_Jump.play()
+	if is_on_floor():
+		velocity.y = -JUMP_FORCE
+		player_sprite.scale.x = 0.7
+		player_sprite.scale.y = 1.3
+		player_sprite.position.y -= 2
+		create_smoke_particles()
+		$Audio_Jump.play()
 	
 
 
@@ -266,14 +267,8 @@ func die():
 # Esta funcion se llama cada vez que cualquier input se detecta
 # "input" siendo una tecla presionada, mouse clickeada, etc.
 func _input(event):
-	if is_on_floor():
-		if event.is_action_pressed("jump"):
-			jump()
-	else:
-		if velocity.y < 0:
-			animation_player.play("jump")
-		else:
-			animation_player.play("falling")
+	if event.is_action_pressed("jump"):
+		jump()
 	
 	if event is InputEventMouseButton:
 		match event.button_index:		# Esto es como el switch-case statements en C++/Python
@@ -327,8 +322,11 @@ func _on_Hurtbox_area_entered(area : Area2D):
 	player_hurt = true
 	stats.health -= area.damage
 	hurtbox.start_invincibility(INVINCIBILITY_TIME)
+	$Audio_Hit_By_Enemy.play()
+	OS.delay_msec(100)
 	yield(get_tree().create_timer(1), "timeout")
 	player_hurt = false
+
 
 func create_smoke_particles():
 	var smoke_particles = smoke_particle_scene.instance()	
