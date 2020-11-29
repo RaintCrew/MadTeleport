@@ -2,7 +2,7 @@ extends Node2D
 
 onready var currentScene = get_tree().get_current_scene().get_filename()
 var is_restarting = false
-
+onready var camera_animation_player = $Camera/AnimationPlayer
 # Player has to kill all enemies of the current phase
 # for the next phase to start. This var keeps track of that
 var num_of_phase_enemies_killed = 0
@@ -31,9 +31,9 @@ func _ready():
 func _process(_delta):
 	if Input.is_action_just_pressed("reset"):
 		if not is_restarting:
-			$Camera/AnimationPlayer.play("BlackScreenFadeIn")
+			camera_animation_player.play("BlackScreenFadeIn")
 			is_restarting = true
-			yield($Camera/AnimationPlayer, "animation_finished")
+			yield(camera_animation_player, "animation_finished")
 			get_tree().change_scene(currentScene)
 			get_tree().paused = false
 			PlayerStats.health = PlayerStats.max_health
@@ -133,4 +133,11 @@ func disable_all_spawners():
 	
 # Called when the player completes the level!
 func clear_level():
+	camera_animation_player.play("ShowLevelCleared")
+	yield(get_tree().create_timer(3), "timeout")
+	camera_animation_player.play("BlackScreenFadeIn")
+	is_restarting = true
+	yield(camera_animation_player, "animation_finished")
+	PlayerStats.health = PlayerStats.max_health
+	get_tree().change_scene("res://World/Level2/Level2.tscn")
 	pass

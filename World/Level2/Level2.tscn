@@ -94,10 +94,11 @@ enemies_limit = 2
 spawning = false
 will_wait_for_spawned_enemy_to_die = true
 
-[node name="Camera" parent="." instance=ExtResource( 1 )]
-position = Vector2( 256, 144 )
-zoom = Vector2( 0.8, 0.8 )
-
 [node name="bg_music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
 autoplay = true
+
+[node name="Camera" parent="." instance=ExtResource( 1 )]
+position = Vector2( 256, 144 )
+scale = Vector2( 0.8, 0.8 )
+zoom = Vector2( 0.8, 0.8 )
