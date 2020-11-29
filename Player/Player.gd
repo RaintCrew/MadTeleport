@@ -152,9 +152,10 @@ func _physics_process(delta):
 	# Cuando el Player aterriza en suelo, su sprite se deforma
 	# Este codigo es el que se encarga en cada frame de suavemente
 	# acomodar la sprite de vuelta a su forma normal
-	player_sprite.scale.y += (1 - player_sprite.scale.y) * 0.2
-	player_sprite.scale.x += (1 - player_sprite.scale.x) * 0.2
-	player_sprite.position.y += (0 - player_sprite.position.y) * 0.2
+	if !player_dead:
+		player_sprite.scale.y += (1 - player_sprite.scale.y) * 0.2
+		player_sprite.scale.x += (1 - player_sprite.scale.x) * 0.2
+		player_sprite.position.y += (0 - player_sprite.position.y) * 0.2
 	# Suaviza el retorno del arma a su posicion normal despues del recoil
 	gun.position.x += (0 - gun.position.x) * 0.2
 	gun.position.y += (0 - gun.position.y) * 0.2
@@ -259,8 +260,6 @@ func die():
 		teleport_ball.queue_free()
 	OS.delay_msec(100)
 	camera.display_gameover()
-
-
 
 	
 # Esta funcion se llama cada vez que cualquier input se detecta
