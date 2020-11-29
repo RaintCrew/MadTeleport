@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const GRAVITY = 200.0
+const GRAVITY = 10.0
 const TIMER_LIMIT = 3000
 const EnemyDeathEffect = preload("res://Enemies/Enemy_tower/TowerEnemyDrathEffect.tscn")
 
@@ -35,9 +35,8 @@ func _ready():
 	
 
 func _physics_process(delta):
-	velocity.y += delta * GRAVITY
-	var motion = velocity * delta
-	move_and_collide(motion)
+	velocity.y += GRAVITY
+	move_and_slide(velocity)
 	$Position2D.position = self.position + Vector2(0.065,-30)
 
 func shoot_player():
