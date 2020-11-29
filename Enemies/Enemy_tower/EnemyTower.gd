@@ -37,7 +37,7 @@ func _ready():
 func _physics_process(delta):
 	velocity.y += GRAVITY
 	move_and_slide(velocity)
-	$Position2D.position = self.position + Vector2(0.065,-30)
+	$Position2D.position = self.position + Vector2(0,-30)
 
 func shoot_player():
 	if PlayerStats.health > 0:

@@ -41,7 +41,7 @@ margin_bottom = 30.0
 [node name="EnemySpawnerDLL" parent="." groups=[
 "all_enemy_spawners",
 ] instance=ExtResource( 3 )]
-position = Vector2( 48, 224 )
+position = Vector2( 56, 160 )
 enemy_type = 1
 enemies_limit = 2
 will_wait_for_spawned_enemy_to_die = true
