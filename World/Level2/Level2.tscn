@@ -100,3 +100,4 @@ zoom = Vector2( 0.8, 0.8 )
 
 [node name="bg_music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
+volume_db = -5.0

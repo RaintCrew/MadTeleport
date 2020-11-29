@@ -56,6 +56,7 @@ attack_speed = 1.5
 position = Vector2( 0, 3.75 )
 frames = SubResource( 7 )
 animation = "idle"
+frame = 5
 playing = true
 offset = Vector2( 3.891, -0.201 )
 
@@ -77,9 +78,11 @@ position = Vector2( 0.065, -30 )
 
 [node name="Audio_Hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 1 )
+volume_db = -10.0
 
 [node name="Audio_Shoot" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+volume_db = -10.0
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 
