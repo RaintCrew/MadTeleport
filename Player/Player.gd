@@ -161,9 +161,10 @@ func _physics_process(delta):
 	# Ejecutar efectos en el primer instante que el Player aterriza en suelo
 	if is_on_floor():
 		if has_landed == false:
-			player_sprite.position.y += 2
-			player_sprite.scale.y = 0.7
-			player_sprite.scale.x = 1.3
+			if !player_dead:
+				player_sprite.position.y += 2
+				player_sprite.scale.y = 0.7
+				player_sprite.scale.x = 1.3
 			
 			has_landed = true
 			create_smoke_particles()

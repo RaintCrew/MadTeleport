@@ -66,7 +66,6 @@ func move_along_path(distance, delta):
 			break
 		elif path.size() == 1 and distance > distance_to_next:
 			global_position = path[0]
-			print("CHASE")
 			chase_player(delta)
 			break
 			
