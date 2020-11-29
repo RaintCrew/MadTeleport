@@ -720,6 +720,7 @@ margin_bottom = 40.0
 [node name="EnemySpawner" parent="." instance=ExtResource( 7 )]
 position = Vector2( 232, 24 )
 enemies_limit = 1
+spawning = false
 
 [node name="Camera" parent="." instance=ExtResource( 4 )]
 position = Vector2( 318.439, 175 )

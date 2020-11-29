@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 const EnemyDeathEfffect = preload("res://Enemies/Enemy_drone/DroneEnemyDeathEffect.tscn") # Load drone death animation
 
-export var SPEED : = 100.0
+export var SPEED : = 60.0
 export var ACCELERATION = 200
 export var MAX_SPEED = 80		# Movement speed
 export var FRICTION = 200		# Slowdown speed when the player hits drone

@@ -180,7 +180,9 @@ extents = Vector2( 7, 9 )
 radius = 5.39457
 height = 2.70943
 
-[sub_resource type="RectangleShape2D" id=14]
+[sub_resource type="CapsuleShape2D" id=14]
+radius = 4.47543
+height = 3.68676
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 1.415, -0.0229755 )
@@ -196,7 +198,6 @@ position = Vector2( 1, 0 )
 texture = ExtResource( 13 )
 vframes = 8
 hframes = 8
-frame = 28
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/die = SubResource( 3 )
@@ -246,6 +247,8 @@ __meta__ = {
 }
 
 [node name="PlayerKnockback" parent="." instance=ExtResource( 11 )]
+position = Vector2( 0.280613, 0 )
+scale = Vector2( 1.08, 1.28 )
 collision_layer = 32
 collision_mask = 2147483648
 
@@ -254,12 +257,15 @@ position = Vector2( -1.03009, 1.21738 )
 shape = SubResource( 13 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 6 )]
-visible = false
+position = Vector2( -0.420921, 0 )
+scale = Vector2( 1.2, 1.12 )
 collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 modulate = Color( 0.501961, 0.054902, 0.054902, 1 )
+position = Vector2( -0.350769, 0.841846 )
+scale = Vector2( 1, 1.0268 )
 shape = SubResource( 14 )
 
 [node name="Audio_Shoot" type="AudioStreamPlayer" parent="."]

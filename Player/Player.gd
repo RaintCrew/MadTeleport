@@ -282,6 +282,7 @@ func _input(event):
 		
 # this knockback makes the player jump a little, like a "classic" knockback
 func classic_knockback(area):
+	# velocity 0 so that it won't add to the knockback force
 	velocity = Vector2.ZERO
 	var collision_point = global_position - area.global_position
 	area.knockback_vector.x = sign(collision_point.x) * area.knockback_force
