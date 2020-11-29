@@ -8,12 +8,10 @@ export var FRICTION = 150			# this force will oppose the knockback force
 export var JUMP_FORCE = 220 		# qué tan alto puede saltar el jugador
 export var INVINCIBILITY_TIME = 2	# invincibility duration 
 
-const PISTOL_AMMO = 6
 var stats = PlayerStats				# Access to the Singleton with the stats.
 var knockback = Vector2.ZERO		# knockback yay
 var velocity = Vector2() 			# Vector (x,y) donde x/y define cuanto se mueve horizontal/verticalmente en cada frame.
 var target_running_velocity = 0		# Velocidad a la que está intentando llegar. Se usa para lograr la aceleracion y desaceleracion
-var ammo = PISTOL_AMMO 				# Numero de balas en el arma. Se recarga con Teleport
 var player_hurt = false
 var player_dead = false
 var is_facing_right = true
@@ -109,7 +107,7 @@ func _physics_process(delta):
 			# si esta volando y por lo tanto, no puede ser arrojada
 			floating_teleport_ball.visible = can_throw_teleport_ball
 			
-			$Ammo_Label.text = str(ammo) # Mostrar en texto la municion del arma
+			$Ammo_Label.text = str(PlayerStats.ammo) # Mostrar en texto la municion del arma
 
 			# El jugador y el arma se voltean hacia donde este la crosshair
 			if crosshair.global_position.x < global_position.x:
@@ -187,7 +185,7 @@ func jump():
 
 # Funcion para disparar arma
 func fire():
-	if ammo > 0:	# Tienes que tener municion para disparar
+	if PlayerStats.ammo > 0:	# Tienes que tener municion para disparar
 		# Crear una instancia de bala, fijar su origen en el arma,
 		# y despues crearla en el nivel con "add_child"
 		var bullet = bullet_scene.instance()	
@@ -195,7 +193,7 @@ func fire():
 		bullet.destination = crosshair.get_global_position()
 		get_parent().add_child(bullet)
 		
-		ammo -= 1
+		PlayerStats.ammo -= 1
 		
 		# Gun recoil vfx
 		var recoil = gun.global_position.direction_to(crosshair.global_position)
@@ -237,7 +235,7 @@ func teleport():
 # Funcion para recargar tu arma. Suele ejecutarse al teleportarse
 # Si vamos a agregar mas armas, esta funcion se modifica para cada tipo de arma
 func reload():
-	ammo = PISTOL_AMMO
+	PlayerStats.ammo = PlayerStats.max_ammo
 
 # Funcion para recuperar la teleport ball
 # Esta en su opcion porque probablemente hagamos algunos vfx

@@ -2,16 +2,41 @@
 extends Node
 
 export var max_health = 1 setget set_max_health
+export var max_ammo = 6 setget set_max_ammo
 #onready so that the value is the one set in the inspector. 
 #every time the health changes, Godot will call set_health.
 var health = max_health setget set_health
+var ammo = max_ammo setget set_ammo
 
 #We use a signal because it's the child who wants to tell something to the parent.
 signal no_health
 signal health_changed(value)
 signal max_health_changed(value)
+
+signal no_ammo
+signal ammo_changed(value)
+signal max_ammo_changed(value)
 signal player_is_dead()
 
+func _ready():
+	self.health = max_health
+	self.ammo = max_ammo
+
+
+### AMMUNITION
+func set_max_ammo(value):
+	max_ammo = value
+	self.ammo = min(ammo,max_ammo)
+	emit_signal("max_ammo_changed", max_ammo)
+
+func set_ammo(value):
+	if ammo < 1:
+		emit_signal("no_ammo")
+		
+	ammo = value
+	emit_signal("ammo_changed", ammo)
+
+### HEALTH
 func set_max_health(value):
 	max_health = value
 	# self so that it calls the setter
@@ -27,6 +52,3 @@ func set_health(value):
 	emit_signal("health_changed", health)
 	if health <= 0:
 		emit_signal("no_health")
-		
-func _ready():
-	self.health = max_health
