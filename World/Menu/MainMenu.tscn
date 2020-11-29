@@ -14,102 +14,127 @@
 [ext_resource path="res://Assets/Menu_Buttons/music_disable.png" type="Texture" id=14]
 
 [sub_resource type="AtlasTexture" id=1]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 640, 368 )
 
 [sub_resource type="AtlasTexture" id=2]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 640, 0, 640, 368 )
 
 [sub_resource type="AtlasTexture" id=3]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 1280, 0, 640, 368 )
 
 [sub_resource type="AtlasTexture" id=4]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 1920, 0, 640, 368 )
 
 [sub_resource type="AtlasTexture" id=5]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 2560, 0, 640, 368 )
 
 [sub_resource type="AtlasTexture" id=6]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 0, 368, 640, 368 )
 
 [sub_resource type="AtlasTexture" id=7]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 640, 368, 640, 368 )
 
 [sub_resource type="AtlasTexture" id=8]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 1280, 368, 640, 368 )
 
 [sub_resource type="AtlasTexture" id=9]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 1920, 368, 640, 368 )
 
 [sub_resource type="AtlasTexture" id=10]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 2560, 368, 640, 368 )
 
 [sub_resource type="AtlasTexture" id=11]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 0, 736, 640, 368 )
 
 [sub_resource type="AtlasTexture" id=12]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 640, 736, 640, 368 )
 
 [sub_resource type="AtlasTexture" id=13]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 1280, 736, 640, 368 )
 
 [sub_resource type="AtlasTexture" id=14]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 1920, 736, 640, 368 )
 
 [sub_resource type="AtlasTexture" id=15]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 2560, 736, 640, 368 )
 
 [sub_resource type="AtlasTexture" id=16]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 0, 1104, 640, 368 )
 
 [sub_resource type="AtlasTexture" id=17]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 640, 1104, 640, 368 )
 
 [sub_resource type="AtlasTexture" id=18]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 1280, 1104, 640, 368 )
 
 [sub_resource type="AtlasTexture" id=19]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 1920, 1104, 640, 368 )
 
 [sub_resource type="AtlasTexture" id=20]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 2560, 1104, 640, 368 )
 
 [sub_resource type="AtlasTexture" id=21]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 0, 1472, 640, 368 )
 
 [sub_resource type="AtlasTexture" id=22]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 640, 1472, 640, 368 )
 
 [sub_resource type="AtlasTexture" id=23]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 1280, 1472, 640, 368 )
 
 [sub_resource type="AtlasTexture" id=24]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 1920, 1472, 640, 368 )
 
 [sub_resource type="AtlasTexture" id=25]
+flags = 4
 atlas = ExtResource( 7 )
 region = Rect2( 2560, 1472, 640, 368 )
 
@@ -129,7 +154,7 @@ position = Vector2( 319.913, 179.802 )
 scale = Vector2( 0.997656, 0.971178 )
 frames = SubResource( 26 )
 animation = "bg"
-frame = 3
+frame = 20
 playing = true
 
 [node name="ButtonNewGame" type="TextureButton" parent="."]
@@ -193,5 +218,6 @@ position = Vector2( 340.809, 212.297 )
 scale = Vector2( 0.007, 0.007 )
 texture = ExtResource( 6 )
 [connection signal="pressed" from="ButtonNewGame" to="." method="_on_ButtonNewGame_pressed"]
+[connection signal="pressed" from="ButtonQuit" to="." method="_on_ButtonQuit_pressed"]
 [connection signal="pressed" from="MusicDisableButton" to="." method="_on_MusicDisableButton_pressed"]
 [connection signal="pressed" from="MusicAvailableButton" to="." method="_on_MusicAvailableButton_pressed"]

@@ -41,3 +41,7 @@ func _on_MusicDisableButton_pressed() -> void:
 	$MusicDisableButton.hide()
 	$MusicAvailableButton.show()
 	pass
+
+
+func _on_ButtonQuit_pressed():
+	get_tree().quit()
