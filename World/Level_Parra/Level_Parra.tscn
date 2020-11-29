@@ -710,12 +710,14 @@ format = 1
 tile_data = PoolIntArray( 13, 14, 0, 22, 13, 0, 29, 1, 0, 131111, 11, 0, 524327, 0, 0, 720912, 2, 0, 720915, 24, 0, 720917, 25, 0, 720935, 1, 0, 983062, 17, 0, 983063, 26, 0, 1048615, 10, 0, 1179668, 16, 0, 1179670, 25, 0, 1310738, 22, 0, 1310741, 27, 0, 1376282, 17, 0, 1376288, 18, 0 )
 
 [node name="HealthUI" parent="." instance=ExtResource( 3 )]
-margin_left = 24.0
-margin_top = 24.0
-margin_right = 94.0
-margin_bottom = 40.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 90.0
+margin_bottom = 36.0
 
 [node name="AmmoUI" parent="." instance=ExtResource( 11 )]
+margin_top = 48.0
+margin_bottom = 57.0
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 7 )]
 position = Vector2( 232, 24 )
@@ -740,10 +742,10 @@ __meta__ = {
 }
 
 [node name="WeaponUI" parent="." instance=ExtResource( 5 )]
-margin_left = 20.3654
-margin_top = 48.1984
-margin_right = 40.3654
-margin_bottom = 68.1984
+margin_left = 20.0
+margin_top = 40.0
+margin_right = 40.0
+margin_bottom = 60.0
 
 [node name="EnemyTower" parent="." instance=ExtResource( 10 )]
 position = Vector2( 352, 125.5 )
