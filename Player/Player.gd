@@ -81,7 +81,7 @@ func _physics_process(delta):
 	if target_running_velocity == 0: # Si esta intentando frenar hasta cero
 		velocity.x += (target_running_velocity - velocity.x) * 0.7
 	else:							# Si esta intentando acelerar
-		velocity.x += (target_running_velocity - velocity.x) * 0.4
+		velocity.x += (target_running_velocity - velocity.x) * 0.3
 
 	
 	# Limitar que el Player no caiga muy rapido
@@ -184,7 +184,7 @@ func teleport():
 	if has_tpball_traveled_enough:
 		create_tp_particles()
 		# Relocar al jugador donde este la teleport_ball
-		self.global_position = teleport_ball.get_global_position()
+		self.global_position = teleport_ball.safe_position
 		OS.delay_msec(60) # Frame freeze
 		camera.activate_shake(2.0, 0.4)
 		create_tp_particles()
@@ -239,7 +239,6 @@ func _on_PlayerKnockback_area_entered(area):
 
 
 func _on_Hurtbox_area_entered(area):
-	print(area.get_filename())
 	stats.health -= area.damage
 	hurtbox.start_invincibility(INVINCIBILITY_TIME)
 	$Audio_Hit_By_Enemy.play()

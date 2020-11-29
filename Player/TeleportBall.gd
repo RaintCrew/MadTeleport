@@ -5,6 +5,7 @@ export var speed = 6					# Speed de la bala
 var velocity = Vector2()		# Vector velocidad x/y
 var traveled_distance = 0.0
 var initial_position = Vector2()
+var safe_position = Vector2()
 var has_signaled_traveled_enough = false
 onready var player = null
 onready var destination = null	# Punto a donde va la bala (donde estaba la mira al disparar)
@@ -16,7 +17,9 @@ func _ready():
 	initial_position = global_position
 	player = get_parent().get_node("Player")
 	global_rotation = global_position.angle_to(destination)
+	safe_position = global_position
 func _physics_process(delta):
+	safe_position = global_position
 	# Mover hacia destino
 	velocity = velocity.move_toward(destination, delta)
 	velocity = velocity.normalized() * speed
