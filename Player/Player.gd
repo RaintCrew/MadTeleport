@@ -298,8 +298,6 @@ func _on_PlayerKnockback_area_entered(area):
 	target_running_velocity = 0
 	classic_knockback(area)
 	#vector_knockback(area)
-	if area.is_in_group("enemyBullet"):
-		area.queue_free()
 	player_knockback_collisionShape.set_deferred("disabled",true)
 
 # flips the player  horizontally if facing the wrong direction when taking damage
@@ -320,6 +318,8 @@ func _on_Hurtbox_area_entered(area : Area2D):
 	flip_on_enemy_collision(area)
 	player_hurt = true
 	stats.health -= area.damage
+	if area.is_in_group("enemyBullet"):
+		area.queue_free()
 	hurtbox.start_invincibility(INVINCIBILITY_TIME)
 	$Audio_Hit_By_Enemy.play()
 	OS.delay_msec(100)
