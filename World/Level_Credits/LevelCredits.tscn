@@ -180,7 +180,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton" type="TextureButton" parent="."]
+[node name="ButtonBack" type="TextureButton" parent="."]
 margin_left = 16.0181
 margin_top = 14.6832
 margin_right = 46.0181
@@ -195,3 +195,4 @@ __meta__ = {
 
 [node name="MusicControl" parent="." instance=ExtResource( 7 )]
 position = Vector2( 604.502, 10.8662 )
+[connection signal="pressed" from="ButtonBack" to="." method="_on_ButtonBack_pressed"]
