@@ -28,6 +28,7 @@ var total_phases = 4
 
 func _ready():
 	set_phase(phase)
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	if Global.music:
 		$bg_music.play()
 	pass
