@@ -28,3 +28,8 @@ func change_scene() -> void:
 	queue_free()
 	get_tree().change_scene("res://World/Level_Select/LevelSelect.tscn")  
 
+
+
+func _on_CreditButton_pressed() -> void:
+	get_tree().change_scene("res://World/Level_Credits/LevelCredits.tscn") 
+	pass

@@ -1,13 +1,18 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Assets/Menu_Buttons/play_game.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Menu_Buttons/play_game_hover.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Menu_buttons/play_game_hover.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Menu_Buttons/quit.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Menu_buttons/quit_white_hover.png" type="Texture" id=4]
 [ext_resource path="res://World/Music/MusicControl.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/mouse.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Background/bg_main_menu_normal.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Menu_Buttons/quit_hover.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Menu_buttons/quit_hover.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Menu_buttons/play_game_hover_white.png" type="Texture" id=9]
 [ext_resource path="res://World/Menu/MainMenu.gd" type="Script" id=10]
+[ext_resource path="res://Assets/Menu_buttons/credits_hover.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Menu_buttons/credits.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Menu_buttons/credits_hover_white.png" type="Texture" id=13]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 7 )
@@ -125,7 +130,7 @@ position = Vector2( 319.913, 179.802 )
 scale = Vector2( 0.997656, 0.971178 )
 frames = SubResource( 26 )
 animation = "bg"
-frame = 13
+frame = 9
 playing = true
 
 [node name="ButtonNewGame" type="TextureButton" parent="."]
@@ -134,7 +139,8 @@ margin_top = 132.923
 margin_right = 146.455
 margin_bottom = 164.923
 texture_normal = ExtResource( 1 )
-texture_pressed = ExtResource( 2 )
+texture_pressed = ExtResource( 9 )
+texture_hover = ExtResource( 2 )
 expand = true
 stretch_mode = 4
 __meta__ = {
@@ -147,7 +153,22 @@ margin_top = 211.303
 margin_right = 90.8051
 margin_bottom = 239.303
 texture_normal = ExtResource( 3 )
-texture_pressed = ExtResource( 9 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 8 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CreditButton" type="TextureButton" parent="."]
+margin_left = 29.315
+margin_top = 171.9
+margin_right = 146.315
+margin_bottom = 200.9
+texture_normal = ExtResource( 12 )
+texture_pressed = ExtResource( 13 )
+texture_hover = ExtResource( 11 )
 expand = true
 stretch_mode = 4
 __meta__ = {
@@ -162,3 +183,4 @@ position = Vector2( 340.809, 212.297 )
 scale = Vector2( 0.007, 0.007 )
 texture = ExtResource( 6 )
 [connection signal="pressed" from="ButtonNewGame" to="." method="_on_ButtonNewGame_pressed"]
+[connection signal="pressed" from="CreditButton" to="." method="_on_CreditButton_pressed"]

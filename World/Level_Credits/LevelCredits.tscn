@@ -1,8 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Fonts/rainyhearts.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/Background/bg_credits.jpg" type="Texture" id=2]
 [ext_resource path="res://Assets/Fonts/SFPixelatte/SFPixelate-Bold.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Assets/Menu_buttons/back_arrow_hover.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Menu_buttons/back_arrow.png" type="Texture" id=5]
+[ext_resource path="res://World/Level_Credits/LevelCredits.gd" type="Script" id=6]
+[ext_resource path="res://World/Music/MusicControl.tscn" type="PackedScene" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -22,7 +26,8 @@ font_data = ExtResource( 1 )
 size = 15
 font_data = ExtResource( 3 )
 
-[node name="Node2D" type="Node2D"]
+[node name="LevelCredits" type="Node2D"]
+script = ExtResource( 6 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchor_right = 1.0
@@ -117,7 +122,7 @@ margin_top = 188.0
 margin_right = 210.0
 margin_bottom = 204.0
 custom_fonts/font = SubResource( 4 )
-text = "Carlos Parra\"Parrol\""
+text = "Carlos Parra \"Parrol\""
 align = 1
 valign = 1
 __meta__ = {
@@ -130,19 +135,6 @@ margin_right = 210.0
 margin_bottom = 223.439
 custom_fonts/font = SubResource( 4 )
 text = "Miguel Zamora"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label9" type="Label" parent="."]
-margin_left = 210.0
-margin_top = 207.439
-margin_right = 420.0
-margin_bottom = 223.439
-custom_fonts/font = SubResource( 4 )
-text = "Tania Gutierréz"
 align = 1
 valign = 1
 __meta__ = {
@@ -187,3 +179,19 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_left = 16.0181
+margin_top = 14.6832
+margin_right = 46.0181
+margin_bottom = 31.6832
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 4 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicControl" parent="." instance=ExtResource( 7 )]
+position = Vector2( 604.502, 10.8662 )
