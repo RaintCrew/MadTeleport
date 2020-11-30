@@ -132,9 +132,9 @@ func chase_player(delta: float):
 	hitbox.knockback_vector = velocity
 
 func _on_Hurtbox_area_entered(area: Area2D) -> void:
-	if area != null:
+	if area != null and area.damage != 0:
 		stats.health -= area.damage										# Lose a health depending of hit damage
-		area.get_parent().queue_free()
+		area.damage = 0
 		velocity = velocity.move_toward(Vector2.ZERO, 300.0)			# Hitting the drone causes it to slow down
 		sprite.modulate = Color(10,10,10,10) 	# Drone sprite turns white
 		$Audio_Hit.play()

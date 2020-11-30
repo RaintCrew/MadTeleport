@@ -36,3 +36,8 @@ func _on_VisibilityNotifier2D_screen_exited():
 func _on_Bullet_body_entered(body):
 	if not can_cross_walls:
 		queue_free()
+
+
+func _on_BallHitbox_area_entered(area):
+	self.queue_free()
+	pass # Replace with function body.

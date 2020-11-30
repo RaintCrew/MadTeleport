@@ -50,14 +50,14 @@ func shoot_player():
 				get_parent().add_child(bullet)
 
 func _on_Hurtbox_area_entered(area: Area2D) -> void:
-	stats.health -= area.damage					# Tower lose a life
-	area.get_parent().queue_free()				# Anything that hits the tower is removed
-	
-	$Audio_Hit.play()
-	sprite.modulate = Color(10,10,10,10)
-	OS.delay_msec(20)
-	yield(get_tree().create_timer(0.1), "timeout")
-	sprite.modulate = Color(1,1,1,1)
+	if area != null and area.damage != 0:
+		stats.health -= area.damage					# Tower lose a life
+		area.damage = 0
+		$Audio_Hit.play()
+		sprite.modulate = Color(10,10,10,10)
+		OS.delay_msec(20)
+		yield(get_tree().create_timer(0.1), "timeout")
+		sprite.modulate = Color(1,1,1,1)
 	
 
 func _on_Stats_no_health() -> void:
