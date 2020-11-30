@@ -1,24 +1,27 @@
 extends Area2D
 
-var speed = 7					# Speed de la bala
+var speed = 10					# Speed de la bala
 var velocity = Vector2()		# Vector velocidad x/y
-onready var destination = null	# Punto a donde va la bala (donde estaba la mira al disparar)
+var destination = null	# Punto a donde va la bala (donde estaba la mira al disparar)
 export var can_cross_walls = false
+onready var sprite = $Sprite
+onready var flash = $Flash
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	destination = get_local_mouse_position()	# La bala viaja hacia donde esta la mira
-	$Sprite.modulate = Color(10,10,10,10)
-	$Sprite.scale = Vector2(0.8,0.8)
+	#destination = get_local_mouse_position()	# La bala viaja hacia donde esta la mira
+	look_at(destination)
+	flash.visible = true
 	yield(get_tree().create_timer(0.04),"timeout")
-	$Sprite.modulate = Color(1,1,1,1)
-	$Sprite.scale = Vector2(0.5,0.5)
+	flash.visible = false
+
+	
+	velocity = global_position.direction_to(destination)
+	velocity *= speed
 
 func _physics_process(delta):
 	# Mover hacia destino
-	velocity = velocity.move_toward(destination, delta)
-	velocity = velocity.normalized() * speed
-	position = position + velocity
+	global_position += velocity
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
