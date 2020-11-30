@@ -1,5 +1,4 @@
-[gd_scene load_steps=159 format=2]
-[gd_scene load_steps=148 format=2]
+[gd_scene load_steps=160 format=2]
 
 [ext_resource path="res://Assets/TutorialAnimations/teleport.png" type="Texture" id=1]
 [ext_resource path="res://Assets/TutorialAnimations/tutorial_portal.png" type="Texture" id=2]
@@ -612,7 +611,7 @@ position = Vector2( -192.47, -73.9559 )
 scale = Vector2( -1.5, 1.5 )
 frames = SubResource( 9 )
 animation = "Player_Running"
-frame = 3
+frame = 5
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="backgound"]
@@ -620,7 +619,7 @@ position = Vector2( 146.692, 13.0821 )
 scale = Vector2( 0.372886, 0.386197 )
 frames = SubResource( 125 )
 animation = "Teleport"
-frame = 111
+frame = 54
 playing = true
 
 [node name="level_button_normal" type="Sprite" parent="backgound"]
@@ -737,7 +736,7 @@ collision_mask = 0
 position = Vector2( 0.0923125, 1.79887 )
 scale = Vector2( 1.69962, 1.64086 )
 frames = SubResource( 143 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -746,9 +745,6 @@ shape = SubResource( 144 )
 
 [node name="Player" parent="." instance=ExtResource( 8 )]
 position = Vector2( 334.63, 255.112 )
-
-[node name="Camera" parent="." instance=ExtResource( 10 )]
-position = Vector2( 319.902, 180.683 )
 
 [node name="TileMap" parent="." instance=ExtResource( 11 )]
 collision_layer = 1025
@@ -771,13 +767,16 @@ margin_top = 48.0
 margin_right = 44.0
 margin_bottom = 48.0
 
+[node name="TeleportBallUI" parent="." instance=ExtResource( 15 )]
+
+[node name="Camera" parent="." instance=ExtResource( 10 )]
+position = Vector2( 319.902, 180.683 )
+
 [node name="PausePopup" parent="." instance=ExtResource( 7 )]
 margin_left = 192.0
 margin_top = 126.0
 margin_right = 448.0
 margin_bottom = 238.0
-
-[node name="TeleportBallUI" parent="." instance=ExtResource( 15 )]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 
 [editable path="WeaponUI"]

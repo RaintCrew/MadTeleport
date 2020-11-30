@@ -137,3 +137,4 @@ func clear_level():
 	PlayerStats.health = PlayerStats.max_health
 	get_tree().change_scene("res://World/Level3/Level3.tscn")
 	pass
+

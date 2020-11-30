@@ -42,7 +42,7 @@ func _physics_process(delta):
 func shoot_player():
 	if PlayerStats.health > 0:
 		if attack == true:
-	$Audio_Shoot.play()
+			$Audio_Shoot.play()
 			var bullet = bullet_scene.instance()		# Create a Bullet
 			bullet.position = get_node("Position2D").position			# New Bullet have the position of the tower
 			if target:									# If the target is alive execute below
