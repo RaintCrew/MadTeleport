@@ -672,7 +672,7 @@ position = Vector2( -192.47, -73.9559 )
 scale = Vector2( -1.5, 1.5 )
 frames = SubResource( 9 )
 animation = "Player_Running"
-frame = 6
+frame = 7
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="backgound"]
@@ -680,7 +680,7 @@ position = Vector2( 146.692, 13.0821 )
 scale = Vector2( 0.372886, 0.386197 )
 frames = SubResource( 125 )
 animation = "Teleport"
-frame = 105
+frame = 77
 playing = true
 
 [node name="level_button_normal" type="Sprite" parent="backgound"]
@@ -810,10 +810,11 @@ shape = SubResource( 132 )
 position = Vector2( 334.63, 255.112 )
 
 [node name="PausePopup" parent="." instance=ExtResource( 13 )]
-margin_left = 208.0
-margin_top = 124.0
-margin_right = 432.0
-margin_bottom = 236.0
+visible = true
+margin_left = 192.0
+margin_top = 125.0
+margin_right = 448.0
+margin_bottom = 237.0
 
 [node name="Camera" parent="." instance=ExtResource( 10 )]
 position = Vector2( 319.902, 180.683 )

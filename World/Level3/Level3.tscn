@@ -111,9 +111,9 @@ spawn_delay_offset = 2.0
 enemies_limit = 3
 
 [node name="PausePopup" parent="." instance=ExtResource( 9 )]
-margin_left = 208.0
+margin_left = 192.0
 margin_top = 120.0
-margin_right = 432.0
+margin_right = 448.0
 margin_bottom = 232.0
 
 [node name="Camera" parent="." instance=ExtResource( 1 )]

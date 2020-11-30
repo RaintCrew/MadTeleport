@@ -25,3 +25,7 @@ func _on_ReturnLevelSelect_pressed():
 	get_tree().change_scene("res://World/Level_Select/LevelSelect.tscn")
 	get_tree().paused = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
+
+func _on_QuitDesktop_pressed():
+	get_tree().quit()
