@@ -1,9 +1,7 @@
 extends PopupDialog
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+onready var player = get_parent().get_node("Player")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,6 +15,10 @@ func _process(delta):
 		self.hide()
 		get_tree().paused = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		
+	# Hide/show the player crosshair depending on if the pause is on/off
+	if player != null:
+		player.crosshair.visible = not self.visible
 
 
 func _on_ReturnLevelSelect_pressed():
