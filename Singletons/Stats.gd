@@ -7,6 +7,7 @@ export var max_ammo = 6 setget set_max_ammo
 #every time the health changes, Godot will call set_health.
 var health = max_health setget set_health
 var ammo = max_ammo setget set_ammo
+var has_tp = true setget set_tp
 
 #We use a signal because it's the child who wants to tell something to the parent.
 signal no_health
@@ -18,10 +19,16 @@ signal ammo_changed(value)
 signal max_ammo_changed(value)
 signal player_is_dead()
 
+signal has_tp_changed(value)
+
 func _ready():
 	self.health = max_health
 	self.ammo = max_ammo
 
+### Teleport Ball
+func set_tp(value):
+	has_tp = value
+	emit_signal("has_tp_changed", has_tp)
 
 ### AMMUNITION
 func set_max_ammo(value):

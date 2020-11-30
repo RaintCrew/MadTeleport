@@ -105,7 +105,7 @@ func _physics_process(delta):
 			
 			# Hace desaparecer la teleport ball flotando al lado tuyo
 			# si esta volando y por lo tanto, no puede ser arrojada
-			floating_teleport_ball.visible = can_throw_teleport_ball
+			#floating_teleport_ball.visible = can_throw_teleport_ball
 			
 			$Ammo_Label.text = str(PlayerStats.ammo) # Mostrar en texto la municion del arma
 
@@ -207,8 +207,8 @@ func fire():
 
 # Funcion para arrojar teleport ball
 func throw_teleport_ball():
-	can_throw_teleport_ball = false	# Ya no puedes arrojar la teleport ball
-	
+	can_throw_teleport_ball = false # Ya no puedes arrojar la teleport ball
+	PlayerStats.has_tp = false
 	# Crear una instancia de teleport ball, fijar su origen en el arma,
 	# y despues crearla en el nivel con "add_child"
 	teleport_ball = teleport_ball_scene.instance()
@@ -242,6 +242,7 @@ func reload():
 # cuando ocurra. Esos se pondrian aqui.
 func regain_teleport_ball():
 	can_throw_teleport_ball = true
+	PlayerStats.has_tp = true
 	has_tpball_traveled_enough = false
 
 func die():
@@ -252,7 +253,7 @@ func die():
 	target_running_velocity = 0
 	crosshair.set_visible(false)
 	gun.set_visible(false)
-	floating_teleport_ball.set_visible(false)
+	#floating_teleport_ball.set_visible(false)
 
 	if teleport_ball: # Si la tp ball esta volando, debe ser eliminada antes de quitar al player
 		teleport_ball.queue_free()
