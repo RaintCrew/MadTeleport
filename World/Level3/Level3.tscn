@@ -7,7 +7,7 @@
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World/Level3/Level3.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Background/bg_level0_blue.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Music/bg_music_level_1.ogg" type="AudioStream" id=8]
+[ext_resource path="res://World/Music/MusicControl.tscn" type="PackedScene" id=8]
 
 [node name="Level3" type="Node2D"]
 script = ExtResource( 6 )
@@ -112,6 +112,5 @@ enemies_limit = 3
 [node name="Camera" parent="." instance=ExtResource( 1 )]
 position = Vector2( 320, 176 )
 
-[node name="bg_music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 8 )
-volume_db = -5.0
+[node name="MusicControl" parent="." instance=ExtResource( 8 )]
+position = Vector2( -28.0115, -25.784 )
