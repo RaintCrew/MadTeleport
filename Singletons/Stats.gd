@@ -1,7 +1,7 @@
 #This will be autoloaded as a Singleton
 extends Node
 
-export var max_health = 1 setget set_max_health
+export var max_health = 5 setget set_max_health
 export var max_ammo = 6 setget set_max_ammo
 #onready so that the value is the one set in the inspector. 
 #every time the health changes, Godot will call set_health.
