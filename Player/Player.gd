@@ -61,8 +61,9 @@ func _physics_process(delta):
 			animation_player.play("die")
 			# yield and then pause cause we're in a process func so all this is called every frame
 			yield(get_tree().create_timer(0.7),"timeout")
-			get_tree().paused = true
-			self.pause_mode = Node.PAUSE_MODE_STOP
+			self.set_physics_process(false)
+#			get_tree().paused = true
+#			self.pause_mode = Node.PAUSE_MODE_STOP
 	# if the player isn't dead, it can be controlled
 	# however if the player is hurt, the animation plays AND THEN it can be controlled
 	else:	
@@ -314,19 +315,19 @@ func flip_on_enemy_collision(area):
 func _on_Hurtbox_area_entered(area):
 	if not is_invulnerable:
 		is_invulnerable = true
-	# litle dirty fix so that the enemy can assign its knockback vector before this
-	# occur
-	yield(get_tree().create_timer(0.01),"timeout")
-	flip_on_enemy_collision(area)
-	player_hurt = true
-	stats.health -= area.damage
-	if area.is_in_group("enemyBullet"):
-		area.queue_free()
-	hurtbox.start_invincibility(INVINCIBILITY_TIME)
-	$Audio_Hit_By_Enemy.play()
-	OS.delay_msec(100)
-	yield(get_tree().create_timer(1), "timeout")
-	player_hurt = false
+		# litle dirty fix so that the enemy can assign its knockback vector before this
+		# occur
+		yield(get_tree().create_timer(0.01),"timeout")
+		flip_on_enemy_collision(area)
+		player_hurt = true
+		stats.health -= area.damage
+		if area.is_in_group("enemyBullet"):
+			area.queue_free()
+		hurtbox.start_invincibility(INVINCIBILITY_TIME)
+		$Audio_Hit_By_Enemy.play()
+		OS.delay_msec(100)
+		yield(get_tree().create_timer(1), "timeout")
+		player_hurt = false
 
 
 func create_smoke_particles():

@@ -2,9 +2,8 @@ extends Node2D
 onready var pause_popup = $PausePopup
 
 func _ready() -> void:
-	var screen_size = OS.get_screen_size()
-	var window_size = OS.get_window_size()
-	OS.set_window_position(screen_size*0.47 - window_size*0.5)
+	PlayerStats.health = PlayerStats.max_health
+	PlayerStats.ammo = PlayerStats.max_ammo
 	
 func _process(delta):
 	if Input.is_action_just_pressed("esc"):

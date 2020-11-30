@@ -1,7 +1,6 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Enemies/Enemy_tower/EnemyTowerBullet.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Player/tempplayer_bullet.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Enemy_tower/enemy_tower_bullet.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Enemy_tower/enemy_tower_bulletv2.png" type="Texture" id=4]
 
@@ -49,42 +48,52 @@ atlas = ExtResource( 3 )
 region = Rect2( 64, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=12]
+flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=13]
+flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=14]
+flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 32, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=15]
+flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 48, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=16]
+flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 64, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=17]
+flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 0, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=18]
+flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 16, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=19]
+flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 32, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=20]
+flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 48, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=21]
+flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 64, 16, 16, 16 )
 
@@ -113,12 +122,6 @@ __meta__ = {
 }
 speed = 4
 
-[node name="Sprite" type="Sprite" parent="."]
-visible = false
-modulate = Color( 0.905882, 0, 0, 1 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 2 )
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
@@ -130,6 +133,4 @@ animation = "New Anim"
 frame = 2
 playing = true
 [connection signal="area_entered" from="." to="." method="_on_EnemyBullet_area_entered"]
-[connection signal="area_shape_entered" from="." to="." method="_on_EnemyBullet_area_shape_entered"]
-[connection signal="body_entered" from="." to="." method="_on_EnemyBullet_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

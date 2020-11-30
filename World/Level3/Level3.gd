@@ -29,6 +29,8 @@ var total_phases = 4
 
 func _ready():
 	set_phase(phase)
+	PlayerStats.health = PlayerStats.max_health
+	PlayerStats.ammo = PlayerStats.max_ammo
 	pass
 
 
