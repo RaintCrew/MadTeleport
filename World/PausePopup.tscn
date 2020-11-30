@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://World/PausePopup.gd" type="Script" id=1]
+[ext_resource path="res://Assets/UI/font_rainyhearts.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 2 )
+
+[node name="PausePopup" type="PopupDialog"]
+pause_mode = 2
+margin_right = 224.0
+margin_bottom = 112.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_top = 16.0
+margin_right = 224.0
+margin_bottom = 64.0
+custom_fonts/font = SubResource( 1 )
+text = "- - GAME PAUSED - -
+Press 'Esc' to unpause game"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReturnLevelSelect" type="Button" parent="."]
+margin_left = 67.0
+margin_top = 64.0
+margin_right = 157.0
+margin_bottom = 96.0
+custom_fonts/font = SubResource( 2 )
+text = "Level Select"
+[connection signal="pressed" from="ReturnLevelSelect" to="." method="_on_ReturnLevelSelect_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://World/Camera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://World/Level3/Level3.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Background/bg_level0_blue.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Music/bg_music_level_1.ogg" type="AudioStream" id=8]
+[ext_resource path="res://World/PausePopup.tscn" type="PackedScene" id=9]
 
 [node name="Level3" type="Node2D"]
 script = ExtResource( 6 )
@@ -108,6 +109,12 @@ will_wait_for_spawned_enemy_to_die = true
 position = Vector2( 176, 288 )
 spawn_delay_offset = 2.0
 enemies_limit = 3
+
+[node name="PausePopup" parent="." instance=ExtResource( 9 )]
+margin_left = 208.0
+margin_top = 120.0
+margin_right = 432.0
+margin_bottom = 232.0
 
 [node name="Camera" parent="." instance=ExtResource( 1 )]
 position = Vector2( 320, 176 )

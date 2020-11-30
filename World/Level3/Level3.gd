@@ -3,6 +3,7 @@ extends Node2D
 onready var currentScene = get_tree().get_current_scene().get_filename()
 var is_restarting = false
 onready var camera_animation_player = $Camera/AnimationPlayer
+onready var pause_popup = $PausePopup
 # Player has to kill all enemies of the current phase
 # for the next phase to start. This var keeps track of that
 var num_of_phase_enemies_killed = 0
@@ -42,7 +43,11 @@ func _process(_delta):
 			PlayerStats.health = PlayerStats.max_health
 
 	if Input.is_action_just_pressed("esc"):
-		get_tree().quit()
+		if not is_restarting:
+			get_tree().paused = true
+			yield(get_tree().create_timer(0.1), "timeout")
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			pause_popup.show()
 
 # Called everytime an enemy is killed
 func add_to_enemies_killed():
