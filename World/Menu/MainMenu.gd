@@ -11,7 +11,6 @@ func _ready() -> void:
 func _physics_process(delta):
 	mouse.global_position = get_global_mouse_position()
 
-
 func _on_ButtonNewGame_pressed() -> void:
 	var newGame_animation = newGame_button_animation.instance()
 	get_parent().add_child(newGame_animation)
@@ -27,8 +26,6 @@ func _on_ButtonNewGame_pressed() -> void:
 func change_scene() -> void:
 	queue_free()
 	get_tree().change_scene("res://World/Level_Select/LevelSelect.tscn")  
-
-
 
 func _on_CreditButton_pressed() -> void:
 	get_tree().change_scene("res://World/Level_Credits/LevelCredits.tscn") 
