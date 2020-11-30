@@ -38,7 +38,7 @@ func _on_EnemySpawnTimer_timeout() -> void:
 
 func spawn_enemy() -> void:
 	if enemy_type == 0:
-		animation_player.play("sawdrone_about_2spawn")
+		animation_player.play("sawdrone_about_2spawn2")
 		enemy_spawned = enemy_drone.instance()
 	elif enemy_type == 1:
 		animation_player.play("tower_about_2spawn2")
