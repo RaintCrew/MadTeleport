@@ -5,6 +5,8 @@ var player = null
 var screen_size = OS.get_screen_size()
 var window_size = OS.get_window_size()
 
+var music = true
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	#this centers the game window

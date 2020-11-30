@@ -46,7 +46,7 @@ MAX_SPEED = 60
 scale = Vector2( 0.8, 0.8 )
 frames = SubResource( 1 )
 animation = "DroneAnimation"
-frame = 1
+frame = 4
 playing = true
 offset = Vector2( -2, 3 )
 
@@ -81,7 +81,7 @@ shape = SubResource( 5 )
 
 [node name="Audio_Hit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
-volume_db = -10.0
+volume_db = -20.0
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]

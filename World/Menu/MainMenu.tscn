@@ -1,17 +1,13 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Assets/Menu_Buttons/play_game.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Menu_Buttons/play_game_hover.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Menu_Buttons/quit.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Music/bg_music_menu.ogg" type="AudioStream" id=4]
+[ext_resource path="res://World/Music/MusicControl.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/mouse.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Background/bg_main_menu_normal.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Menu_Buttons/quit_hover.png" type="Texture" id=9]
 [ext_resource path="res://World/Menu/MainMenu.gd" type="Script" id=10]
-[ext_resource path="res://Assets/Menu_Buttons/music_available.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Menu_Buttons/music_available_hover.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Menu_Buttons/music_disable_hover.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Menu_Buttons/music_disable.png" type="Texture" id=14]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -154,7 +150,7 @@ position = Vector2( 319.913, 179.802 )
 scale = Vector2( 0.997656, 0.971178 )
 frames = SubResource( 26 )
 animation = "bg"
-frame = 3
+frame = 13
 playing = true
 
 [node name="ButtonNewGame" type="TextureButton" parent="."]
@@ -183,35 +179,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="bg_music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
-autoplay = true
-
-[node name="MusicDisableButton" type="TextureButton" parent="."]
-margin_left = 605.0
-margin_top = 321.0
-margin_right = 646.0
-margin_bottom = 362.0
-texture_normal = ExtResource( 14 )
-texture_pressed = ExtResource( 13 )
-expand = true
-stretch_mode = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MusicAvailableButton" type="TextureButton" parent="."]
-margin_left = 605.454
-margin_top = 320.719
-margin_right = 646.454
-margin_bottom = 357.719
-texture_normal = ExtResource( 11 )
-texture_pressed = ExtResource( 12 )
-expand = true
-stretch_mode = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="MusicControl" parent="." instance=ExtResource( 5 )]
+position = Vector2( 606.902, 323.134 )
 
 [node name="mouse" type="Sprite" parent="."]
 position = Vector2( 340.809, 212.297 )
@@ -219,5 +188,3 @@ scale = Vector2( 0.007, 0.007 )
 texture = ExtResource( 6 )
 [connection signal="pressed" from="ButtonNewGame" to="." method="_on_ButtonNewGame_pressed"]
 [connection signal="pressed" from="ButtonQuit" to="." method="_on_ButtonQuit_pressed"]
-[connection signal="pressed" from="MusicDisableButton" to="." method="_on_MusicDisableButton_pressed"]
-[connection signal="pressed" from="MusicAvailableButton" to="." method="_on_MusicAvailableButton_pressed"]

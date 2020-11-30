@@ -1,0 +1,189 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/Fonts/rainyhearts.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/Background/bg_credits.jpg" type="Texture" id=2]
+[ext_resource path="res://Assets/Fonts/SFPixelatte/SFPixelate-Bold.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 25
+outline_size = 1
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 15
+font_data = ExtResource( 3 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.26132
+margin_top = -0.420441
+margin_right = 692.739
+margin_bottom = 373.58
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="THANKS" type="Label" parent="."]
+margin_top = 31.324
+margin_right = 640.0
+margin_bottom = 61.324
+custom_fonts/font = SubResource( 1 )
+text = "Thanks for playing our game"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CREDITS" type="Label" parent="."]
+margin_top = 80.38
+margin_right = 640.0
+margin_bottom = 110.38
+custom_fonts/font = SubResource( 2 )
+text = "------ CREDITS ------"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CODERS" type="Label" parent="."]
+margin_top = 129.22
+margin_right = 215.0
+margin_bottom = 156.22
+custom_fonts/font = SubResource( 3 )
+text = "PROGRAMERS"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ARTITS" type="Label" parent="."]
+margin_left = 215.0
+margin_top = 129.22
+margin_right = 430.0
+margin_bottom = 156.22
+custom_fonts/font = SubResource( 3 )
+text = "ARTISTS"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MUSIC" type="Label" parent="."]
+margin_left = 430.0
+margin_top = 129.0
+margin_right = 645.0
+margin_bottom = 156.0
+custom_fonts/font = SubResource( 3 )
+text = "MUSIC"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label6" type="Label" parent="."]
+margin_top = 168.0
+margin_right = 210.0
+margin_bottom = 184.0
+custom_fonts/font = SubResource( 4 )
+text = "Enrique Paris"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label7" type="Label" parent="."]
+margin_top = 188.0
+margin_right = 210.0
+margin_bottom = 204.0
+custom_fonts/font = SubResource( 4 )
+text = "Carlos Parra\"Parrol\""
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label8" type="Label" parent="."]
+margin_top = 207.439
+margin_right = 210.0
+margin_bottom = 223.439
+custom_fonts/font = SubResource( 4 )
+text = "Miguel Zamora"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label9" type="Label" parent="."]
+margin_left = 210.0
+margin_top = 207.439
+margin_right = 420.0
+margin_bottom = 223.439
+custom_fonts/font = SubResource( 4 )
+text = "Tania Gutierréz"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label10" type="Label" parent="."]
+margin_left = 215.0
+margin_top = 168.0
+margin_right = 430.0
+margin_bottom = 184.0
+custom_fonts/font = SubResource( 4 )
+text = "Creat"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label11" type="Label" parent="."]
+margin_left = 215.0
+margin_top = 188.0
+margin_right = 430.0
+margin_bottom = 204.0
+custom_fonts/font = SubResource( 4 )
+text = "Reovez"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label12" type="Label" parent="."]
+margin_left = 430.0
+margin_top = 171.04
+margin_right = 645.0
+margin_bottom = 186.04
+custom_fonts/font = SubResource( 4 )
+text = "Lauteharfe"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

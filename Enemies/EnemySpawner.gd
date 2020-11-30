@@ -41,7 +41,7 @@ func spawn_enemy() -> void:
 		animation_player.play("sawdrone_about_2spawn")
 		enemy_spawned = enemy_drone.instance()
 	elif enemy_type == 1:
-		animation_player.play("tower_about_2spawn")
+		animation_player.play("tower_about_2spawn2")
 		enemy_spawned = enemy_tower.instance()
 	yield(animation_player,"animation_finished")
 	enemy_spawned.position = enemy_position
