@@ -15,6 +15,7 @@ var velocity = Vector2() 			# Vector (x,y) donde x/y define cuanto se mueve hori
 var target_running_velocity = 0		# Velocidad a la que está intentando llegar. Se usa para lograr la aceleracion y desaceleracion
 var ammo = PISTOL_AMMO 				# Numero de balas en el arma. Se recarga con Teleport
 var is_player_hurt = false
+var is_invulnerable = false
 
 var can_throw_teleport_ball = true	# Puede arrojar la teleport ball, o esta en el aire y no puede lanzarla
 var has_landed = true				# Se usa para ejecutar code en el primer instante que aterriza en suelo
@@ -239,12 +240,14 @@ func _on_PlayerKnockback_area_entered(area):
 
 
 func _on_Hurtbox_area_entered(area):
-	stats.health -= area.damage
-	hurtbox.start_invincibility(INVINCIBILITY_TIME)
-	$Audio_Hit_By_Enemy.play()
-	OS.delay_msec(100)
-	if area.get_filename() == enemy_tower_bullet:
-		area.queue_free()
+	if not is_invulnerable:
+		is_invulnerable = true
+		hurtbox.start_invincibility(INVINCIBILITY_TIME)
+		$Audio_Hit_By_Enemy.play()
+		OS.delay_msec(100)
+		stats.health -= area.damage
+		if area.get_filename() == enemy_tower_bullet:
+			area.queue_free()
 
 func create_smoke_particles():
 	var smoke_particles = smoke_particle_scene.instance()	
@@ -273,3 +276,4 @@ func _on_Hurtbox_invincibility_started():
 func _on_Hurtbox_invincibility_ended():
 	blink_animation_player.play("Stop")
 	player_knockback_collisionShape.disabled = false
+	is_invulnerable = false
