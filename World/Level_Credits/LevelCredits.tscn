@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Fonts/rainyhearts.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/Background/bg_credits.jpg" type="Texture" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Assets/Menu_buttons/back_arrow_hover.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Menu_buttons/back_arrow.png" type="Texture" id=5]
 [ext_resource path="res://World/Level_Credits/LevelCredits.gd" type="Script" id=6]
-[ext_resource path="res://World/Music/MusicControl.tscn" type="PackedScene" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -192,7 +191,4 @@ stretch_mode = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="MusicControl" parent="." instance=ExtResource( 7 )]
-position = Vector2( 604.502, 10.8662 )
 [connection signal="pressed" from="ButtonBack" to="." method="_on_ButtonBack_pressed"]

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Assets/Background/bg_main_menu_newgame_button.png" type="Texture" id=1]
 [ext_resource path="res://World/Menu/Menu_NewGame_Animation.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Menu_Buttons/quit.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Menu_buttons/quit.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Menu_Buttons/play_game.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Menu_buttons/credits.png" type="Texture" id=5]
 
@@ -131,10 +131,10 @@ frames = SubResource( 23 )
 script = ExtResource( 2 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_left = -291.215
+margin_left = -291.0
 margin_top = -47.0
-margin_right = -173.215
-margin_bottom = -16.0
+margin_right = -174.0
+margin_bottom = -19.0
 texture = ExtResource( 4 )
 expand = true
 stretch_mode = 5
@@ -142,26 +142,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect2" type="TextureRect" parent="."]
-margin_left = -290.107
-margin_top = 31.6238
-margin_right = -234.107
-margin_bottom = 63.6238
-texture = ExtResource( 3 )
+[node name="TextureRect3" type="TextureRect" parent="."]
+margin_left = -291.0
+margin_top = -5.718
+margin_right = -174.0
+margin_bottom = 22.282
+texture = ExtResource( 5 )
 expand = true
 stretch_mode = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect3" type="TextureRect" parent="."]
-margin_left = -291.298
-margin_top = -6.52904
-margin_right = -175.298
-margin_bottom = 23.471
-texture = ExtResource( 5 )
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_left = -290.0
+margin_top = 31.97
+margin_right = -234.0
+margin_bottom = 60.97
+texture_normal = ExtResource( 3 )
 expand = true
-stretch_mode = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
