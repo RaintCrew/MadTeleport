@@ -281,6 +281,7 @@ func die():
 
 func level_cleared():
 	level_cleared = true
+	is_invulnerable = true
 # Esta funcion se llama cada vez que cualquier input se detecta
 # "input" siendo una tecla presionada, mouse clickeada, etc.
 func _input(event):

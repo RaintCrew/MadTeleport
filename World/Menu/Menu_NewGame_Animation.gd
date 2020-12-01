@@ -1,7 +1,7 @@
 extends AnimatedSprite
 
 func _ready() -> void:
-	play("defaul")
+	play()
 	pass # Replace with function body.              
 
 

@@ -16,3 +16,7 @@ func _physics_process(delta):
 
 func _on_EnemyBullet_area_entered(area: Area2D) -> void:
 	knockback_vector = velocity
+
+
+func _on_VisibilityNotifier2D_screen_exited():
+	queue_free()

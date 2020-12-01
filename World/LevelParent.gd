@@ -7,11 +7,12 @@ onready var camera_animation_player = $Camera/AnimationPlayer
 onready var pause_popup = $PausePopup
 var next_level = String()
 
+signal level_cleared
+
 func _ready():
-	if Global.music:
-		$bg_music.play()
 	PlayerStats.health = PlayerStats.max_health
 	PlayerStats.ammo = PlayerStats.max_ammo
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	pass
 	
 func _process(delta):
@@ -40,6 +41,7 @@ func disable_all_spawners():
 # Called when player clears level
 func clear_level():
 	level_cleared = true
+	emit_signal("level_cleared")
 	camera_animation_player.play("ShowLevelCleared")
 	yield(get_tree().create_timer(3), "timeout")
 	camera_animation_player.play("BlackScreenFadeIn")

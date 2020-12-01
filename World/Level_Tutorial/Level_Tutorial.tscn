@@ -1,4 +1,4 @@
-[gd_scene load_steps=161 format=2]
+[gd_scene load_steps=160 format=2]
 
 [ext_resource path="res://Assets/Tutorial/teleport.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Tutorial/tutorial_portal.png" type="Texture" id=2]
@@ -15,45 +15,36 @@
 [ext_resource path="res://UI/WeaponUI.tscn" type="PackedScene" id=13]
 [ext_resource path="res://UI/AmmoUI.tscn" type="PackedScene" id=14]
 [ext_resource path="res://UI/TeleportBallUI.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Enemies/EnemySpawner.tscn" type="PackedScene" id=16]
 
 [sub_resource type="AtlasTexture" id=1]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=2]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=3]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 32, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=4]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 48, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=5]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 64, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=6]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 80, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=7]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 96, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=8]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 112, 0, 16, 16 )
 
@@ -66,577 +57,462 @@ animations = [ {
 } ]
 
 [sub_resource type="AtlasTexture" id=10]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=11]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 656, 0, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=12]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1312, 0, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=13]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1968, 0, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=14]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 2624, 0, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=15]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 216, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=16]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 656, 216, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=17]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1312, 216, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=18]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1968, 216, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=19]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 2624, 216, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=20]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 432, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=21]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 656, 432, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=22]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1312, 432, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=23]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1968, 432, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=24]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 2624, 432, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=25]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 648, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=26]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 656, 648, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=27]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1312, 648, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=28]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1968, 648, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=29]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 2624, 648, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=30]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 864, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=31]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 656, 864, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=32]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1312, 864, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=33]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1968, 864, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=34]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 2624, 864, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=35]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 1080, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=36]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 656, 1080, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=37]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1312, 1080, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=38]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1968, 1080, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=39]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 2624, 1080, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=40]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 1296, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=41]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 656, 1296, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=42]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1312, 1296, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=43]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1968, 1296, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=44]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 2624, 1296, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=45]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 1512, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=46]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 656, 1512, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=47]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1312, 1512, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=48]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1968, 1512, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=49]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 2624, 1512, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=50]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 1728, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=51]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 656, 1728, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=52]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1312, 1728, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=53]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1968, 1728, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=54]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 2624, 1728, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=55]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 1944, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=56]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 656, 1944, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=57]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1312, 1944, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=58]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1968, 1944, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=59]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 2624, 1944, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=60]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 2160, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=61]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 656, 2160, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=62]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1312, 2160, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=63]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1968, 2160, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=64]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 2624, 2160, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=65]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 2376, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=66]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 656, 2376, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=67]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1312, 2376, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=68]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1968, 2376, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=69]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 2624, 2376, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=70]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 2592, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=71]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 656, 2592, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=72]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1312, 2592, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=73]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1968, 2592, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=74]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 2624, 2592, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=75]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 2808, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=76]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 656, 2808, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=77]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1312, 2808, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=78]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1968, 2808, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=79]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 2624, 2808, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=80]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 3024, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=81]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 656, 3024, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=82]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1312, 3024, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=83]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1968, 3024, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=84]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 2624, 3024, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=85]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 3240, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=86]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 656, 3240, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=87]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1312, 3240, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=88]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1968, 3240, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=89]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 2624, 3240, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=90]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 3456, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=91]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 656, 3456, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=92]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1312, 3456, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=93]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1968, 3456, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=94]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 2624, 3456, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=95]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 3672, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=96]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 656, 3672, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=97]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1312, 3672, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=98]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1968, 3672, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=99]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 2624, 3672, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=100]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 3888, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=101]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 656, 3888, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=102]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1312, 3888, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=103]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1968, 3888, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=104]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 2624, 3888, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=105]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 4104, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=106]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 656, 4104, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=107]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1312, 4104, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=108]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1968, 4104, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=109]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 2624, 4104, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=110]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 4320, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=111]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 656, 4320, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=112]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1312, 4320, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=113]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1968, 4320, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=114]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 2624, 4320, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=115]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 4536, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=116]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 656, 4536, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=117]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1312, 4536, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=118]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1968, 4536, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=119]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 2624, 4536, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=120]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 4752, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=121]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 656, 4752, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=122]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1312, 4752, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=123]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 1968, 4752, 656, 216 )
 
 [sub_resource type="AtlasTexture" id=124]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 2624, 4752, 656, 216 )
 
@@ -735,6 +611,7 @@ position = Vector2( -192.47, -73.9559 )
 scale = Vector2( -1.5, 1.5 )
 frames = SubResource( 9 )
 animation = "Player_Running"
+frame = 1
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="backgound"]
@@ -742,7 +619,7 @@ position = Vector2( 146.692, 13.0821 )
 scale = Vector2( 0.372886, 0.386197 )
 frames = SubResource( 125 )
 animation = "Teleport"
-frame = 105
+frame = 83
 playing = true
 
 [node name="level_button_normal" type="Sprite" parent="backgound"]
@@ -859,19 +736,19 @@ collision_mask = 0
 position = Vector2( 0.0923125, 1.79887 )
 scale = Vector2( 1.69962, 1.64086 )
 frames = SubResource( 143 )
-frame = 7
+frame = 5
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 0, 6.89758 )
 shape = SubResource( 144 )
 
-[node name="Player" parent="." instance=ExtResource( 8 )]
-position = Vector2( 334.63, 255.112 )
-
 [node name="TileMap" parent="." instance=ExtResource( 11 )]
 collision_layer = 1025
 tile_data = PoolIntArray( -1, 18, 0, -65536, 18, 1, -65535, 18, 1, -65534, 18, 1, -65533, 18, 1, -65532, 18, 1, -65531, 18, 1, -65530, 18, 1, -65529, 18, 1, -65528, 18, 1, -65527, 18, 1, -65526, 18, 1, -65525, 18, 1, -65524, 18, 1, -65523, 18, 1, -65522, 18, 1, -65521, 18, 1, -65520, 18, 1, -65519, 18, 1, -65518, 18, 1, -65517, 18, 1, -65516, 18, 1, -65515, 18, 1, -65514, 18, 1, -65513, 18, 1, -65512, 18, 1, -65511, 18, 1, -65510, 18, 1, -65509, 18, 1, -65508, 18, 1, -65507, 18, 1, -65506, 18, 1, -65505, 18, 1, -65504, 18, 1, -65503, 18, 1, -65502, 18, 1, -65501, 18, 1, -65500, 18, 1, -65499, 18, 1, -65498, 18, 1, -65497, 18, 1, -65496, 18, 2, 65535, 18, 65536, 0, 18, 65541, 1, 18, 131073, 2, 18, 131073, 3, 18, 131073, 4, 18, 131073, 5, 18, 131073, 6, 18, 131073, 7, 18, 131073, 8, 18, 131073, 9, 18, 131073, 10, 18, 131073, 11, 18, 131073, 12, 18, 131073, 13, 18, 131073, 14, 18, 131073, 15, 18, 131073, 16, 18, 131073, 17, 18, 131073, 18, 18, 131073, 19, 18, 131073, 20, 18, 131073, 21, 18, 131073, 22, 18, 131073, 23, 18, 131073, 24, 18, 131073, 25, 18, 131073, 26, 18, 131073, 27, 18, 131073, 28, 18, 131073, 29, 18, 131073, 30, 18, 131073, 31, 18, 131073, 32, 18, 131073, 33, 18, 131073, 34, 18, 131073, 35, 18, 131073, 36, 18, 131073, 37, 18, 131073, 38, 18, 131073, 39, 18, 65542, 40, 18, 65538, 131071, 18, 65536, 65536, 18, 65538, 65575, 18, 65536, 65576, 18, 65538, 196607, 18, 65536, 131072, 18, 65538, 131111, 18, 65536, 131112, 18, 65538, 262143, 18, 65536, 196608, 18, 65538, 196647, 18, 65536, 196648, 18, 65538, 327679, 18, 65536, 262144, 18, 65538, 262183, 18, 65536, 262184, 18, 65538, 393214, 18, 0, 393215, 18, 131078, 327680, 18, 65538, 327719, 18, 65536, 327720, 18, 65538, 458750, 18, 65536, 458751, 18, 65537, 393216, 18, 65538, 393255, 18, 65536, 393256, 18, 65538, 524286, 18, 65536, 524287, 18, 65537, 458752, 18, 65538, 458791, 18, 65536, 458792, 18, 131077, 458793, 18, 2, 589822, 18, 131072, 589823, 18, 65542, 524288, 18, 65538, 524327, 18, 65536, 524328, 18, 65537, 524329, 18, 65538, 655359, 18, 65536, 589824, 18, 65538, 589863, 18, 65536, 589864, 18, 65537, 589865, 18, 65538, 720895, 18, 65536, 655360, 18, 65538, 655399, 18, 65536, 655400, 18, 65537, 655401, 18, 65538, 786431, 18, 65536, 720896, 18, 65538, 720935, 18, 65536, 720936, 18, 65537, 720937, 18, 65538, 851967, 18, 65536, 786432, 18, 65538, 786471, 18, 65536, 786472, 18, 65537, 786473, 18, 65538, 917503, 18, 65536, 851968, 18, 65538, 852007, 18, 65536, 852008, 18, 65537, 852009, 18, 65538, 983039, 18, 65536, 917504, 18, 65538, 917543, 18, 65536, 917544, 18, 65537, 917545, 18, 65538, 1048575, 18, 65536, 983040, 18, 65538, 983079, 18, 65536, 983080, 18, 65537, 983081, 18, 65538, 1114111, 18, 65536, 1048576, 18, 65538, 1048615, 18, 65536, 1048616, 18, 65537, 1048617, 18, 65538, 1179647, 18, 65536, 1114112, 18, 65538, 1114151, 18, 65536, 1114152, 18, 65541, 1114153, 18, 131074, 1245183, 18, 65536, 1179648, 18, 65538, 1179687, 18, 65536, 1179688, 18, 65538, 1310719, 18, 65536, 1245184, 18, 65538, 1245223, 18, 65536, 1245224, 18, 65538, 1376255, 18, 65536, 1310720, 18, 65538, 1310759, 18, 65536, 1310760, 18, 65538, 1441791, 18, 65536, 1376256, 18, 131077, 1376257, 18, 1, 1376258, 18, 1, 1376259, 18, 1, 1376260, 18, 1, 1376261, 18, 1, 1376262, 18, 1, 1376263, 18, 1, 1376264, 18, 1, 1376265, 18, 1, 1376266, 18, 1, 1376267, 18, 1, 1376268, 18, 1, 1376269, 18, 1, 1376270, 18, 1, 1376271, 18, 1, 1376272, 18, 1, 1376273, 18, 1, 1376274, 18, 1, 1376275, 18, 1, 1376276, 18, 1, 1376277, 18, 1, 1376278, 18, 1, 1376279, 18, 1, 1376280, 18, 1, 1376281, 18, 1, 1376282, 18, 1, 1376283, 18, 1, 1376284, 18, 1, 1376285, 18, 1, 1376286, 18, 1, 1376287, 18, 1, 1376288, 18, 1, 1376289, 18, 1, 1376290, 18, 1, 1376291, 18, 1, 1376292, 18, 1, 1376293, 18, 1, 1376294, 18, 1, 1376295, 18, 131078, 1376296, 18, 65538, 1507327, 18, 131072, 1441792, 18, 131073, 1441793, 18, 131073, 1441794, 18, 131073, 1441795, 18, 131073, 1441796, 18, 131073, 1441797, 18, 131073, 1441798, 18, 131073, 1441799, 18, 131073, 1441800, 18, 131073, 1441801, 18, 131073, 1441802, 18, 131073, 1441803, 18, 131073, 1441804, 18, 131073, 1441805, 18, 131073, 1441806, 18, 131073, 1441807, 18, 131073, 1441808, 18, 131073, 1441809, 18, 131073, 1441810, 18, 131073, 1441811, 18, 131073, 1441812, 18, 131073, 1441813, 18, 131073, 1441814, 18, 131073, 1441815, 18, 131073, 1441816, 18, 131073, 1441817, 18, 131073, 1441818, 18, 131073, 1441819, 18, 131073, 1441820, 18, 131073, 1441821, 18, 131073, 1441822, 18, 131073, 1441823, 18, 131073, 1441824, 18, 131073, 1441825, 18, 131073, 1441826, 18, 131073, 1441827, 18, 131073, 1441828, 18, 131073, 1441829, 18, 131073, 1441830, 18, 131073, 1441831, 18, 131073, 1441832, 18, 131074 )
+
+[node name="Player" parent="." instance=ExtResource( 8 )]
+position = Vector2( 334.63, 255.112 )
 
 [node name="HealthUI" parent="." instance=ExtResource( 9 )]
 margin_left = 20.0
@@ -894,12 +771,6 @@ margin_bottom = 48.0
 
 [node name="Camera" parent="." instance=ExtResource( 10 )]
 position = Vector2( 319.902, 180.683 )
-
-[node name="EnemySpawner" parent="." instance=ExtResource( 16 )]
-position = Vector2( 318.905, 67.1752 )
-enemy_type = 2
-spawn_delay = 1.0
-enemies_limit = 10
 
 [node name="PausePopup" parent="." instance=ExtResource( 7 )]
 margin_left = 192.0
