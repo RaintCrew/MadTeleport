@@ -129,7 +129,6 @@ position = Vector2( 319.913, 179.802 )
 scale = Vector2( 0.997656, 0.971178 )
 frames = SubResource( 26 )
 animation = "bg"
-frame = 23
 playing = true
 
 [node name="ButtonNewGame" type="TextureButton" parent="."]
@@ -161,10 +160,10 @@ __meta__ = {
 }
 
 [node name="CreditButton" type="TextureButton" parent="."]
-margin_left = 29.315
-margin_top = 171.9
-margin_right = 146.315
-margin_bottom = 200.9
+margin_left = 29.455
+margin_top = 173.106
+margin_right = 123.455
+margin_bottom = 202.106
 texture_normal = ExtResource( 12 )
 texture_pressed = ExtResource( 13 )
 texture_hover = ExtResource( 11 )
