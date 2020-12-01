@@ -125,5 +125,4 @@ script = ExtResource( 1 )
 
 [node name="Audio_Explosion" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -30.0
 [connection signal="frame_changed" from="." to="." method="_on_TowerEnemyDrathEffect_frame_changed"]

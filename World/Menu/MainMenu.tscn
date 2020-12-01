@@ -1,8 +1,8 @@
 [gd_scene load_steps=63 format=2]
 
-[ext_resource path="res://Assets/Menu_Buttons/play_game.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Menu_buttons/play_game.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Menu_buttons/play_game_hover.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Menu_Buttons/quit.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Menu_buttons/quit.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Menu_buttons/quit_pressed.png" type="Texture" id=4]
 [ext_resource path="res://World/Music/MusicControl.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Fonts/SFPixelatte/SFPixelateShaded-Bold.ttf" type="DynamicFontData" id=6]
@@ -268,7 +268,7 @@ position = Vector2( 319.913, 179.802 )
 scale = Vector2( 0.997656, 0.971178 )
 frames = SubResource( 26 )
 animation = "bg"
-frame = 20
+frame = 22
 playing = true
 
 [node name="bg_Menu_PlayGame" type="AnimatedSprite" parent="."]

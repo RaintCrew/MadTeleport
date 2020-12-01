@@ -316,25 +316,20 @@ shape = SubResource( 15 )
 [node name="Audio_empty_gun_shoot" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( -1.415, 0.0229755 )
 stream = ExtResource( 12 )
-volume_db = -30.0
 
 [node name="Audio_Shoot" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
-volume_db = -30.0
 
 [node name="Audio_Hit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-volume_db = -30.0
 
 [node name="Audio_Teleport" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
-volume_db = -30.0
 
 [node name="Audio_Hit_By_Enemy" type="AudioStreamPlayer" parent="."]
 
 [node name="Audio_Jump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
-volume_db = -30.0
 [connection signal="area_entered" from="PlayerKnockback" to="." method="_on_PlayerKnockback_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]

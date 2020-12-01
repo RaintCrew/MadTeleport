@@ -1,6 +1,6 @@
 extends Node2D
 
-const newGame_button_animation = preload("res://World/Menu/Menu_NewGame_Animation.tscn")
+#const newGame_button_animation = preload("res://World/Menu/Menu_NewGame_Animation.tscn")
 var level_select = preload("res://World/Level_Select/LevelSelect.tscn")
 onready var bg_playgame = $bg_Menu_PlayGame
 

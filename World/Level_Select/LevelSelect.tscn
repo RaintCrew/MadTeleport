@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://World/Level_Select/Level_LevelButton.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/Menu_Buttons/back_arrow_hover.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Menu_buttons/back_arrow.png" type="Texture" id=2]
 [ext_resource path="res://World/Level_Select/Level_Select.gd" type="Script" id=3]
-[ext_resource path="res://Assets/Menu_Buttons/back_arrow.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Menu_buttons/back_arrow_hover.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Fonts/rainyhearts.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://Assets/Background/bg_level0_darkblue.png" type="Texture" id=12]
 [ext_resource path="res://World/Music/MusicControl.tscn" type="PackedScene" id=13]
@@ -70,8 +70,8 @@ margin_left = 70.0
 margin_top = 38.0
 margin_right = 107.0
 margin_bottom = 65.0
-texture_normal = ExtResource( 6 )
-texture_pressed = ExtResource( 2 )
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 4 )
 expand = true
 stretch_mode = 4
 __meta__ = {

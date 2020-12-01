@@ -181,9 +181,9 @@ __meta__ = {
 
 [node name="ButtonBack" type="TextureButton" parent="."]
 margin_left = 16.0181
-margin_top = 14.6832
+margin_top = 14.0158
 margin_right = 46.0181
-margin_bottom = 31.6832
+margin_bottom = 31.0158
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 4 )
 expand = true
