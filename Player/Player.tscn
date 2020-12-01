@@ -26,7 +26,6 @@ void fragment() {
 	}
 	COLOR = new_color;
 }"
-custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
@@ -250,6 +249,7 @@ __meta__ = {
 }
 
 [node name="PlayerKnockback" parent="." instance=ExtResource( 11 )]
+visible = false
 position = Vector2( 0.280613, 0 )
 scale = Vector2( 1.08, 1.28 )
 collision_layer = 32
@@ -260,6 +260,7 @@ position = Vector2( -1.03009, 1.21738 )
 shape = SubResource( 13 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 6 )]
+visible = false
 position = Vector2( -0.420921, 0 )
 scale = Vector2( 1.2, 1.12 )
 collision_layer = 4
@@ -292,7 +293,6 @@ volume_db = -10.0
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
-[connection signal="invincibility_started" from="Hurtbox" to="Invincibility" method="_on_Hurtbox_invincibility_started"]
 
 [editable path="PlayerKnockback"]
 

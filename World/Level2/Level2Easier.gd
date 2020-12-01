@@ -7,13 +7,15 @@ onready var pause_popup = $PausePopup
 # Player has to kill all enemies of the current phase
 # for the next phase to start. This var keeps track of that
 var num_of_phase_enemies_killed = 0
-var enemies_to_kill_in_phase = [8,2,12,10,19,100]
+var enemies_to_kill_in_phase = [4,8,20,16,19,100]
 
-onready var ul_enemy_spawner = $EnemySpawnerUL
-onready var ur_enemy_spawner = $EnemySpawnerUR
-onready var dl_enemy_spawner = $EnemySpawnerDL
-onready var dr_enemy_spawner = $EnemySpawnerDR
 onready var c_enemy_spawner = $EnemySpawnerCenter
+onready var ur_enemy_spawner = $EnemySpawnerUR
+onready var drr_enemy_spawner = $EnemySpawnerDRR
+onready var dr_enemy_spawner = $EnemySpawnerDR
+onready var dl_enemy_spawner = $EnemySpawnerDL
+onready var dll_enemy_spawner = $EnemySpawnerDLL
+onready var ul_enemy_spawner = $EnemySpawnerUL
 
 # The phase of the level (starts at 0)
 # The different waves and setups of enemies
@@ -61,33 +63,30 @@ func add_to_enemies_killed():
 #############
 ## PHASE 0 ##
 #############
-# A slow spawn of saw drones in two corners in the room.
-# Both of them will wait for its spawned drones to die, giving more
-# space for the player to take each of them one at a time
-# All enemies in this level will do that
+# In this level, the only way to hit someone in the opposite side
+# of the room is to teleport through the upper passageway
+# The tightness of the room also makes it harder to teleport
+# 2 towers, in opposite sides
 ###################################
 
 #############
 ## PHASE 1 ##
 #############
-# Introduction to the tower.
-# A tower will spawn in Center
-# The player here will get a sense of the bullet speed
-# and HP of the tower for the rest of the game
+# Phase 0, but with a drone in C
 #######################################
 
 #############
 ## PHASE 2 ##
 #############
-# We mix few saw drones (two spawning at a time)
-# with one tower in the center
+# 4 fast-spawning saw drones. 
 ######################################
 
 #############
 ## PHASE 3 ##
 #############
-# It's phase 2, but with two towers.
-# The towers are in UL and UR
+# 3 fast-spawning saw drones
+# 2 towers in DL and DR
+# QUITE HARD.
 ######################################
 
 
@@ -100,29 +99,27 @@ func set_phase(value):
 	print("Phase: ", phase)
 	if phase == 1:
 		disable_all_spawners()
-		c_enemy_spawner.reset(1, 1, 0, 2, true, true)
+		#ur_enemy_spawner.reset(0, 1, 0, 4, true, true)
+		dl_enemy_spawner.reset(1, 2, 0, 2, true, true)
+		dr_enemy_spawner.reset(1, 2, 0, 2, true, true)
+		#ul_enemy_spawner.reset(0, 1, 0, 4, true, true)
+		c_enemy_spawner.reset(0, 1, 3, 4, true, true)
 	elif phase == 2:
 		disable_all_spawners()
-		c_enemy_spawner.reset(1, 4, 0, 2, true, true)
-		ur_enemy_spawner.reset(0, 1, 0, 1, true, true)
-		dr_enemy_spawner.reset(0, 3, 3, 4, true, true)
-		dl_enemy_spawner.reset(0, 2, 4, 4, true, true)
-		ul_enemy_spawner.reset(0, 2, 0, 1, true, true)
-		
+		#c_enemy_spawner.reset(0, 1, 0, 5, true, true)
+		ur_enemy_spawner.reset(0, 1, 2, 5, true, true)
+		dl_enemy_spawner.reset(0, 1, 1, 5, true, true)
+		dr_enemy_spawner.reset(0, 1, 1, 5, true, true)
+		ul_enemy_spawner.reset(0, 1, 2, 5, true, true)
 	elif phase == 3:
 		disable_all_spawners()
-		ur_enemy_spawner.reset(1, 3, 0, 2, true, true)
-		dr_enemy_spawner.reset(0, 3, 2, 3, true, true)
-		dl_enemy_spawner.reset(0, 3, 2, 3, true, true)
-		ul_enemy_spawner.reset(1, 3, 0, 2, true, true)
-		
-#	elif phase == 4:
-#		disable_all_spawners()
-#		c_enemy_spawner.reset(0, 2, 3, 5, true, true)
-#		ur_enemy_spawner.reset(1, 1, 2, 2, true, true)
-#		dr_enemy_spawner.reset(0, 3, 2, 5, true, true)
-#		dl_enemy_spawner.reset(0, 2, 3, 5, true, true)
-#		ul_enemy_spawner.reset(1, 3, 2, 2, true, true)
+		#ur_enemy_spawner.reset(0, 3, 0, 4, true, true)
+		drr_enemy_spawner.reset(1, 4, 0, 2, true, true)
+		dr_enemy_spawner.reset(0, 4, 2, 4, true, true)
+		dll_enemy_spawner.reset(1, 4, 0, 2, true, true)
+		dl_enemy_spawner.reset(0, 5, 2, 4, true, true)
+		#ul_enemy_spawner.reset(0, 3, 0, 4, true, true)
+		c_enemy_spawner.reset(0, 3, 0, 4, true, true)
 	
 	elif phase == total_phases:
 		disable_all_spawners()
@@ -140,5 +137,6 @@ func clear_level():
 	is_restarting = true
 	yield(camera_animation_player, "animation_finished")
 	PlayerStats.health = PlayerStats.max_health
-	get_tree().change_scene("res://World/Level2/Level2.tscn")
+	get_tree().change_scene("res://World/Level3/Level3.tscn")
 	pass
+
