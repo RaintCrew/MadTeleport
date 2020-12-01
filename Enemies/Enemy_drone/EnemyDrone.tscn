@@ -34,8 +34,8 @@ radius = 8.76727
 [node name="EnemyDrone" type="KinematicBody2D"]
 position = Vector2( -0.187286, 0 )
 scale = Vector2( 0.6, 0.6 )
-collision_layer = 0
-collision_mask = 2147483648
+collision_layer = 8
+collision_mask = 2147483649
 script = ExtResource( 9 )
 __meta__ = {
 "_edit_group_": true
@@ -51,7 +51,6 @@ playing = true
 offset = Vector2( -2, 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0.343358, 0.655507 )
 shape = SubResource( 2 )
 disabled = true
@@ -71,7 +70,6 @@ shape = SubResource( 3 )
 [node name="Hitbox" parent="." instance=ExtResource( 6 )]
 visible = false
 collision_mask = 36
-knockback_force = 170
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 4 )

@@ -12,7 +12,7 @@ func set_health(value):
 	# this will set the size of the rect with strecth of tile, to be the health times 
 	# the size of each heart.
 	if healthUIFull:
-		healthUIFull.rect_size.x = health * 15
+		healthUIFull.rect_size.x = health * 12
 	
 func set_max_health(value):
 	# max = max_health value won't never be less than 1.
@@ -20,7 +20,7 @@ func set_max_health(value):
 	# same as above.
 	self.health = min(health, max_health)
 	if healthUIEmpty:
-		healthUIEmpty.rect_size.x = max_health * 15
+		healthUIEmpty.rect_size.x = max_health * 12
 	
 func _ready():
 	self.max_health = PlayerStats.max_health

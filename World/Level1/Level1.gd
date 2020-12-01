@@ -2,11 +2,12 @@ extends Node2D
 
 onready var currentScene = get_tree().get_current_scene().get_filename()
 var is_restarting = false
-
+onready var camera_animation_player = $Camera/AnimationPlayer
+onready var pause_popup = $PausePopup
 # Player has to kill all enemies of the current phase
 # for the next phase to start. This var keeps track of that
 var num_of_phase_enemies_killed = 0
-var enemies_to_kill_in_phase = [8,2,16,14,19,100]
+var enemies_to_kill_in_phase = [8,2,12,10,19,100]
 
 onready var ul_enemy_spawner = $EnemySpawnerUL
 onready var ur_enemy_spawner = $EnemySpawnerUR
@@ -20,25 +21,33 @@ onready var c_enemy_spawner = $EnemySpawnerCenter
 var phase = 0 setget set_phase
 
 # How many phases are there in this level
-var total_phases = 5
+var total_phases = 4
 
 func _ready():
 	set_phase(phase)
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	PlayerStats.health = PlayerStats.max_health
+	PlayerStats.ammo = PlayerStats.max_ammo
+	pass
 
 
 func _process(_delta):
 	if Input.is_action_just_pressed("reset"):
 		if not is_restarting:
-			$Camera/AnimationPlayer.play("BlackScreenFadeIn")
+			camera_animation_player.play("BlackScreenFadeIn")
 			is_restarting = true
-			yield($Camera/AnimationPlayer, "animation_finished")
+			yield(camera_animation_player, "animation_finished")
 			get_tree().change_scene(currentScene)
 			get_tree().paused = false
 			PlayerStats.health = PlayerStats.max_health
+			PlayerStats.ammo = PlayerStats.max_ammo
 
 	if Input.is_action_just_pressed("esc"):
-		get_tree().quit()
+		if not is_restarting:
+			get_tree().paused = true
+			yield(get_tree().create_timer(0.1), "timeout")
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			pause_popup.show()
 
 # Called everytime an enemy is killed
 func add_to_enemies_killed():
@@ -103,26 +112,26 @@ func set_phase(value):
 		disable_all_spawners()
 		c_enemy_spawner.reset(1, 4, 0, 2, true, true)
 		ur_enemy_spawner.reset(0, 1, 0, 1, true, true)
-		dr_enemy_spawner.reset(0, 3, 6, 6, true, true)
-		dl_enemy_spawner.reset(0, 3, 4, 6, true, true)
+		dr_enemy_spawner.reset(0, 3, 3, 4, true, true)
+		dl_enemy_spawner.reset(0, 2, 4, 4, true, true)
 		ul_enemy_spawner.reset(0, 2, 0, 1, true, true)
 		
 	elif phase == 3:
 		disable_all_spawners()
-		ur_enemy_spawner.reset(1, 3, 0, 1, true, true)
-		dr_enemy_spawner.reset(0, 3, 2, 6, true, true)
-		dl_enemy_spawner.reset(0, 3, 2, 6, true, true)
-		ul_enemy_spawner.reset(1, 3, 0, 1, true, true)
+		ur_enemy_spawner.reset(1, 3, 0, 2, true, true)
+		dr_enemy_spawner.reset(0, 3, 2, 3, true, true)
+		dl_enemy_spawner.reset(0, 3, 2, 3, true, true)
+		ul_enemy_spawner.reset(1, 3, 0, 2, true, true)
 		
-	elif phase == 4:
-		disable_all_spawners()
-		c_enemy_spawner.reset(0, 2, 3, 5, true, true)
-		ur_enemy_spawner.reset(1, 1, 2, 2, true, true)
-		dr_enemy_spawner.reset(0, 3, 2, 5, true, true)
-		dl_enemy_spawner.reset(0, 2, 3, 5, true, true)
-		ul_enemy_spawner.reset(1, 3, 2, 2, true, true)
+#	elif phase == 4:
+#		disable_all_spawners()
+#		c_enemy_spawner.reset(0, 2, 3, 5, true, true)
+#		ur_enemy_spawner.reset(1, 1, 2, 2, true, true)
+#		dr_enemy_spawner.reset(0, 3, 2, 5, true, true)
+#		dl_enemy_spawner.reset(0, 2, 3, 5, true, true)
+#		ul_enemy_spawner.reset(1, 3, 2, 2, true, true)
 	
-	elif phase == 5:
+	elif phase == total_phases:
 		disable_all_spawners()
 		clear_level()
 	
@@ -132,4 +141,11 @@ func disable_all_spawners():
 	
 # Called when the player completes the level!
 func clear_level():
+	camera_animation_player.play("ShowLevelCleared")
+	yield(get_tree().create_timer(3), "timeout")
+	camera_animation_player.play("BlackScreenFadeIn")
+	is_restarting = true
+	yield(camera_animation_player, "animation_finished")
+	PlayerStats.health = PlayerStats.max_health
+	get_tree().change_scene("res://World/Level2/Level2.tscn")
 	pass

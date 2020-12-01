@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://World/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Assets/VFX/smoke_small_particle.png" type="Texture" id=2]
@@ -189,7 +189,45 @@ tracks/6/keys = {
 "times": PoolRealArray( 0, 1 )
 }
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="Animation" id=4]
+resource_name = "ShowLevelCleared"
+tracks/0/type = "value"
+tracks/0/path = NodePath("LevelClear:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("LevelClear:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 192, -0.25, 0, 0.25, 0, 8, -0.77, 3.93789, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("LevelClear:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=6]
 font_data = ExtResource( 3 )
 
 [node name="Camera" type="Camera2D"]
@@ -206,7 +244,7 @@ wait_time = 0.1
 
 [node name="Flash" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0 )
-position = Vector2( -1.87497, 0.124995 )
+position = Vector2( -2.38419e-07, 7.45058e-09 )
 scale = Vector2( 334.125, 192.125 )
 texture = ExtResource( 2 )
 
@@ -214,6 +252,7 @@ texture = ExtResource( 2 )
 anims/BlackScreenFadeIn = SubResource( 1 )
 anims/BlackScreenFadeOut = SubResource( 2 )
 anims/GameOverFadeIn = SubResource( 3 )
+anims/ShowLevelCleared = SubResource( 4 )
 
 [node name="GameOver" type="Node2D" parent="."]
 visible = false
@@ -236,7 +275,7 @@ margin_top = -32.0
 margin_right = 48.0
 margin_bottom = 16.0
 rect_scale = Vector2( 1.5, 1.5 )
-custom_fonts/normal_font = SubResource( 4 )
+custom_fonts/normal_font = SubResource( 5 )
 text = "         IS IT POSSIBLE?
 
   - PRESS R TO RESTART -"
@@ -245,13 +284,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BlackScreen" type="ColorRect" parent="."]
+[node name="LevelClear" type="Node2D" parent="."]
 visible = false
+position = Vector2( 8, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="LevelClear"]
+margin_left = 176.0
+margin_top = -144.0
+margin_right = 352.0
+margin_bottom = -112.0
+color = Color( 0, 0, 0, 0.694118 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="LevelClear/ColorRect"]
+margin_left = 15.0
+margin_top = 7.0
+margin_right = 191.0
+margin_bottom = 39.0
+custom_fonts/normal_font = SubResource( 6 )
+text = "Level Cleared!"
+
+[node name="BlackScreen" type="ColorRect" parent="."]
 margin_left = -368.0
 margin_top = -208.0
 margin_right = 368.0
 margin_bottom = 208.0
-color = Color( 0, 0, 0, 1 )
+color = Color( 0, 0, 0, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

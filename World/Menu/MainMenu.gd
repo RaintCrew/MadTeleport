@@ -28,3 +28,6 @@ func change_scene() -> void:
 func _on_CreditButton_pressed() -> void:
 	get_tree().change_scene("res://World/Level_Credits/LevelCredits.tscn") 
 	pass
+
+func _on_ButtonQuit_pressed():
+	get_tree().quit()
