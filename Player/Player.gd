@@ -333,6 +333,11 @@ func flip_on_enemy_collision(area):
 			is_facing_right = true
 
 func _on_Hurtbox_area_entered(area):
+	var incoming_damage
+	if area.damage == null:
+		incoming_damage = 1
+	else:
+		incoming_damage = area.damage
 	if not is_invulnerable:
 		is_invulnerable = true
 		# litle dirty fix so that the enemy can assign its knockback vector before this
@@ -340,7 +345,7 @@ func _on_Hurtbox_area_entered(area):
 		yield(get_tree().create_timer(0.01),"timeout")
 		flip_on_enemy_collision(area)
 		player_hurt = true
-		stats.health -= area.damage
+		stats.health -= incoming_damage
 		if area.is_in_group("enemyBullet"):
 			area.queue_free()
 		hurtbox.start_invincibility(INVINCIBILITY_TIME)

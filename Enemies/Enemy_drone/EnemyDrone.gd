@@ -100,6 +100,9 @@ func _on_Hurtbox_area_entered(area: Area2D) -> void:
 func _on_Stats_no_health() -> void:
 	emit_signal("enemy_killed")
 	queue_free() 													# Drone die
+	hurtbox.queue_free()
+	hitbox.queue_free()
+	softCollision.queue_free()
 	var enemyDeathEffect = EnemyDeathEfffect.instance() 			# Set drone death animation
 	get_parent().add_child(enemyDeathEffect)						# Play drone death animation
 	enemyDeathEffect.global_position = global_position				# drone death animation it is positioned in the same place where the drone died

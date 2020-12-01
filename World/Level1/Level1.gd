@@ -20,6 +20,8 @@ var phase = 0 setget set_phase
 var total_phases = 4
 
 func _ready():
+	
+	Global.player = $Player
 	set_phase(phase)
 	next_level = "res://World/Level2/Level2.tscn"
 	pass

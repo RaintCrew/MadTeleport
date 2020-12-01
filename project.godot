@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="BallTeleport"
+config/name="Mad Teleport"
 run/main_scene="res://World/Menu/MainMenu.tscn"
 config/icon="res://Assets/Icon/icon.png"
 
