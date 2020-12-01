@@ -7,7 +7,7 @@ onready var music_level = $Level_Music
 onready var music_level_select = $Level_Select_Music
 
 func _ready() -> void:
-	print(get_parent().name)
+	#print(get_parent().name)
 	if Global.music:
 		music_off_button.hide()
 		music_on_button.show()

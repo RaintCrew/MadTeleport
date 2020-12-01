@@ -31,7 +31,7 @@ func _ready():
 # Called everytime an enemy is killed
 func add_to_enemies_killed():
 	num_of_phase_enemies_killed += 1
-	print("Enemies killed: ", num_of_phase_enemies_killed)
+	#print("Enemies killed: ", num_of_phase_enemies_killed)
 	# When the player has killed the required enemies to advance to the next phase
 	if num_of_phase_enemies_killed == enemies_to_kill_in_phase[phase]:	
 		set_phase(phase+1)
@@ -72,7 +72,7 @@ func add_to_enemies_killed():
 func set_phase(value):
 	phase = clamp(value,0,total_phases)
 	num_of_phase_enemies_killed = 0
-	print("Phase: ", phase)
+	#print("Phase: ", phase)
 	if phase == 1:
 		disable_all_spawners()
 		#ur_enemy_spawner.reset(0, 1, 0, 4, true, true)

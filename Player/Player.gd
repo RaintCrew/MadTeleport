@@ -23,7 +23,7 @@ var has_landed = true				# Se usa para ejecutar code en el primer instante que a
 var has_tpball_traveled_enough = false
 var will_camera_shake_on_gunfire = true
 
-onready var tower = get_parent().get_node("EnemyTower")
+#onready var tower = get_parent().get_node("EnemyTower")
 onready var level = get_tree().get_current_scene()		# Access to the current level 
 onready var player_sprite = $PlayerSprite
 onready var animation_player = $AnimationPlayer

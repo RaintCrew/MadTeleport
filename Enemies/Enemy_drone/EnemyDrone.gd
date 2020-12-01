@@ -78,50 +78,6 @@ func set_path(value : PoolVector2Array):
 	if value.size() == 0:
 		return
 
-func move_along_path3(distance_to_walk):
-	# Move the player along the path until he has run out of movement or the path ends.
-	while distance_to_walk > 0 and path.size() > 0:
-		var distance_to_next_point = position.distance_to(path[0])
-		if distance_to_walk <= distance_to_next_point:
-			# The player does not have enough movement left to get to the next point.
-			position += position.direction_to(path[0]) * distance_to_walk
-		else:
-			# The player get to the next point
-			position = path[0]
-			path.remove(0)
-		# Update the distance to walk
-		distance_to_walk -= distance_to_next_point
-
-func move_along_pathR(distance):
-	# Ensure we have an actual path, otherwise we are done and can stop
-	# processing
-	if path.size() == 0:
-		set_process(false)
-		return
-	
-	# If there's no distance available to travel, then nothing to do for this
-	# tick
-	if distance <= 0.0:
-		return
-	
-	# Check how far until the next point
-	var distance_to_next_point : = position.distance_to(path[0])
-	
-	# Assuming there's some distance left to go, let's move it
-	if distance_to_next_point > 0.0:
-		# Use the min of distance and distance_to_next_point so that we don't
-		# overshoot our destination when distance > distance_to_next_point
-		position = position.linear_interpolate(path[0], min(distance, distance_to_next_point) / distance_to_next_point)
-
-	# If this condition is met, we must have reached destination, so remove point
-	if distance >= distance_to_next_point:
-		path.remove(0)
-	
-	# Subtract the amount we used up before moving further along the path.  If
-	# there is no distance left, the next call will check this at the start
-	# and return
-	move_along_pathR(distance - distance_to_next_point)
-
 func chase_player(delta: float):
 	var direction = global_position.direction_to(Global.player.global_position)		# Check player position
 	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)	# Sets the drone speed
