@@ -3,6 +3,7 @@ extends Node2D
 onready var currentScene = get_tree().get_current_scene().get_filename()
 var is_restarting = false
 var level_cleared = false
+onready var camera = $Camera
 onready var camera_animation_player = $Camera/AnimationPlayer
 onready var pause_popup = $PausePopup
 var next_level = String()
@@ -27,7 +28,7 @@ func _process(delta):
 			PlayerStats.ammo = PlayerStats.max_ammo
 
 	if Input.is_action_just_pressed("esc"):
-		if not is_restarting and !Global.player.player_dead:
+		if not is_restarting and !Global.player.player_dead and !camera.fading_in:
 			get_tree().paused = true
 			yield(get_tree().create_timer(0.1), "timeout")
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
