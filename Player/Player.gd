@@ -37,6 +37,7 @@ onready var teleport_ball = null						# Referencia a teleport ball lanzada a la 
 onready var hurtbox = $Hurtbox
 onready var player_knockback_collisionShape = $PlayerKnockback/CollisionShape2D
 onready var enemy_tower_bullet = "res://Enemies/Enemy_tower/EnemyTowerBullet.tscn"
+onready var sfx_empty_gun_shoot = $Audio_empty_gun_shoot  
 
 onready var bullet_scene = preload("res://Player/PlayerBullet.tscn") 					# Referencia a escena de bala
 onready var teleport_ball_scene = preload("res://Player/TeleportBall.tscn") 			# Referencia a escena de teleport ball
@@ -220,7 +221,8 @@ func fire():
 		$Audio_Shoot.play()
 		if will_camera_shake_on_gunfire:
 			camera.activate_shake(1.6,0.1) # (shake_intensity, shake_duration)
-
+	else:
+		sfx_empty_gun_shoot.play()
 
 
 # Funcion para arrojar teleport ball
