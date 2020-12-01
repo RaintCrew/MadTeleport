@@ -199,8 +199,6 @@ func jump():
 		player_sprite.position.y -= 2
 		create_smoke_particles()
 		$Audio_Jump.play()
-	
-
 
 # Funcion para disparar arma
 func fire():
@@ -322,14 +320,15 @@ func _on_PlayerKnockback_area_entered(area):
 
 # flips the player  horizontally if facing the wrong direction when taking damage
 func flip_on_enemy_collision(area):
-	if is_facing_right and (area.knockback_vector.x > 0):
-		player_sprite.flip_h = true
-		gun.flip_v = true
-		is_facing_right = false
-	elif !is_facing_right and (area.knockback_vector.x < 0):
-		player_sprite.flip_h = false
-		gun.flip_v = false
-		is_facing_right = true
+	if area:
+		if is_facing_right and (area.knockback_vector.x > 0):
+			player_sprite.flip_h = true
+			gun.flip_v = true
+			is_facing_right = false
+		elif !is_facing_right and (area.knockback_vector.x < 0):
+			player_sprite.flip_h = false
+			gun.flip_v = false
+			is_facing_right = true
 
 func _on_Hurtbox_area_entered(area):
 	if not is_invulnerable:
