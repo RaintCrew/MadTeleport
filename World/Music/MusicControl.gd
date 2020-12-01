@@ -29,11 +29,10 @@ func play_scene_music(scene_name) -> void:
 		music_menu.stop()
 		music_level_select.play()
 		music_level.stop()
-	elif scene_name == "StageOne" or scene_name == "Level2" or scene_name == "Level3":
+	else:
 		music_menu.stop()
 		music_level_select.stop()
 		music_level.play()
-	pass
 
 func _on_MusicOn_pressed() -> void:
 	Global.music = false
@@ -42,7 +41,7 @@ func _on_MusicOn_pressed() -> void:
 		music_menu.volume_db = -80
 	elif get_parent().name == "LevelSelect" or get_parent().name == "LevelCredits":
 		music_level_select.volume_db = -80
-	elif get_parent().name == "StageOne" or get_parent().name == "Level2" or get_parent().name == "Level3":
+	else:
 		music_menu.volume_db = -80
 	
 	music_on_button.hide()
@@ -55,7 +54,7 @@ func _on_MusicOff_pressed() -> void:
 		music_menu.volume_db = -5
 	elif get_parent().name == "LevelSelect" or get_parent().name == "LevelCredits":
 		music_level_select.volume_db = -5
-	elif get_parent().name == "StageOne" or get_parent().name == "Level2" or get_parent().name == "Level3":
+	else:
 		music_menu.volume_db = -5
 
 	music_off_button.hide()
