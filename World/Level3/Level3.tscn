@@ -131,10 +131,11 @@ margin_bottom = 57.0
 [node name="Camera" parent="." instance=ExtResource( 1 )]
 position = Vector2( 320, 176 )
 
-margin_bottom = 232.0
-margin_right = 448.0
-margin_top = 120.0
-margin_left = 192.0
 [node name="PausePopup" parent="." instance=ExtResource( 12 )]
+margin_left = 195.929
+margin_top = 121.93
+margin_right = 451.929
+margin_bottom = 233.93
+
 [node name="MusicControl" parent="." instance=ExtResource( 8 )]
 position = Vector2( -28.0115, -25.784 )

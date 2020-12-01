@@ -29,10 +29,11 @@ var total_phases = 4
 
 func _ready():
 	set_phase(phase)
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	PlayerStats.health = PlayerStats.max_health
 	PlayerStats.ammo = PlayerStats.max_ammo
 	pass
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	
 
 
 func _process(_delta):
