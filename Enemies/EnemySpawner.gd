@@ -2,7 +2,9 @@ extends Position2D
 
 var enemy_drone = preload("res://Enemies/Enemy_drone/EnemyDrone.tscn") # Reference EnemyDrone
 var enemy_tower = preload("res://Enemies/Enemy_tower/EnemyTower.tscn") # Reference EnemyTower
-export(int, "Drone", "Tower") var enemy_type
+var enemy_drone_turret = preload("res://Enemies/Enemy_drone_turret/EnemyDroneTurret.tscn") # Reference EnemyDroneTurret
+
+export(int, "Drone", "Tower", "Drone Turret") var enemy_type
 onready var animation_player = $AnimationPlayer
 
 export var spawn_delay : = 2.0 				# Spawn speed
@@ -43,6 +45,9 @@ func spawn_enemy() -> void:
 	elif enemy_type == 1:
 		animation_player.play("tower_about_2spawn2")
 		enemy_spawned = enemy_tower.instance()
+	elif enemy_type == 2:
+		animation_player.play("sawdrone_about_2spawn2")
+		enemy_spawned = enemy_drone_turret.instance()
 	yield(animation_player,"animation_finished")
 	enemy_spawned.position = enemy_position
 	add_child(enemy_spawned)

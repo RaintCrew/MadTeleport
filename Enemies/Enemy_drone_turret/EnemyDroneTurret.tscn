@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
+[ext_resource path="res://Assets/SFX/sfx_enemy_hurt.wav" type="AudioStream" id=1]
 [ext_resource path="res://Hit_Hurtboxes/Hurtbox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Singletons/Stats.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Enemy_drone_turret/enemy_drone_turret_idle.png" type="Texture" id=5]
@@ -46,7 +47,7 @@ script = ExtResource( 6 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
 animation = "idle"
-frame = 2
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -69,6 +70,10 @@ shape = SubResource( 7 )
 
 [node name="Position2D" type="Position2D" parent="."]
 position = Vector2( 1.18921, 6.09469 )
+
+[node name="Audio_Hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
+volume_db = -20.0
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 
