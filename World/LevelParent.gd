@@ -2,8 +2,10 @@ extends Node2D
 
 onready var currentScene = get_tree().get_current_scene().get_filename()
 var is_restarting = false
+var level_cleared = false
 onready var camera_animation_player = $Camera/AnimationPlayer
 onready var pause_popup = $PausePopup
+var next_level = String()
 
 func _ready():
 	if Global.music:
@@ -34,3 +36,15 @@ func _process(delta):
 func disable_all_spawners():
 	for spawner in get_tree().get_nodes_in_group("all_enemy_spawners"):
 		spawner.spawning = false
+
+# Called when player clears level
+func clear_level():
+	level_cleared = true
+	camera_animation_player.play("ShowLevelCleared")
+	yield(get_tree().create_timer(3), "timeout")
+	camera_animation_player.play("BlackScreenFadeIn")
+	is_restarting = true
+	yield(camera_animation_player, "animation_finished")
+	PlayerStats.health = PlayerStats.max_health
+	get_tree().change_scene(next_level)
+	pass

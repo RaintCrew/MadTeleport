@@ -25,6 +25,7 @@ var total_phases = 4
 
 func _ready():
 	set_phase(phase)
+	next_level = "res://World/Level_Select/LevelSelect.tscn"
 	pass
 
 
@@ -101,14 +102,3 @@ func set_phase(value):
 		disable_all_spawners()
 		clear_level()
 
-	
-# Called when the player completes the level!
-func clear_level():
-	camera_animation_player.play("ShowLevelCleared")
-	yield(get_tree().create_timer(3), "timeout")
-	camera_animation_player.play("BlackScreenFadeIn")
-	is_restarting = true
-	yield(camera_animation_player, "animation_finished")
-	PlayerStats.health = PlayerStats.max_health
-	get_tree().change_scene("res://World/Level_Select/LevelSelect.tscn")
-	pass
