@@ -7,26 +7,25 @@ var traveled_distance = 0.0
 var initial_position = Vector2()
 var safe_position = Vector2()
 var has_signaled_traveled_enough = false
-onready var player = null
-onready var destination = null	# Punto a donde va la bala (donde estaba la mira al disparar)
+var player = null
+var destination = null	# Punto a donde va la bala (donde estaba la mira al disparar)
 onready var particle_scene = preload("res://Player/TeleportParticles.tscn")	# Referencia a escena de particulas de teleport
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	destination = get_local_mouse_position()	# La tp ball viaja hacia donde esta la mira
 	initial_position = global_position
 	player = get_parent().get_node("Player")
-	global_rotation = global_position.angle_to(destination)
+	look_at(destination)
 	safe_position = global_position
+	
+	velocity = global_position.direction_to(destination)
+	velocity *= speed
 func _physics_process(delta):
 	safe_position = global_position
-	# Mover hacia destino
-	velocity = velocity.move_toward(destination, delta)
-	velocity = velocity.normalized() * speed
-	
+	# Mover hacia destino	
 	# Para que sea afectado por gravedad
 	#velocity.y += GRAVITY  
-	position = position + velocity
+	global_position += velocity
 	
 	traveled_distance = initial_position.distance_squared_to(global_position)
 	

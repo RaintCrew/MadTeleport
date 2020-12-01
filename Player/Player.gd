@@ -215,6 +215,7 @@ func throw_teleport_ball():
 	# y despues crearla en el nivel con "add_child"
 	teleport_ball = teleport_ball_scene.instance()
 	teleport_ball.position = gun.get_node("Gun_Tip").get_global_position()
+	teleport_ball.destination = crosshair.get_global_position()
 	get_parent().add_child(teleport_ball)
 	
 
