@@ -2,6 +2,7 @@ extends Node2D
 onready var pause_popup = $PausePopup
 
 func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	PlayerStats.health = PlayerStats.max_health
 	PlayerStats.ammo = PlayerStats.max_ammo
 	

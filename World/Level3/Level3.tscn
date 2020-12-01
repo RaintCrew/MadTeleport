@@ -7,7 +7,7 @@
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World/Level3/Level3.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Background/bg_level0_blue.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Music/bg_music_level_1.ogg" type="AudioStream" id=8]
+[ext_resource path="res://World/Music/MusicControl.tscn" type="PackedScene" id=8]
 [ext_resource path="res://UI/WeaponUI.tscn" type="PackedScene" id=9]
 [ext_resource path="res://UI/AmmoUI.tscn" type="PackedScene" id=10]
 [ext_resource path="res://UI/TeleportBallUI.tscn" type="PackedScene" id=11]
@@ -132,11 +132,10 @@ margin_bottom = 57.0
 position = Vector2( 320, 176 )
 
 [node name="PausePopup" parent="." instance=ExtResource( 12 )]
-margin_left = 192.0
-margin_top = 120.0
-margin_right = 448.0
-margin_bottom = 232.0
+margin_left = 195.929
+margin_top = 121.93
+margin_right = 451.929
+margin_bottom = 233.93
 
-[node name="bg_music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 8 )
-volume_db = -5.0
+[node name="MusicControl" parent="." instance=ExtResource( 8 )]
+position = Vector2( -28.0115, -25.784 )

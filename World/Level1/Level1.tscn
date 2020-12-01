@@ -2,7 +2,7 @@
 
 [ext_resource path="res://World/Camera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Music/bg_music_level_1.ogg" type="AudioStream" id=3]
+[ext_resource path="res://World/Music/MusicControl.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Enemies/EnemySpawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://World/Props/TileMap.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=6]
@@ -96,11 +96,10 @@ margin_bottom = 57.0
 position = Vector2( 320, 176 )
 
 [node name="PausePopup" parent="." instance=ExtResource( 12 )]
-margin_left = 192.0
-margin_top = 120.0
-margin_right = 448.0
-margin_bottom = 232.0
+margin_left = 197.99
+margin_top = 105.359
+margin_right = 453.99
+margin_bottom = 217.359
 
-[node name="bg_music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
-volume_db = -5.0
+[node name="MusicControl" parent="." instance=ExtResource( 3 )]
+position = Vector2( -37.4035, 67.292 )

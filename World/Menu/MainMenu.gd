@@ -3,14 +3,11 @@ extends Node2D
 const newGame_button_animation = preload("res://World/Menu/Menu_NewGame_Animation.tscn")
 var level_select = preload("res://World/Level_Select/LevelSelect.tscn")
 
-onready var mouse = get_node("mouse")
+#onready var mouse = get_node("mouse")
 
 func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	pass
-
-func _physics_process(delta):
-	mouse.global_position = get_global_mouse_position()
-
 
 func _on_ButtonNewGame_pressed() -> void:
 	var newGame_animation = newGame_button_animation.instance()
@@ -28,6 +25,9 @@ func change_scene() -> void:
 	queue_free()
 	get_tree().change_scene("res://World/Level_Select/LevelSelect.tscn")  
 
+func _on_CreditButton_pressed() -> void:
+	get_tree().change_scene("res://World/Level_Credits/LevelCredits.tscn") 
+	pass
 
 func _on_ButtonQuit_pressed():
 	get_tree().quit()
