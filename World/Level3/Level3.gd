@@ -3,7 +3,7 @@ extends "res://World/LevelParent.gd"
 # Player has to kill all enemies of the current phase
 # for the next phase to start. This var keeps track of that
 var num_of_phase_enemies_killed = 0
-var enemies_to_kill_in_phase = [11,17,6,20,19,100]
+var enemies_to_kill_in_phase = [11,17,6,16,19,100]
 
 onready var c_enemy_spawner = $EnemySpawnerC
 onready var ur_enemy_spawner = $EnemySpawnerUR
