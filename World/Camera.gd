@@ -15,19 +15,19 @@ export var amplitude : = 1.6
 export var duration : = 0.1
 export(float, EASE) var DAMP_EASING : = 1.0
 export var shake : = false setget set_shake
-
+var fading_in = true
 var enabled : = false
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	randomize()
+	self.duration = duration
 	$BlackScreen.visible = true	# If the black screen is set as visible in the editor
 								# we can't edit the levels because it blocks sight.
 	$AnimationPlayer.play("BlackScreenFadeOut")
-	randomize()
-	#set_process(false)
-	self.duration = duration
-	
+	yield($AnimationPlayer, "animation_finished")
+	fading_in = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -72,5 +72,4 @@ func activate_shake(given_amplitude, given_duration):
 
 func display_gameover():
 	$AnimationPlayer.play("GameOverFadeIn")
-	
 	
