@@ -36,14 +36,14 @@ __meta__ = {
 
 [node name="Menu_Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
-volume_db = -5.0
+volume_db = -15.0
 
 [node name="Level_Select_Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
-volume_db = -5.0
+volume_db = -15.0
 
 [node name="Level_Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-volume_db = -7.0
+volume_db = -15.0
 [connection signal="pressed" from="MusicOn" to="." method="_on_MusicOn_pressed"]
 [connection signal="pressed" from="MusicOff" to="." method="_on_MusicOff_pressed"]

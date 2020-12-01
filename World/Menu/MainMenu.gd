@@ -23,14 +23,9 @@ func _on_ButtonQuit_pressed():
 
 
 func _on_ButtonPlayGame_pressed() -> void:
-	#var newGame_animation = newGame_button_animation.instance()
-	#get_parent().add_child(newGame_animation)
-	#newGame_animation.global_position = Vector2(319.913,179.802)
 	bg_playgame.show()
 	bg_playgame.play()
-	var timer = Timer.new()
-	timer.set_wait_time(0.85)
-	timer.set_one_shot(true)
-	timer.connect("timeout", self, "change_scene")
-	add_child(timer)
-	timer.start()
+
+
+func _on_bg_Menu_PlayGame_animation_finished() -> void:
+	get_tree().change_scene("res://World/Level_Select/LevelSelect.tscn")  
