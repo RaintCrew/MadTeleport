@@ -3,11 +3,14 @@ extends Node2D
 onready var currentScene = get_tree().get_current_scene().get_filename()
 var is_restarting = false
 onready var camera_animation_player = $Camera/AnimationPlayer
+onready var player_animation_player = $Player/AnimationPlayer
 onready var pause_popup = $PausePopup
 # Player has to kill all enemies of the current phase
 # for the next phase to start. This var keeps track of that
 var num_of_phase_enemies_killed = 0
 var enemies_to_kill_in_phase = [8,2,12,10,19,100]
+
+signal level_cleared
 
 onready var ul_enemy_spawner = $EnemySpawnerUL
 onready var ur_enemy_spawner = $EnemySpawnerUR
@@ -143,6 +146,7 @@ func disable_all_spawners():
 # Called when the player completes the level!
 func clear_level():
 	camera_animation_player.play("ShowLevelCleared")
+	emit_signal("level_cleared")
 	yield(get_tree().create_timer(3), "timeout")
 	camera_animation_player.play("BlackScreenFadeIn")
 	is_restarting = true

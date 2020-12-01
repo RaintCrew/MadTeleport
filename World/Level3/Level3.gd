@@ -9,6 +9,8 @@ onready var pause_popup = $PausePopup
 var num_of_phase_enemies_killed = 0
 var enemies_to_kill_in_phase = [11,17,6,20,19,100]
 
+signal level_cleared
+
 onready var c_enemy_spawner = $EnemySpawnerC
 onready var ur_enemy_spawner = $EnemySpawnerUR
 onready var drr_enemy_spawner = $EnemySpawnerDRR
@@ -134,6 +136,7 @@ func disable_all_spawners():
 # Called when the player completes the level!
 func clear_level():
 	camera_animation_player.play("ShowLevelCleared")
+	emit_signal("level_cleared")
 	yield(get_tree().create_timer(3), "timeout")
 	camera_animation_player.play("BlackScreenFadeIn")
 	is_restarting = true
