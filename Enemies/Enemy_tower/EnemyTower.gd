@@ -18,6 +18,8 @@ var velocity = Vector2()
 
 # We use a signal because it's the child who wants to tell something to the parent.
 signal enemy_killed
+# Debug purposes
+signal level_cleared
 
 func _ready():
 	connect("enemy_killed",level,"add_to_enemies_killed")	# The Level script hears this to check when to change the current level phase
@@ -62,6 +64,8 @@ func _on_Hurtbox_area_entered(area: Area2D) -> void:
 
 func _on_Stats_no_health() -> void:
 	emit_signal("enemy_killed")
+	# Debug purposes
+	emit_signal("level_cleared")
 	queue_free()
 	var enemyDeathEffect = EnemyDeathEffect.instance() 				# Set enemy death animation
 	get_parent().add_child(enemyDeathEffect)						# Play enemy death animation

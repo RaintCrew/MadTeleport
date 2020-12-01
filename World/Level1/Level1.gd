@@ -5,6 +5,8 @@ extends "res://World/LevelParent.gd"
 var num_of_phase_enemies_killed = 0
 var enemies_to_kill_in_phase = [8,2,12,10,19,100]
 
+signal level_cleared
+
 onready var ul_enemy_spawner = $EnemySpawnerUL
 onready var ur_enemy_spawner = $EnemySpawnerUR
 onready var dl_enemy_spawner = $EnemySpawnerDL

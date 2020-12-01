@@ -8,6 +8,7 @@ export var FRICTION = 150			# this force will oppose the knockback force
 export var JUMP_FORCE = 220 		# qué tan alto puede saltar el jugador
 export var INVINCIBILITY_TIME = 2	# invincibility duration 
 
+var level_cleared = false			# Determines if the level is completed
 var stats = PlayerStats				# Access to the Singleton with the stats.
 var knockback = Vector2.ZERO		# knockback yay
 var velocity = Vector2() 			# Vector (x,y) donde x/y define cuanto se mueve horizontal/verticalmente en cada frame.
@@ -22,9 +23,12 @@ var has_landed = true				# Se usa para ejecutar code en el primer instante que a
 var has_tpball_traveled_enough = false
 var will_camera_shake_on_gunfire = true
 
+onready var tower = get_parent().get_node("EnemyTower")
+onready var level = get_tree().get_current_scene()		# Access to the current level 
 onready var player_sprite = $PlayerSprite
 onready var animation_player = $AnimationPlayer
 onready var blink_animation_player = $BlinkAnimationPlayer
+onready var laugh_animation_player = $LaughAnimationPlayer
 onready var crosshair = get_node("Crosshair") 			# Referencia a la crosshair
 onready var camera = get_parent().get_node("Camera")	# Referencia a la camara
 onready var gun = get_node("Gun") 						# Referencia al arma de la que disparas
@@ -33,6 +37,7 @@ onready var teleport_ball = null						# Referencia a teleport ball lanzada a la 
 onready var hurtbox = $Hurtbox
 onready var player_knockback_collisionShape = $PlayerKnockback/CollisionShape2D
 onready var enemy_tower_bullet = "res://Enemies/Enemy_tower/EnemyTowerBullet.tscn"
+onready var sfx_empty_gun_shoot = $Audio_empty_gun_shoot  
 
 onready var bullet_scene = preload("res://Player/PlayerBullet.tscn") 					# Referencia a escena de bala
 onready var teleport_ball_scene = preload("res://Player/TeleportBall.tscn") 			# Referencia a escena de teleport ball
@@ -45,15 +50,27 @@ func _ready():
 	# no_health is the signal we're connecting to
 	# self is this object (like "this" in any othe major programming language xd)
 	# "die" is the function that will be called.
-	stats.connect("no_health",self,"die")
-	
+	stats.connect("no_health", self, "die")
+	level.connect("level_cleared", self, "level_cleared")
+	# Debug purposes
+	#tower.connect("level_cleared", self, "level_cleared")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):	
+	
+	# When the player completes the lvl, as soon as it touches the ground
+	# it will play the infamous laugh
+	if level_cleared:
+		if is_on_floor():
+			target_running_velocity = 0
+			animation_player.play("hahaha")
+			laugh_animation_player.play("Start")
+			gun.set_visible(false)
+			crosshair.set_visible(false)
 	# if player is dead, anything keypressed-related is innaccesible
 	# !play_hurt is a condition so that it can play the hurt animation
-	if player_dead and !player_hurt:
+	elif player_dead and !player_hurt:
 		target_running_velocity = 0
 		# the player has to be on the floor to reproduce the death animation
 		if is_on_floor():
@@ -162,7 +179,7 @@ func _physics_process(delta):
 	# Ejecutar efectos en el primer instante que el Player aterriza en suelo
 	if is_on_floor():
 		if has_landed == false:
-			if !player_dead:
+			if !player_dead and !level_cleared:
 				player_sprite.position.y += 2
 				player_sprite.scale.y = 0.7
 				player_sprite.scale.x = 1.3
@@ -182,8 +199,6 @@ func jump():
 		player_sprite.position.y -= 2
 		create_smoke_particles()
 		$Audio_Jump.play()
-	
-
 
 # Funcion para disparar arma
 func fire():
@@ -204,7 +219,8 @@ func fire():
 		$Audio_Shoot.play()
 		if will_camera_shake_on_gunfire:
 			camera.activate_shake(1.6,0.1) # (shake_intensity, shake_duration)
-
+	else:
+		sfx_empty_gun_shoot.play()
 
 
 # Funcion para arrojar teleport ball
@@ -263,14 +279,15 @@ func die():
 	OS.delay_msec(100)
 	camera.display_gameover()
 
-	
+func level_cleared():
+	level_cleared = true
 # Esta funcion se llama cada vez que cualquier input se detecta
 # "input" siendo una tecla presionada, mouse clickeada, etc.
 func _input(event):
-	if event.is_action_pressed("jump"):
+	if event.is_action_pressed("jump") and !level_cleared:
 		jump()
 	
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and !level_cleared:
 		match event.button_index:		# Esto es como el switch-case statements en C++/Python
 			BUTTON_LEFT:				# Clic-izquierdo = disparar
 				if event.is_pressed():	# Registrar solo el clic, y no su release o el dejarlo presionado
@@ -304,14 +321,15 @@ func _on_PlayerKnockback_area_entered(area):
 
 # flips the player  horizontally if facing the wrong direction when taking damage
 func flip_on_enemy_collision(area):
-	if is_facing_right and (area.knockback_vector.x > 0):
-		player_sprite.flip_h = true
-		gun.flip_v = true
-		is_facing_right = false
-	elif !is_facing_right and (area.knockback_vector.x < 0):
-		player_sprite.flip_h = false
-		gun.flip_v = false
-		is_facing_right = true
+	if area:
+		if is_facing_right and (area.knockback_vector.x > 0):
+			player_sprite.flip_h = true
+			gun.flip_v = true
+			is_facing_right = false
+		elif !is_facing_right and (area.knockback_vector.x < 0):
+			player_sprite.flip_h = false
+			gun.flip_v = false
+			is_facing_right = true
 
 func _on_Hurtbox_area_entered(area):
 	if not is_invulnerable:
